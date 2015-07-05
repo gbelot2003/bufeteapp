@@ -141,6 +141,7 @@ return [
 		Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
 		Barryvdh\DomPDF\ServiceProvider::class,
 		Orangehill\Iseed\IseedServiceProvider::class,
+		Illuminate\Html\HtmlServiceProvider::class,
 		/*
          * Application Service Providers...
          */
@@ -197,7 +198,9 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 		'Calendar' 	=> MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 		'Entrust' 	=> Zizaco\Entrust\EntrustFacade::class,
-		'PDF' 		=> Barryvdh\DomPDF\Facade::class
+		'PDF' 		=> Barryvdh\DomPDF\Facade::class,
+		'Form' 		=> Illuminate\Html\FormFacade::class,
+		'Html' 		=> Illuminate\Html\HtmlFacade::class
 
     ],
 

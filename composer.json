@@ -11,7 +11,8 @@
         "zizaco/entrust": "dev-laravel-5",
         "cviebrock/eloquent-sluggable": ">=3.0.0-beta",
         "barryvdh/laravel-dompdf": "0.6.*",
-        "orangehill/iseed": "dev-master"
+        "orangehill/iseed": "dev-master",
+        "illuminate/html": "^5.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
