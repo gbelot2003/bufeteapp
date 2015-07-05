@@ -17,6 +17,8 @@
   "dependencies": {
     "fullcalendar": "~2.3.2",
     "angular-materialize": "*",
-    "angularjs": "~1.4.1"
+    "angularjs": "~1.4.1",
+    "materialize": "~0.97.0",
+    "angular-morph": "~0.1.0"
   }
 }
