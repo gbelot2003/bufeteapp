@@ -10,7 +10,8 @@
         "maddhatter/laravel-fullcalendar": "^1.2",
         "zizaco/entrust": "dev-laravel-5",
         "cviebrock/eloquent-sluggable": ">=3.0.0-beta",
-        "barryvdh/laravel-dompdf": "0.6.*"
+        "barryvdh/laravel-dompdf": "0.6.*",
+        "orangehill/iseed": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

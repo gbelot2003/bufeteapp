@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e9a26e9d7fe36822d04cde47e3f37bc6",
+    "hash": "5d3470f2177ebd865a90629bcb4a3a81",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1022,6 +1022,55 @@
                 "php"
             ],
             "time": "2015-05-02 15:40:40"
+        },
+        {
+            "name": "orangehill/iseed",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orangehill/iseed.git",
+                "reference": "0886919f3f0f7513ec334af22beeddcb3f28b7e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orangehill/iseed/zipball/0886919f3f0f7513ec334af22beeddcb3f28b7e2",
+                "reference": "0886919f3f0f7513ec334af22beeddcb3f28b7e2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/filesystem": "5.x",
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Orangehill\\Iseed": "src/"
+                },
+                "classmap": [
+                    "src/Orangehill/Iseed/Exceptions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tihomir Opacic",
+                    "email": "tihomir.opacic@orangehilldev.com"
+                }
+            ],
+            "description": "Generate a new Laravel database seed file based on data from the existing database table.",
+            "keywords": [
+                "artisan",
+                "generators",
+                "laravel",
+                "seed"
+            ],
+            "time": "2015-03-19 09:48:32"
         },
         {
             "name": "phenx/php-font-lib",
@@ -3266,7 +3315,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "zizaco/entrust": 20,
-        "cviebrock/eloquent-sluggable": 10
+        "cviebrock/eloquent-sluggable": 10,
+        "orangehill/iseed": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

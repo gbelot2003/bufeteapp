@@ -140,6 +140,7 @@ return [
 		Zizaco\Entrust\EntrustServiceProvider::class,
 		Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
 		Barryvdh\DomPDF\ServiceProvider::class,
+		Orangehill\Iseed\IseedServiceProvider::class,
 		/*
          * Application Service Providers...
          */
