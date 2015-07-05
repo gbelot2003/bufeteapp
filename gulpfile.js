@@ -32,7 +32,8 @@ elixir(function(mix) {
         'angular-materialize.js',
         'angular-morph.js',
         'angularapp.js',
-        'angularapp/indexController.js'
+        'angularapp/indexController.js',
+        'angularapp/partials/navController.js'
 
     ], 'public/js/angular.js');
 });

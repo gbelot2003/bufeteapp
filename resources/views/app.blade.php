@@ -21,8 +21,8 @@
 	@include('partials.nav')
 	<div class="container">
 		<div class="col s12">
-			<h2 class="page-title hide-on-small-only">@yield('title', 'Sistema de Track')</h2>
-			<h4 class="page-title hide-on-med-and-up">@yield('title', 'Sistema de Track')</h4>
+			<h2 class="page-title hide-on-small-only">@yield('title', 'Bufete Forlar')</h2>
+			<h4 class="page-title hide-on-med-and-up">@yield('title', 'Bufete Forlar')</h4>
 		</div>
 
 		<div class="breadcrumbs">

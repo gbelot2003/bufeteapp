@@ -1,4 +1,4 @@
-<nav class="indigo darken-1">
+<nav class="indigo darken-1" ng-controller="navController">
 	<a class="" href="{{ url('/') }}"><img src="{{ asset('images/b_logo.jpg') }}" alt=""/></a>
 	<ul id="slide-out" class="side-nav">
 
