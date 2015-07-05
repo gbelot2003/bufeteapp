@@ -137,7 +137,10 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 		MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-		        /*
+		Zizaco\Entrust\EntrustServiceProvider::class,
+		Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+		Barryvdh\DomPDF\ServiceProvider::class,
+		/*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -192,6 +195,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 		'Calendar' 	=> MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+		'Entrust' 	=> Zizaco\Entrust\EntrustFacade::class,
+		'PDF' 		=> Barryvdh\DomPDF\Facade::class
 
     ],
 
