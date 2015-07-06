@@ -17,3 +17,7 @@
 		</tbody>
 	</table>
 @stop
+
+@section('post-script')
+	<script src="{{ URL::asset("js/vue-permisos.js") }}"></script>
+@stop
