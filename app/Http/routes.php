@@ -15,6 +15,8 @@ Route::get('/', 'PagesController@index');
 
 Route::get('home', 'DashController@home');
 
+Route::resource('permisos', 'PermsController');
+
 Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',

@@ -19,10 +19,25 @@
 <body>
 	<!-- nav -->
 	@include('partials.nav')
-	<div class="container">
-		<div class="col s12">
-			<h2 class="page-title hide-on-small-only">@yield('title', '')</h2>
-			<h4 class="page-title hide-on-med-and-up">@yield('title', '')</h4>
+	<div class="container" @yield('v-control', "")>
+		<div class="row">
+			@if($__env->yieldContent('link-button'))
+				<div class="col s12 m9">
+					<h3 class="page-title hide-on-small-only">@yield('title', '')</h3>
+					<h4 class="page-title hide-on-med-and-up">@yield('title', '')</h4>
+				</div>
+
+				<div class="col s12 m3">
+					<div class="btn-padding">
+						@yield('link-button')
+					</div>
+				</div>
+			@else
+				<div class="col s12">
+					<h3 class="page-title hide-on-small-only">@yield('title', '')</h3>
+					<h4 class="page-title hide-on-med-and-up">@yield('title', '')</h4>
+				</div>
+			@endif
 		</div>
 
 		<div class="breadcrumbs">
@@ -32,15 +47,15 @@
 				</ul>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col s12">
+				@include('partials.flash')
+			</div>
 
-		<div class="col s12">
-			@include('partials.flash')
+			<div class="s12">
+				@yield('content')
+			</div>
 		</div>
-
-		<div class="s12">
-			@yield('content')
-		</div>
-
 	</div>
 
 	@yield('modal')
