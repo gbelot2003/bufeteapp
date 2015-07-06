@@ -26255,7 +26255,7 @@ fcViews.agendaWeek = {
 return fc; // export for Node/CommonJS
 });
 $(document).ready(function(){
-    $(".button-collapse").sideNav()
+    $(".button-collapse").sideNav();
     $('input#email').characterCounter();
 });
 
