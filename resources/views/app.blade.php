@@ -56,9 +56,10 @@
 				@yield('content')
 			</div>
 		</div>
+		@yield('modal')
 	</div>
 
-	@yield('modal')
+
 	<!-- Scripts -->
 	<script src="{{ URL::asset("js/app.js") }}"></script>
 @yield('post-script')
