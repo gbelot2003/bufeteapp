@@ -20,4 +20,5 @@ Route::resource('permisos', 'PermsController');
 Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',
+	'listados'	=> 'ListadosController'
 ]);
