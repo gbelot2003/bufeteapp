@@ -9090,4 +9090,16 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-resizer:after {
   content: "="; }
 
+.tiny {
+  font-size: 1rem; }
+
+.small {
+  font-size: 2rem; }
+
+.medium {
+  font-size: 4rem; }
+
+.large {
+  font-size: 6rem; }
+
 /*# sourceMappingURL=app.css.map */

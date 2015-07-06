@@ -19,6 +19,7 @@
     "angular-materialize": "*",
     "angularjs": "~1.4.1",
     "materialize": "~0.97.0",
-    "angular-morph": "~0.1.0"
+    "angular-morph": "~0.1.0",
+    "ng-animate-css": "~0.0.4"
   }
 }

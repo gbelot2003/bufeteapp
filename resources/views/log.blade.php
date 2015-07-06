@@ -16,22 +16,9 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
+<body class="blue darken-2">
 	<!-- nav -->
-	@include('partials.nav')
 	<div class="container">
-		<div class="col s12">
-			<h2 class="page-title hide-on-small-only">@yield('title', '')</h2>
-			<h4 class="page-title hide-on-med-and-up">@yield('title', '')</h4>
-		</div>
-
-		<div class="breadcrumbs">
-			<div class="inner">
-				<ul class="cf">
-					@yield('breadcrumbs')
-				</ul>
-			</div>
-		</div>
 
 		<div class="col s12">
 			@include('partials.flash')
@@ -43,7 +30,6 @@
 
 	</div>
 
-	@yield('modal')
 	<!-- Scripts -->
 	<script src="{{ URL::asset("js/app.js") }}"></script>
 @yield('post-script')
