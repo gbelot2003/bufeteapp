@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,7 +13,7 @@ class ListadosController extends Controller
 
 	public function __construct()
 	{
-		$this->middleware('guest');
+		//$this->middleware('auth');
 	}
 
     /**
@@ -21,6 +22,13 @@ class ListadosController extends Controller
      */
     public function getPermisos()
     {
-
+		$permisos = Permission::latest()->select(['id', 'name', 'description'])->get();
+		return $permisos;
     }
+
+	public function getPermisosById($id)
+	{
+		$permisos = Permission::whereId($id)->select(['id', 'name', 'description'])->get();
+		return $permisos;
+	}
 }

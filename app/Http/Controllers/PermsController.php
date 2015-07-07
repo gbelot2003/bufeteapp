@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -34,7 +35,7 @@ class PermsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store(PermisosRequest $request)
+	public function store(Request $request)
 	{
 		$permisos = Permission::create($request->all());
 		return 'Archivo creado';

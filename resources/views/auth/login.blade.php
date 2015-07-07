@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class=" input-field col s12">
+				<div class="input-field col s12">
 					<i class="material-icons prefix white-text">vpn_key</i>
 					<input id="password" type="password" name="password" class="validate" minlength="6" length="15">
 					<label class="white-text" for="password">Contraseña</label>
