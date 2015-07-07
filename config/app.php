@@ -142,6 +142,7 @@ return [
 		Barryvdh\DomPDF\ServiceProvider::class,
 		Orangehill\Iseed\IseedServiceProvider::class,
 		Illuminate\Html\HtmlServiceProvider::class,
+		yajra\Datatables\DatatablesServiceProvider::class,
 		/*
          * Application Service Providers...
          */
@@ -200,7 +201,8 @@ return [
 		'Entrust' 	=> Zizaco\Entrust\EntrustFacade::class,
 		'PDF' 		=> Barryvdh\DomPDF\Facade::class,
 		'Form' 		=> Illuminate\Html\FormFacade::class,
-		'Html' 		=> Illuminate\Html\HtmlFacade::class
+		'Html' 		=> Illuminate\Html\HtmlFacade::class,
+		'Datatables' => yajra\Datatables\Datatables::class
 
     ],
 
