@@ -59,9 +59,4 @@ class ListadosController extends Controller
 		}
     }
 
-	public function getPermisosById($id)
-	{
-		$permisos = Permission::whereId($id)->select(['id', 'name', 'description'])->get();
-		return $permisos;
-	}
 }

@@ -60,8 +60,8 @@ class PermsController extends Controller
 	 */
 	public function edit($id)
 	{
-		$permisos = Permission::findOrFail($id);
-		return View('permisos.edit', compact('permisos'));
+		$permisos = Permission::whereId($id)->select(['id', 'display_name', 'description'])->get();
+		return $permisos;
 	}
 
 	/**
@@ -85,6 +85,7 @@ class PermsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Permission::destroy($id);
+		return 'done';
 	}
 }
