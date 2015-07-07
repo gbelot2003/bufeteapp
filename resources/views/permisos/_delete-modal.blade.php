@@ -1,6 +1,6 @@
 <div id="modal2" class="modal">
 	<div class="modal-content">
-		<h4 class="red-text darken-2"><i class="material-icons">info</i> Advertencia, vas a eliminar un registro</h4>
+		<h4 class="red-text darken-2"><i class="material-icons small">info</i> Advertencia, vas a eliminar un registro</h4>
 		<p>¿Estas seguro de esta ejecutar esta operación?, vas a eliminar <strong class="red-text">@{{ permsName[0].display_name }}</strong> esta no se puede deshacer</p>
 	</div>
 	<div class="modal-footer">
