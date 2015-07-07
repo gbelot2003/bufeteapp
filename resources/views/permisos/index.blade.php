@@ -23,14 +23,14 @@
 				<td>@{{ row.id }}</td>
 				<td>@{{ row.display_name }}</td>
 				<td>@{{ row.description }}</td>
-				<td>eliminar</td>
+				<td><a href="#!">&#10007;</a></td>
 			</tr>
 		<tbody>
 	</table>
 
 	@include('permisos._pagination')
 
-	<pre>@{{ $data | json }}</pre>
+	<!--<pre>@{{ $data | json }}</pre>-->
 @stop
 
 @section('post-script')

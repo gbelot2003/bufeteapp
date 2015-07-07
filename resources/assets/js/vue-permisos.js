@@ -4,8 +4,6 @@ $(document).ready(function(){
             dismissible: false
         });
     });
-
-    $('#permisos-table').dataTable();
 });
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
@@ -13,7 +11,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').
 var v = new Vue({
     el: '#permisos',
     ready: function(){
-        this.getPermisos();
+        this.getPermisos(1);
     },
     data: {
         rows: [],
@@ -26,34 +24,48 @@ var v = new Vue({
         message: '',
         searchKey: '',
         currentPage: 0,
-        itemsPerPage: 10,
-        resultCount: 0
-    },
-
-    computed:{
-        errors: function(){
-            for (var key in this.newPerm){
-                if( ! this.newPerm[key]) return true;
-            }
-            return false;
-        },
-
-        totalPages: function() {
-            return Math.ceil(this.resultCount / this.itemsPerPage)
-        }
+        itemsPerPage: 0,
+        resultCount: 0,
+        totalPage: 0
     },
 
     methods:{
-        getPermisos: function(){
-            this.$http.get('/listados/permisos').success(function(data){
-                this.$set('rows', data);
-            });
+        getPermisos: function(page, search){
+
+            if(search == null) {
+                this.$http.get('/listados/permisos/' + page).success(function(data){
+                    this.$set('rows', data.items);
+                    this.$set('resultCount', data.total);
+                    this.$set('itemsPerPage', data.itemsPerPage);
+                    this.setTotalPage();
+                });
+            } else {
+                this.$http.get('/listados/permisos/' + page + "/"  + search).success(function(data){
+                    this.$set('rows', data.items);
+                    this.$set('resultCount', data.total);
+                    this.$set('itemsPerPage', data.itemsPerPage);
+                    this.setTotalPage();
+                });
+            }
+        },
+
+        getSearch: function(search){
+            if(search === null || search === 0){
+                this.getPermisos(1);
+            } else {
+                this.getPermisos(1, search);
+            }
+
         },
 
         getPermisosById: function(id){
            this.$http.get('/listados/permisos-by-id/' + id).success(function(data){
                 this.$set('permission', data);
            });
+        },
+
+        setDestroy: function(id){
+
         },
 
         onSubmitForm: function(e) {
@@ -63,18 +75,16 @@ var v = new Vue({
 
             this.$http.post('/permisos', perms).success(function (data, status, request) {
                 this.message = 'El permiso a sido registrado exitosamente';
-                this.getPermisos();
+                this.getPermisos(1);
             }).error(function(data, status, request){
                 this.message = 'Hay un error en el envio de esta información!!!';
             });
 
             this.submitted = true;
 
-
             $('#modal1').closeModal();
 
             this.clearForm();
-
         },
 
         clearForm: function(){
@@ -83,22 +93,22 @@ var v = new Vue({
         },
 
         setPage: function(pageNumber) {
-            this.currentPage = pageNumber
+            this.currentPage = pageNumber;
+            var spage = (pageNumber + 1)
+            this.getPermisos(spage);
         },
 
-        removeItem:function(row){
-            this.rows.$remove(row);
+        setTotalPage: function(){
+            this.totalPage = Math.ceil(this.resultCount / this.itemsPerPage);
         }
     },
 
-    filters: {
-        paginate: function(list) {
-            this.resultCount = list.length
-            if (this.currentPage >= this.totalPages) {
-                this.currentPage = Math.max(0, this.totalPages - 1)
+    computed:{
+        errors: function(){
+            for (var key in this.newPerm){
+                if( ! this.newPerm[key]) return true;
             }
-            var index = this.currentPage * this.itemsPerPage
-            return list.slice(index, index + this.itemsPerPage)
+            return false;
         }
     }
 });
