@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PermissionRequest;
 use App\Permission;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class PermsController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -35,7 +40,7 @@ class PermsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(PermissionRequest $request)
 	{
 		$permisos = Permission::create($request->all());
 		return 'Archivo creado';
@@ -70,7 +75,7 @@ class PermsController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Request $request, $id)
+	public function update(PermissionRequest $request, $id)
 	{
 		$permiso = Permission::findOrFail($id);
 		$permiso->update($request->all());

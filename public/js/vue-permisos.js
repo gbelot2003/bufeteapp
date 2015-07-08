@@ -10393,6 +10393,7 @@ var v = new Vue({
     },
     data: {
         rows: [],
+        errors: '',
         permission:{
             id: 0,
             display_name: '',
@@ -10460,6 +10461,7 @@ var v = new Vue({
             this.permission.id = 0;
             this.permission.display_name = '';
             this.permission.description = '';
+            $('#modal3').closeModal();
         },
 
         OnSubmitEditForm: function(e){
@@ -10468,9 +10470,14 @@ var v = new Vue({
             this.$http.put('/permisos/' + permis.id, permis).success(function (data, status, request) {
                 this.message = 'El permiso a sido registrado exitosamente';
                 this.getPermisos(1);
-            }).error(function(data, status, request){
+                this.submitted = true;
+
+            }).error(function(data, status, response){
                 this.message = 'Hay un error en el envio de esta información!!!';
+                this.errors = response.display_name;
+                this.submitted = true;
             });
+            this.getCloseEdit()
         },
 
         onSubmitForm: function(e) {

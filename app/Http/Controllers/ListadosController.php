@@ -26,7 +26,7 @@ class ListadosController extends Controller
 		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
 		if($search != null){
 
-			$permisos = Permission::latest()->select(['id', 'display_name', 'description'])
+			$permisos = Permission::latest()->select(['id', 'name', 'display_name', 'description'])
 				->where(function ($query) use ($search) {
 					$query->where('display_name', 'LIKE', '%'.$search.'%')
 						->orWhere('description', 'LIKE', '%'.$search.'%');
@@ -49,7 +49,7 @@ class ListadosController extends Controller
 
 		} else {
 
-			$permisos = Permission::latest()->select(['id', 'display_name', 'description'])->limit($counter)->offset($start)->get();
+			$permisos = Permission::latest()->select(['id', 'name', 'display_name', 'description'])->limit($counter)->offset($start)->get();
 			$total = Permission::all()->count();
 			return $permiso = [
 				'itemsPerPage' => $counter,

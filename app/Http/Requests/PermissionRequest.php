@@ -24,13 +24,13 @@ class PermissionRequest extends Request
     public function rules()
     {
 		$create = [
-			'display_name' 		=> 'required|unique:permissions',
+			'display_name' 		=> 'required',
 			'description'		=> 'required'
 		];
 
 		$edit = [
-			'display_name' 	=> 'required',
-			'description'	=> 'string'
+			'display_name' 		=> 'required',
+			'description'		=> 'required'
 		];
 
 		if($this->method == 'PUT'){

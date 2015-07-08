@@ -15,11 +15,13 @@
 	<table id="permisos-table" class="striped bordered responsive-table">
 		<thead>
 		<th>Nombre</th>
+		<th>Nombre de sistema</th>
 		<th>Descripción
 		<th>acciones</th>
 		</thead>
 			<tr v-repeat="row:rows">
 				<td><a href="#!" v-on="click: setPermission(row)">@{{ row.display_name }}</a></td>
+				<td>@{{ row.name }}</td>
 				<td>@{{ row.description }}</td>
 				<td><a href="#!" v-on="click: getDestroy(row)" class="red-text">&#10007;</a></td>
 			</tr>
@@ -27,7 +29,7 @@
 	</table>
 
 	@include('permisos._pagination')
-
+	<pre>@{{ $data | json }}</pre>
 @stop
 
 @section('post-script')

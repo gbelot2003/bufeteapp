@@ -1,5 +1,5 @@
 <div id="modal3" class="modal bottom-sheet">
-	<form v-on="submit: OnSubmitEditForm">
+	<form method="PUT" v-on="submit: OnSubmitEditForm">
 		<div class="modal-content">
 			<h4>Editar Permiso</h4>
 
