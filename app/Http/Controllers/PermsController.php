@@ -70,7 +70,7 @@ class PermsController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(PermisosRequest $request, $id)
+	public function update(Request $request, $id)
 	{
 		$permiso = Permission::findOrFail($id);
 		$permiso->update($request->all());

@@ -14,23 +14,20 @@
 
 	<table id="permisos-table" class="striped bordered responsive-table">
 		<thead>
-		<th>No.</th>
 		<th>Nombre</th>
 		<th>Descripción
 		<th>acciones</th>
 		</thead>
 			<tr v-repeat="row:rows">
-				<td>@{{ row.id }}</td>
-				<td><a href="#!" v-on="click: getPermisosById(row.id)">@{{ row.display_name }}</a></td>
+				<td><a href="#!" v-on="click: setPermission(row)">@{{ row.display_name }}</a></td>
 				<td>@{{ row.description }}</td>
-				<td><a href="#!" v-on="click: getDestroy(row)">&#10007;</a></td>
+				<td><a href="#!" v-on="click: getDestroy(row)" class="red-text">&#10007;</a></td>
 			</tr>
 		<tbody>
 	</table>
 
 	@include('permisos._pagination')
 
-	<pre>@{{ $data | json }}</pre>
 @stop
 
 @section('post-script')
@@ -40,4 +37,5 @@
 @section('modal')
 	@include('permisos._create-modal')
 	@include('permisos._delete-modal')
+	@include('permisos._edit-modal')
 @stop

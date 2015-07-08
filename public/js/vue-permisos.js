@@ -10393,8 +10393,8 @@ var v = new Vue({
     },
     data: {
         rows: [],
-        permission: {
-            id: '',
+        permission:{
+            id: 0,
             display_name: '',
             description: ''
         },
@@ -10441,12 +10441,37 @@ var v = new Vue({
 
         },
 
-        getPermisosById: function(id){
-           this.$http.get('/permisos/' + id + '/edit').success(function(data){
-                this.$set('permission', data);
-           });
+        setPermission: function(row){
+            this.permission.id = row.id;
+            this.permission.display_name = row.display_name;
+            this.permission.description = row.description;
+
+            this.getPermisosById();
         },
 
+        getPermisosById: function(){
+
+             $('#modal3').openModal(
+                {dismissible: false}
+            );
+        },
+
+        getCloseEdit: function(){
+            this.permission.id = 0;
+            this.permission.display_name = '';
+            this.permission.description = '';
+        },
+
+        OnSubmitEditForm: function(e){
+            e.preventDefault();
+            var permis = this.permission;
+            this.$http.put('/permisos/' + permis.id, permis).success(function (data, status, request) {
+                this.message = 'El permiso a sido registrado exitosamente';
+                this.getPermisos(1);
+            }).error(function(data, status, request){
+                this.message = 'Hay un error en el envio de esta información!!!';
+            });
+        },
 
         onSubmitForm: function(e) {
             e.preventDefault();
@@ -10479,7 +10504,7 @@ var v = new Vue({
         onDestroy:function(row){
             this.$http.delete('/permisos/' +  row.id)
             .success(function(data, status, request){
-                this.message = "El archivo a sido eliminado"
+                this.message = "El archivo a sido eliminado";
                 this.getPermisos(1);
             }).error(function(data, status, request){
                     this.message = 'Hay un error en el envio de esta información!!!';
@@ -10506,10 +10531,16 @@ var v = new Vue({
     },
 
     computed:{
+
         errors: function(){
             for (var key in this.newPerm){
                 if( ! this.newPerm[key]) return true;
             }
+            return false;
+        },
+
+        editError: function(){
+            if( ! this.permission.display_name || ! this.permission.description ) { return true }
             return false;
         }
     }
