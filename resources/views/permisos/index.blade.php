@@ -29,7 +29,6 @@
 	</table>
 
 	@include('permisos._pagination')
-	<pre>@{{ $data | json }}</pre>
 @stop
 
 @section('post-script')
