@@ -13,7 +13,7 @@ class PermissionRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,20 @@ class PermissionRequest extends Request
      */
     public function rules()
     {
-        return [
-            //
-        ];
+		$create = [
+			'display_name' 		=> 'required|unique:permissions',
+			'description'		=> 'required'
+		];
+
+		$edit = [
+			'display_name' 	=> 'required',
+			'description'	=> 'string'
+		];
+
+		if($this->method == 'PUT'){
+			return $edit;
+		} else {
+			return $create;
+		}
     }
 }
