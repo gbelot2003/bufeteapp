@@ -1,8 +1,18 @@
 <?php namespace App;
 
 use Zizaco\Entrust\EntrustRole;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Role extends EntrustRole {
+class Role extends EntrustRole implements SluggableInterface{
+
+
+	use SluggableTrait;
+
+	protected $sluggable = [
+		'build_from' => 'display_name',
+		'save_to'    => 'name',
+	];
 
 	/**
 	 * The attributes that are mass assignable.

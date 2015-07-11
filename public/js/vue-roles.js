@@ -10475,9 +10475,9 @@ var v = new Vue({
             }).error(function(data, status, response){
                 this.message = 'Hay un error en el envio de esta información!!!';
                 this.errors = response.display_name;
-                this.submitted = true;
             });
-            this.getCloseEdit()
+            this.getCloseEdit();
+            this.submitted = true;
         },
 
         onSubmitForm: function(e) {
@@ -10513,11 +10513,12 @@ var v = new Vue({
                 .success(function(data, status, request){
                     this.message = "El archivo a sido eliminado";
                     this.getRoles(1);
+
                 }).error(function(data, status, request){
                     this.message = 'Hay un error en el envio de esta información!!!';
                     this.getRoles(1);
                 });
-
+            this.submitted = true;
             this.rolesName = [];
         },
 
@@ -10534,6 +10535,11 @@ var v = new Vue({
 
         setTotalPage: function(){
             this.totalPage = Math.ceil(this.resultCount / this.itemsPerPage);
+        },
+
+        clearMessage: function(){
+          this.submitted = false;
+          this.message = '';
         }
     },
 

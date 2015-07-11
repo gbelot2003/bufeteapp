@@ -9,11 +9,11 @@
 
 @section('content')
 
-	@include('permisos._messages')
+	@include('roles._messages')
 
-	@include('permisos._filter')
+	@include('roles._filter')
 
-	<table id="permisos-table" class="striped bordered responsive-table">
+	<table id="roles-table" class="striped bordered responsive-table">
 		<thead>
 		<th>Nombre</th>
 		<th>Nombre de sistema</th>
@@ -28,8 +28,8 @@
 		</tr>
 		<tbody>
 	</table>
-	@include('permisos._pagination')
-
+	@include('roles._pagination')
+	<pre>@{{ $data | json }}</pre>
 
 @stop
 
@@ -38,7 +38,7 @@
 @stop
 
 @section('modal')
-	@include('permisos._create-modal')
-	@include('permisos._delete-modal')
-	@include('permisos._edit-modal')
+	@include('roles._create-modal')
+	@include('roles._delete-modal')
+	@include('roles._edit-modal')
 @stop

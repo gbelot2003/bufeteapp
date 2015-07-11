@@ -1,26 +1,26 @@
 <div id="modal1" class="modal bottom-sheet">
 	<form method="post" v-on="submit: onSubmitForm">
 		<div class="modal-content">
-			<h4>Nuevo Permiso</h4>
+			<h4>Nuevo Rol</h4>
 
 
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field">
-						<input id="name" name="display_name" type="text" length="55" v-model='newPerm.display_name'>
+						<input id="name" name="display_name" type="text" length="55" v-model='newRoles.display_name'>
 						<label for="name">
 							Nombre
-							<span class="error red-text" v-if=" ! newPerm.display_name">*</span>
+							<span class="error red-text" v-if=" ! newRoles.display_name">*</span>
 						</label>
 					</div>
 				</div>
 
 				<div class="col s12">
 					<div class="input-field">
-						<input type="text" id="description" name="description" length="255" v-model="newPerm.description">
+						<input type="text" id="description" name="description" length="255" v-model="newRoles.description">
 						<label for="description">
 							Descripción
-							<span class="error red-text" v-if=" ! newPerm.description">*</span>
+							<span class="error red-text" v-if=" ! newRoles.description">*</span>
 						</label>
 					</div>
 				</div>
