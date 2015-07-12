@@ -4,6 +4,7 @@ $(document).ready(function(){
             dismissible: false
         });
     });
+
 });
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
@@ -12,18 +13,24 @@ var v = new Vue({
     el: '#roles',
     ready: function(){
         this.getRoles(1);
+        this.getPermissions();
     },
     data: {
-        rows: [],
-        errors: '',
         Roles:{
             id: 0,
             display_name: '',
-            description: ''
+            description: '',
+            perms:[]
         },
+        rows: [],
+        errors: '',
         newRoles: {
             display_name: '',
             description: ''
+        },
+        permissions:{
+            id:0,
+            display_name:''
         },
         rolesName: [],
         submitted: false,
@@ -55,6 +62,12 @@ var v = new Vue({
             }
         },
 
+        getPermissions: function(){
+            this.$http.get('/listados/permission-list').success(function(data) {
+                this.$set('permissions', data);
+            });
+        },
+
         getSearch: function(search){
             if(search === null || search === 0){
                 this.getRoles(1);
@@ -68,6 +81,9 @@ var v = new Vue({
             this.Roles.id = row.id;
             this.Roles.display_name = row.display_name;
             this.Roles.description = row.description;
+            for(var i = 0; i < row.perms.length; i++){
+                this.Roles.perms.push(row.perms[i].id);
+            }
 
             this.getRolesById();
         },
@@ -83,6 +99,7 @@ var v = new Vue({
             this.Roles.id = 0;
             this.Roles.display_name = '';
             this.Roles.description = '';
+            this.Roles.perms = [];
             $('#modal3').closeModal();
         },
 
@@ -162,6 +179,11 @@ var v = new Vue({
         clearMessage: function(){
           this.submitted = false;
           this.message = '';
+        },
+
+        submitedSelect: function(id){
+            if(this.Roles.perms.indexOf(id) > -1) return true;
+            return false
         }
     },
 

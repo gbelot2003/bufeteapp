@@ -60,13 +60,20 @@ class ListadosController extends Controller
 		}
     }
 
+	public function getPermissionList()
+	{
+		$permisos = Permission::select('id', 'display_name')->get();
+		return $permisos;
+	}
+
 	public function getRoles($page = null, $search = null)
 	{
 		$counter = 10;
 		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
 		if($search != null){
 
-			$roles = Role::latest()->select(['id', 'name', 'display_name', 'description'])
+			$roles = Role::with('perms')
+				->latest()->select(['id', 'name', 'display_name', 'description'])
 				->where(function ($query) use ($search) {
 					$query->where('display_name', 'LIKE', '%'.$search.'%')
 						->orWhere('description', 'LIKE', '%'.$search.'%');
@@ -89,7 +96,11 @@ class ListadosController extends Controller
 
 		} else {
 
-			$roles = Role::latest()->select(['id', 'name', 'display_name', 'description'])->limit($counter)->offset($start)->get();
+			$roles = Role::with('perms')
+				->latest()
+				->limit($counter)
+				->offset($start)
+				->get();
 			$total = Role::all()->count();
 			return $roles = [
 				'itemsPerPage' => $counter,

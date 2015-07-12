@@ -14,6 +14,7 @@
 	<title>@yield('page-title', 'Bufete Forlar')</title>
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+@yield('addcss')
 </head>
 
 <body>

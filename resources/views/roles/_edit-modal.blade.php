@@ -1,7 +1,7 @@
 <div id="modal3" class="modal bottom-sheet">
 	<form method="PUT" v-on="submit: OnSubmitEditForm">
 		<div class="modal-content">
-			<h4>Editar Permiso</h4>
+			<h4>Editar Role</h4>
 
 
 			<div class="row">
@@ -10,7 +10,7 @@
 						<label for="name">
 							Nombre
 						</label>
-						<input id="name" name="display_name" type="text" length="55" v-model='permission.display_name'>
+						<input id="name" name="display_name" type="text" length="55" v-model='Roles.display_name'>
 					</div>
 				</div>
 
@@ -19,8 +19,14 @@
 						<label for="description">
 							Descripción
 						</label>
-						<input type="text" id="description" name="description" length="255" v-model="permission.description">
+						<input type="text" id="description" name="description" length="255" v-model="Roles.description">
 					</div>
+				</div>
+
+				<div id="perms" class="col s12">
+					<select class="select browser-default" id="pems-select" v-perms="Roles.perms_lists" name="perms" multiple="multiple" v-model="Roles.perms">
+						<option v-repeat="perm:permissions" value="@{{ perm.id }}" name="id" v-attr="selected: submitedSelect(perm.id)">@{{ perm.display_name }}</option>
+					</select>
 				</div>
 
 			</div>

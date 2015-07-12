@@ -17,24 +17,39 @@
 		<thead>
 		<th>Nombre</th>
 		<th>Nombre de sistema</th>
-		<th>Descripción
+		<th>Descripción</th>
+		<th>Permisos</th>
 		<th>acciones</th>
 		</thead>
 		<tr v-repeat="row:rows">
-			<td><a href="#!" v-on="click: setPermission(row)">@{{ row.display_name }}</a></td>
+			<td><a href="#!" v-on="click: setRoles(row)">@{{ row.display_name }}</a></td>
 			<td>@{{ row.name }}</td>
 			<td>@{{ row.description }}</td>
+			<td>
+				<ul>
+					<li v-repeat="perms:rows[$index].perms">@{{ perms.display_name }}</li>
+				</ul>
+			</td>
 			<td><a href="#!" v-on="click: getDestroy(row)" class="red-text">&#10007;</a></td>
 		</tr>
 		<tbody>
 	</table>
 	@include('roles._pagination')
-	<pre>@{{ $data | json }}</pre>
+@stop
 
+@section('addcss')
+	<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+	<style>
+		.select2-container, select{
+			width: 100% !important;
+			height: 200px;
+		}
+	</style>
 @stop
 
 @section('post-script')
 	<script src="{{ URL::asset("js/vue-roles.js") }}"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 @stop
 
 @section('modal')

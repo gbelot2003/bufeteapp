@@ -25,4 +25,5 @@ class Role extends EntrustRole implements SluggableInterface{
 	{
 		return $this->perms->lists('id');
 	}
+
 }
