@@ -1,7 +1,7 @@
 <div id="modal1" class="modal bottom-sheet">
 	<form method="post" v-on="submit: onSubmitForm">
 		<div class="modal-content">
-			<h4>Nuevo Rol</h4>
+			<h4>Nuevo rol</h4>
 
 
 			<div class="row">

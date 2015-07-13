@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'Administración de Roles')
+@section('title', 'Administración de roles')
 @section('v-control', "id='roles'")
 
 @section('link-button')
@@ -30,7 +30,7 @@
 					<li v-repeat="perms:rows[$index].perms">@{{ perms.display_name }}</li>
 				</ul>
 			</td>
-			<td><a href="#!" v-on="click: getDestroy(row)" class="red-text">&#10007;</a></td>
+			<td><a href="#!" v-on="click: getDestroy(row)" class="red-text"><i class="material-icons">delete</i></a></td>
 		</tr>
 		<tbody>
 	</table>

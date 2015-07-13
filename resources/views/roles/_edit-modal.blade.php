@@ -1,7 +1,7 @@
 <div id="modal3" class="modal bottom-sheet">
 	<form method="PUT" v-on="submit: OnSubmitEditForm">
 		<div class="modal-content">
-			<h4>Editar Role</h4>
+			<h4>Editar rol</h4>
 
 
 			<div class="row">
