@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder {
@@ -13,9 +14,9 @@ class UsersTableSeeder extends Seeder {
 	{
 		\DB::table('users')->delete();
         
-		\DB::table('users')->insert(array (
+		\DB::table('users')->insert([
 			0 => 
-			array (
+			[
 				'id' => '1',
 				'userstatus_id' => '1',
 				'name' => 'Gerardo Belot',
@@ -24,8 +25,10 @@ class UsersTableSeeder extends Seeder {
 				'remember_token' => 'wqkKOjK5LEDZnmlBqZWKkSTEqcNlHhEvXNWB77ekdH018tATdkDAsrPE8MsP',
 				'created_at' => '2015-07-06 09:46:45',
 				'updated_at' => '2015-07-06 11:29:18',
-			),
-		));
+			],
+		]);
+
+		$user = User::find(1); $user->roles()->attach(2);
 	}
 
 }
