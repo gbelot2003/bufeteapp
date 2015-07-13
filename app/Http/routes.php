@@ -18,6 +18,7 @@ Route::get('home', 'DashController@home');
 Route::resource('permisos', 'PermsController');
 
 Route::resource('usuarios', 'UserController');
+Route::get('usuarios/setstatus/{id}', 'UserController@setStatus');
 
 Route::resource('roles', 'RolesController');
 

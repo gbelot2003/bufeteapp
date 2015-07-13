@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Permission;
 use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -66,6 +67,12 @@ class ListadosController extends Controller
 		return $permisos;
 	}
 
+	public function getRolesList()
+	{
+		$roles = Role::select('id', 'display_name')->get();
+		return $roles;
+	}
+
 	public function getRoles($page = null, $search = null)
 	{
 		$counter = 10;
@@ -110,4 +117,47 @@ class ListadosController extends Controller
 		}
 	}
 
+	public function getUser($page = null, $search = null)
+	{
+		$counter = 10;
+		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
+		if($search != null){
+
+			$user = User::with('roles')
+				->latest()
+				->where(function ($query) use ($search) {
+					$query->where('name', 'LIKE', '%'.$search.'%')
+						->orWhere('email', 'LIKE', '%'.$search.'%');
+				})
+				->limit($counter)
+				->offset($start)
+				->get();
+
+			$total = User::where(function ($query) use ($search) {
+				$query->where('name', 'LIKE', '%'.$search.'%')
+					->orWhere('email', 'LIKE', '%'.$search.'%');
+			})->count();
+
+			return $user = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $user
+			];
+
+
+		} else {
+
+			$user = User::with('roles')
+				->latest()
+				->limit($counter)
+				->offset($start)
+				->get();
+			$total = User::all()->count();
+			return $roles = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $user
+			];
+		}
+	}
 }

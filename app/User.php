@@ -23,7 +23,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'userstatus_id'];
+	protected $fillable = ['userstatus_id', 'name', 'email', 'password', 'userstatus_id'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -31,4 +31,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+
+	public function userstatus()
+	{
+		return $this->belongsTo('App\Userstatus');
+	}
 }

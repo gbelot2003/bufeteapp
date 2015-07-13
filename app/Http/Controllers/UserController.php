@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,46 +20,18 @@ class UserController extends Controller
         return View('users.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
+		$request['password'] = bcrypt($request['password']);
+		$user = User::create($request->all());
+		$user->roles()->attach($request->input('roles')); // id only
+		return 'Archivo creado';
     }
 
     /**
@@ -67,9 +40,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+		$user = User::findOrFail($id);
+
+		if($request->input('password')):
+			$request['password'] = bcrypt($request->input('password'));
+			unset($request['password_confirmation']);
+		else:
+			unset($request['password']);
+			unset($request['password_confirmation']);
+		endif;
+
+		$user->update($request->all());
+
+		if($request->input('roles')){
+			$user->roles()->sync($request->input('roles'));
+		} else {
+			$user->roles()->detach($request->input('roles'));
+		}
     }
 
     /**
@@ -80,6 +69,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
+
+	public function setStatus($id)
+	{
+		$user = User::findOrFail($id);
+		if($user->userstatus_id == 1){
+			$user->userstatus_id = 2;
+		} else{
+			$user->userstatus_id = 1;
+		}
+		$user->update();
+		return $user;
+	}
 }
