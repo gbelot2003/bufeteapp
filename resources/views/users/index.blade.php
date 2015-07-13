@@ -1,5 +1,5 @@
 @extends('app')
-@section('title', 'Usuarios')
+@section('title', 'Administración de usuarios')
 @section('v-control', "id='usuarios'")
 
 @section('link-button')
