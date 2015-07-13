@@ -22,6 +22,8 @@ Route::get('usuarios/setstatus/{id}', 'UserController@setStatus');
 
 Route::resource('roles', 'RolesController');
 
+Route::resource('clientes', 'ClientesController');
+
 Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',
