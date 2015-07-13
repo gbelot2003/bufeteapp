@@ -19,7 +19,7 @@
 		<th>Estado</th>
 		<th>acciones</th>
 		</thead>
-		<tr v-repeat="row:rows">
+		<tr v-repeat="row:rows | filterBy userStatusPreset in 'userstatus_id'">
 			<td><a href="#!" v-on="click: setUsers(row)">@{{ row.name }}</a></td>
 			<td>@{{ row.email }}</td>
 			<td>
@@ -35,7 +35,6 @@
 		</tr>
 		<tbody>
 	</table>
-	<pre>@{{ $data | json }}</pre>
 @stop
 
 @section('post-script')

@@ -26,7 +26,7 @@
 						<a class="collapsible-header">{{ Auth::user()->name }} <span class="caret"></span><i class="mdi-navigation-arrow-drop-down"></i></a>
 						<div class="collapsible-body">
 							<ul>
-								<li><a href="">Editar Perfil</a></li>
+								<li><a href="{{ action('UserController@show', Auth::id()) }}">Editar Perfil</a></li>
 								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 							</ul>
 						</div>
@@ -54,7 +54,7 @@
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="">Editar Perfil</a></li>
+					<li><a href="{{ action('UserController@show', Auth::id()) }}">Editar Perfil</a></li>
 					<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 				</ul>
 			</li>

@@ -11,6 +11,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').
 var v = new Vue({
     el: '#usuarios',
     data: {
+        showNoActives: false,
         userName: [],
         usuario: {
             id: 0,
@@ -230,6 +231,14 @@ var v = new Vue({
                 return true
             }
             return false;
+        },
+
+        userStatusPreset: function(){
+            if(this.showNoActives == false) {
+                return '1';
+            }
+            return null;
         }
+
     }
 });

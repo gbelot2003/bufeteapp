@@ -34,6 +34,12 @@ class UserController extends Controller
 		return 'Archivo creado';
     }
 
+	public function show($id)
+	{
+		$user = User::findOrFail($id);
+		return View('users.show', compact('user'));
+	}
+
     /**
      * Update the specified resource in storage.
      *
