@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
 use App\Permission;
 use App\Role;
 use App\User;
@@ -160,4 +161,50 @@ class ListadosController extends Controller
 			];
 		}
 	}
+
+	public function getClientes($page = null, $search = null)
+	{
+		$counter = 6;
+		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
+		if($search != null){
+
+			$clientes = Cliente::latest()
+				->where(function ($query) use ($search) {
+					$query->where('name', 'LIKE', '%'.$search.'%')
+						->orWhere('details', 'LIKE', '%'.$search.'%')
+						->orWhere('email', 'LIKE', '%'.$search.'%')
+						->orWhere('phone', 'LIKE', '%'.$search.'%')
+						->orWhere('movil', 'LIKE', '%'.$search.'%');
+				})
+				->limit($counter)
+				->offset($start)
+				->get();
+
+			$total = Cliente::where(function ($query) use ($search) {
+				$query->where('name', 'LIKE', '%'.$search.'%')
+					->orWhere('details', 'LIKE', '%'.$search.'%');
+			})->count();
+
+			return $clientes = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $clientes
+			];
+
+
+		} else {
+
+			$clientes = Cliente::latest()
+				->limit($counter)
+				->offset($start)
+				->get();
+			$total = Cliente::all()->count();
+			return $clientes = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $clientes
+			];
+		}
+	}
+
 }

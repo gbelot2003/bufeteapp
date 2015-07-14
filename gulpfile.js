@@ -44,6 +44,7 @@ elixir(function(mix) {
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-permisos.js'], 'public/js/vue-permisos.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-roles.js'], 'public/js/vue-roles.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-users.js'], 'public/js/vue-users.js');
+    mix.scripts(['vue.js', 'vue-resource.js', 'vue-clientes.js'], 'public/js/vue-clientes.js');
 
 });
 

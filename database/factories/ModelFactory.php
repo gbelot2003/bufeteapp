@@ -20,3 +20,13 @@ $factory->define(App\User::class, function ($faker) {
 		'remember_token' => str_random(10),
 	];
 });
+
+$factory->define(App\Cliente::class, function($faker){
+	return [
+		'name' => $faker->name,
+		'phone' => $faker->phoneNumber,
+		'movil' => $faker->phoneNumber,
+		'email' => $faker->email,
+		'details' => $faker->sentence($nbWords = 12)
+	];
+});

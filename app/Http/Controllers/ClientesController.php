@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        //
+        return View('clientes.index');
     }
 
     /**
@@ -34,9 +35,9 @@ class ClientesController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -45,9 +46,10 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $cliente = Cliente::findBySlug($slug);
+		return View('clientes/show', compact('cliente'));
     }
 
     /**

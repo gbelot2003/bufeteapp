@@ -12,8 +12,15 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::table('clientes', function (Blueprint $table) {
-            //
+        Schema::create('clientes', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('name', 255);
+			$table->string('phone');
+			$table->string('movil');
+			$table->string('email');
+			$table->text('details');
+			$table->string('slug', 255);
+			$table->timestamps();
         });
     }
 
@@ -25,7 +32,7 @@ class CreateClientesTable extends Migration
     public function down()
     {
         Schema::table('clientes', function (Blueprint $table) {
-            //
+			Schema::drop('clientes');
         });
     }
 }

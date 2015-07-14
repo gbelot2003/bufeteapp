@@ -41206,9 +41206,17 @@ return fc; // export for Node/CommonJS
 }(window, document));
 
 
-$(document).ready(function(){
-    $(".button-collapse").sideNav();
-    $('input#email').characterCounter();
-});
+$(function() {
+    $(document).ready(function(){
+        $(".button-collapse").sideNav();
+        $('input#email').characterCounter();
 
+        $('.anchor').on('click', function(){
+            $('html, body').animate({
+                scrollTop: $( $.attr(this, 'href') ).offset().top
+            }, 1000);
+            return false;
+        });
+    });
+});
 //# sourceMappingURL=app.js.map
