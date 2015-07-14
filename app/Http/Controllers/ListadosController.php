@@ -164,7 +164,7 @@ class ListadosController extends Controller
 
 	public function getClientes($page = null, $search = null)
 	{
-		$counter = 6;
+		$counter = 9;
 		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
 		if($search != null){
 

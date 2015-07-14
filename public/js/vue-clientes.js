@@ -10392,19 +10392,24 @@ var v = new Vue({
         this.getClientes(1);
     },
     data: {
-        rows:[],
-        errors: '',
-        cliente: {
-            id:0,
+        newCliente:{
             name: '',
             email: '',
             phone: '',
             movil: '',
             details: ''
         },
-        newCliente:{
-            name:''
+
+        cliente: {
+            id: 0,
+            name: '',
+            email: '',
+            phone: '',
+            movil: '',
+            details: ''
         },
+        rows:[],
+        errors: '',
         clienteName:[],
         submitted: false,
         message: '',
@@ -10444,7 +10449,80 @@ var v = new Vue({
 
         },
 
+        /** query de envio de formulario de creación **/
+        onSubmitForm: function(e) {
+            e.preventDefault();
+            var perms = this.newCliente;
+            this.$http.post('/clientes', perms).success(function (data, status, request) {
+                this.message = 'El cliente a sido registrado exitosamente';
+                this.getClientes(1);
+            }).error(function(data, status, request){
+                this.message = 'Hay un error en el envio de esta información!!!';
+            });
+
+            this.submitted = true;
+
+            this.clearForm();
+        },
+
+        clearForm: function(){
+            this.newCliente.id = 0;
+            this.newCliente.name = '';
+            this.newCliente.details = '';
+            this.newCliente.phone = '';
+            this.newCliente.movil = '';
+            this.newCliente.email = '';
+            $('#modal1').closeModal();
+        },
+
+        /** Eventos de edición de registro **/
+
+        getClienteById: function(){
+
+            $('#modal3').openModal(
+                {dismissible: false}
+            );
+        },
+
+        setCliente: function(row){
+            this.cliente.id = row.id;
+            this.cliente.name = row.name;
+            this.cliente.details = row.details;
+            this.cliente.phone = row.phone;
+            this.cliente.movil = row.movil;
+            this.cliente.email = row.email;
+
+            this.getClienteById();
+        },
+
+        getCloseEdit: function(){
+            this.cliente.id = 0;
+            this.cliente.name = '';
+            this.cliente.details = '';
+            this.cliente.phone = '';
+            this.cliente.movil = '';
+            this.cliente.email = '';
+            $('#modal3').closeModal();
+        },
+
+        OnSubmitEditForm: function(e){
+            e.preventDefault();
+            var cliente = this.cliente;
+            this.$http.put('/clientes/' + cliente.id, cliente).success(function (data, status, request) {
+                this.message = 'El cliente a sido editado exitosamente';
+                this.getClientes(1);
+                this.submitted = true;
+
+            }).error(function(data, status, response){
+                this.message = 'Hay un error en el envio de esta información!!!';
+                this.errors = response.name;
+                this.submitted = true;
+            });
+            this.getCloseEdit()
+        },
+
         /** querys de paginación **/
+
         setPage: function(pageNumber) {
             this.currentPage = pageNumber;
             var spage = (pageNumber + 1)
@@ -10458,6 +10536,19 @@ var v = new Vue({
 
         setTotalPage: function(){
             this.totalPage = Math.ceil(this.resultCount / this.itemsPerPage);
+        }
+    },
+
+    computed:{
+
+        errors: function(){
+            if( ! this.newCliente.name ) { return true }
+            return false;
+        },
+
+        editError: function(){
+            if( ! this.cliente.name ) { return true }
+            return false;
         }
     }
 });

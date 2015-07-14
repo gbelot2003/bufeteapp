@@ -7,20 +7,19 @@
 
 				<div class="col s12 m6">
 					<div class="input-field">
-						<input id="name" name="name" type="text" length="55" v-model='cliente.name'>
+						<input id="name" name="name" type="text" length="55" v-model='newCliente.name'>
 						<label for="name">
 							Nombre
-							<span class="error red-text" v-if=" ! cliente.name">*</span>
+							<span class="error red-text" v-if=" ! newCliente.name">*</span>
 						</label>
 					</div>
 				</div>
 
 				<div class="col s12 m6">
 					<div class="input-field">
-						<input type="email" id="email" name="email" length="255" v-model="cliente.email">
+						<input type="email" id="email" name="email" length="80" v-model="newCliente.email">
 						<label for="email">
 							E-mail
-							<span class="error red-text" v-if=" ! cliente.email">*</span>
 						</label>
 					</div>
 				</div>
@@ -30,7 +29,7 @@
 			<div class="row">
 				<div class="col s12 m6">
 					<div class="input-field">
-						<input id="phone" name="phone" type="text" length="55" v-model='cliente.phone'>
+						<input id="phone" name="phone" type="text" length="14" maxlength="14" v-model='newCliente.phone'>
 						<label for="phone">
 							Teléfono
 						</label>
@@ -39,7 +38,7 @@
 
 				<div class="col s12 m6">
 					<div class="input-field">
-						<input type="text" id="movil" name="movil" length="10" v-model="cliente.movil">
+						<input type="text" id="movil" name="movil" length="14" maxlength="14" v-model="newCliente.movil">
 						<label for="movil">
 							Teléfono Celular
 						</label>
@@ -49,7 +48,10 @@
 			</div>
 
 			<div class="row">
-
+				<div class="input-field">
+					<textarea name="details" id="details" cols="30" rows="4" class="materialize-textarea" v-model="newCliente.details"></textarea>
+					<label for="textarea1">Descripción o detalles</label>
+				</div>    
 			</div>
 
 		</div>

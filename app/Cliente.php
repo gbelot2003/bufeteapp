@@ -27,5 +27,5 @@ class Cliente extends Model implements SluggableInterface
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'detail'];
+	protected $fillable = ['name', 'phone', 'movil', 'email', 'details'];
 }
