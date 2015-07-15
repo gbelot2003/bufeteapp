@@ -89,8 +89,12 @@ v = new Vue({
                 .success(function(){
                     this.closeForm();
                     this.getContactos(this.cid);
+                    Materialize.toast('Registro Creado y vinculado', 3000);
+
                 })
-                .error()
+                .error(function(){
+                    Materialize.toast('Error en el envio', 5000);
+                });
         },
 
         /** Edit Register **/
@@ -116,8 +120,11 @@ v = new Vue({
                 .success(function(){
                     this.closeForm();
                     this.getContactos(this.cid);
+                    Materialize.toast('Registro actualizado', 3000);
                 })
-                .error()
+                .error(function(){
+                    Materialize.toast('Error en el envio', 5000);
+                });
         },
 
         /** show selected **/
