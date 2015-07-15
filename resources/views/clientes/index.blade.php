@@ -13,7 +13,7 @@
 
 	<div id="tops" class="row">
 
-		<div class="col s12 m4 p3" v-repeat="row:rows">
+		<div class="col s12 m4 p3 hoverable" v-repeat="row:rows">
 			<div class="card blue-grey darken-1">
 				<div class="card-content white-text">
 					<span class="card-title"><a href="clientes/@{{ row.slug }}"><small>@{{ row.name }}</small></a></span>
