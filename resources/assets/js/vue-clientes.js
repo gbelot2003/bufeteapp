@@ -158,7 +158,44 @@ var v = new Vue({
 
         setTotalPage: function(){
             this.totalPage = Math.ceil(this.resultCount / this.itemsPerPage);
+        },
+
+        /** eliminar o desvincular ***/
+
+        OnModalDelete: function(row){
+            $('#modal2').openModal({
+                dismissible: false
+            });
+            this.cliente.id = row.id;
+            this.cliente.name = row.name;
+            this.cliente.details = row.details;
+            this.cliente.phone = row.phone;
+            this.cliente.movil = row.movil;
+            this.cliente.email = row.email;
+        },
+
+        modalDestroy: function(){
+            this.cliente.id = 0;
+            this.cliente.name = '';
+            this.cliente.details = '';
+            this.cliente.phone = '';
+            this.cliente.movil = '';
+            this.cliente.email = '';
+        },
+
+        onDestroy:function(){
+            this.$http.delete('/clientes/' +  this.cliente.id)
+                .success(function(data, status, request){
+                    this.getClientes(1);
+                    Materialize.toast('El cliente a sido eliminado', 3000);
+                }).error(function(data, status, request){
+                    this.getClientes(1);
+                    Materialize.toast('hay un error en el envio', 3000);
+                });
+            this.submitted = true;
+            this.cliente = [];
         }
+
     },
 
     computed:{

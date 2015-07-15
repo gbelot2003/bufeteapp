@@ -13,8 +13,8 @@
 
 	<div id="tops" class="row">
 
-		<div class="col s12 m4 p3 hoverable" v-repeat="row:rows">
-			<div class="card blue-grey darken-1">
+		<div class="col s12 m4 p3" v-repeat="row:rows">
+			<div class="card blue-grey darken-1 hoverable">
 				<div class="card-content white-text">
 					<span class="card-title"><a href="clientes/@{{ row.slug }}"><small>@{{ row.name }}</small></a></span>
 					<p>@{{ row.email }}</p>
@@ -23,6 +23,7 @@
 				</div>
 				<div class="card-action">
 					<a href="#!" v-on="click: setCliente(row)"> Editar</a>
+					<a href="#!" v-on="click: OnModalDelete(row)"> Eliminar</a>
 				</div>
 			</div>
 		</div>
@@ -46,4 +47,5 @@
 @section('modal')
 	@include('clientes._create-modal')
 	@include('clientes._edit-modal')
+	@include('clientes._delete-modal')
 @stop
