@@ -44,3 +44,55 @@
 .input-field .prefix.active {
   color: #698fba;
 }
+
+/**** clientes contactos  ****/
+
+.header{
+  padding:0.5rem 0.3rem;
+  background-color: #5288dc;
+}
+
+.collections{
+  background-color: #fff;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.collection a.collections{
+  display: block;
+  transition: 0.25s;
+  color: #26a69a;
+}
+
+/** efectos **/
+.expand-transition {
+
+  transition: all .3s ease;
+  padding: 10px;
+}
+.expand-enter, .expand-leave {
+  height: 0;
+  padding: 0 10px;
+  opacity: 0;
+}
+
+.oexpand-transition {
+  transition: all .4s ease;
+  overflow: hidden;
+}
+.oexpand-enter, .oexpand-leave {
+  height: 0;
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+

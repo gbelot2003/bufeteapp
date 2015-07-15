@@ -12,6 +12,7 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
+
         Schema::create('clientes', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name', 255);
@@ -22,6 +23,15 @@ class CreateClientesTable extends Migration
 			$table->string('slug', 255);
 			$table->timestamps();
         });
+
+		Schema::create('cliente_contacto', function (Blueprint $table) {
+			$table->integer('cliente_id')->unsigned()->index();
+			$table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+
+			$table->integer('contacto_id')->unsigned()->index();
+			$table->foreign('contacto_id')->references('id')->on('contactos')->onDelete('cascade');
+			$table->timestamps();
+		});
     }
 
     /**
@@ -33,6 +43,7 @@ class CreateClientesTable extends Migration
     {
         Schema::table('clientes', function (Blueprint $table) {
 			Schema::drop('clientes');
-        });
+			Schema::drop('cliente_contacto');
+		});
     }
 }

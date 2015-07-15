@@ -168,14 +168,14 @@ class ListadosController extends Controller
 		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
 		if($search != null){
 
-			$clientes = Cliente::latest()
-				->where(function ($query) use ($search) {
+			$clientes = Cliente::where(function ($query) use ($search) {
 					$query->where('name', 'LIKE', '%'.$search.'%')
 						->orWhere('details', 'LIKE', '%'.$search.'%')
 						->orWhere('email', 'LIKE', '%'.$search.'%')
 						->orWhere('phone', 'LIKE', '%'.$search.'%')
 						->orWhere('movil', 'LIKE', '%'.$search.'%');
 				})
+				->orderBy('id')
 				->limit($counter)
 				->offset($start)
 				->get();
@@ -194,7 +194,7 @@ class ListadosController extends Controller
 
 		} else {
 
-			$clientes = Cliente::latest()
+			$clientes = Cliente::orderBy('id')
 				->limit($counter)
 				->offset($start)
 				->get();

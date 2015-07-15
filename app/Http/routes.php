@@ -27,5 +27,6 @@ Route::resource('clientes', 'ClientesController');
 Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',
-	'listados'	=> 'ListadosController'
+	'listados'	=> 'ListadosController',
+	'contactos-relacionados' => 'ClientescontactosController'
 ]);

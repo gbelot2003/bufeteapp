@@ -28,4 +28,12 @@ class Cliente extends Model implements SluggableInterface
 	 * @var array
 	 */
 	protected $fillable = ['name', 'phone', 'movil', 'email', 'details'];
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function contactos()
+	{
+		return $this->belongsToMany('App\Contacto')->withTimestamps();
+	}
 }
