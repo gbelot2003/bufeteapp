@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Contacto;
 use App\Permission;
 use App\Role;
 use App\User;
@@ -207,4 +208,52 @@ class ListadosController extends Controller
 		}
 	}
 
+
+	public function getContactos($page = null, $search = null)
+	{
+		$counter = 10;
+		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
+		if($search != null){
+
+			$contactos = Contacto::where(function ($query) use ($search) {
+				$query->where('type', 'LIKE', '%'.$search.'%')
+				->where('name', 'LIKE', '%'.$search.'%')
+				->where('phone', 'LIKE', '%'.$search.'%')
+				->where('movil', 'LIKE', '%'.$search.'%')
+				->where('email', 'LIKE', '%'.$search.'%');
+			})
+				->orderBy('id')
+				->limit($counter)
+				->offset($start)
+				->get();
+
+			$total = Contacto::where(function ($query) use ($search) {
+				$query->where('type', 'LIKE', '%'.$search.'%')
+					->where('name', 'LIKE', '%'.$search.'%')
+					->where('phone', 'LIKE', '%'.$search.'%')
+					->where('movil', 'LIKE', '%'.$search.'%')
+					->where('email', 'LIKE', '%'.$search.'%');
+			})->count();
+
+			return $contactos = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $contactos
+			];
+
+
+		} else {
+
+			$contactos = Contacto::orderBy('id')
+				->limit($counter)
+				->offset($start)
+				->get();
+			$total = Contacto::all()->count();
+			return $contactos = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $contactos
+			];
+		}
+	}
 }
