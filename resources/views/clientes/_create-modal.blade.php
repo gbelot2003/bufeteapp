@@ -1,7 +1,7 @@
 <div id="modal1" class="modal">
 	<form method="post" v-on="submit: onSubmitForm">
 		<div class="modal-content">
-			<h4>Nuevo Permiso</h4>
+			<h4>Nuevo Cliente</h4>
 
 			<div class="row">
 
