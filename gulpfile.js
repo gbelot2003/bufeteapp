@@ -47,6 +47,7 @@ elixir(function(mix) {
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-clientes.js'], 'public/js/vue-clientes.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-contactos-clientes.js'], 'public/js/vue-contactos-clientes.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-contactos.js'], 'public/js/vue-contactos.js');
+    mix.scripts(['vue.js', 'vue-resource.js', 'vue-casos.js'], 'public/js/vue-casos.js');
 
 });
 
