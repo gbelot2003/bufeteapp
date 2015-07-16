@@ -24,6 +24,8 @@ Route::resource('roles', 'RolesController');
 
 Route::resource('clientes', 'ClientesController');
 
+Route::resource('contactos', 'ContactosController');
+
 Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',
