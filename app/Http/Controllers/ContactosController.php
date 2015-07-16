@@ -17,18 +17,7 @@ class ContactosController extends Controller
      */
     public function index()
     {
-		$contactos = Contacto::all();
-        return View('contactos.index', compact('contactos'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+        return View('contactos.index');
     }
 
     /**
@@ -36,31 +25,10 @@ class ContactosController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
+		$contactos = Contacto::create($request->all());
+		return $contactos;
     }
 
     /**
@@ -69,9 +37,11 @@ class ContactosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+		$contactos = Contacto::findOrFail($id);
+		$contactos->update($request->all());
+		return $contactos;
     }
 
     /**
@@ -82,6 +52,7 @@ class ContactosController extends Controller
      */
     public function destroy($id)
     {
-        //
+		Contacto::destroy($id);
+		return 'done';
     }
 }

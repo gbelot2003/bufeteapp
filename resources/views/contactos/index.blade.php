@@ -1,7 +1,16 @@
 @extends('app')
+@section('title', 'Administración de contactos')
+@section('v-control', "id='contactos'")
+
+@section('link-button')
+	<a id="create" class="modal-trigger btn-floating btn-large waves-effect waves-light blue" href="#modal1"><i class="material-icons">add</i></a>
+@stop
 
 @section('content')
-	<table class="table bordered striped hoverable responsive-table">
+
+	@include('contactos._filter')
+
+	<table class="table bordered striped responsive-table">
 		<thead>
 			<th>Nombre</th>
 			<th>Tipo</th>
@@ -10,19 +19,32 @@
 			<th>Teléfono</th>
 			<th>Celular</th>
 			<th>E-mail</th>
+			<th>Acciones</th>
 		</thead>
-		<tbody>
-		@foreach($contactos as $contacto)
-			<tr>
-				<td>{{ $contacto->name }}</td>
-				<td>{{ $contacto->type }}</td>
-				<td>{{ $contacto->cargo }}</td>
-				<td>{{ $contacto->notes }}</td>
-				<td>{{ $contacto->phone }}</td>
-				<td>{{ $contacto->movil }}</td>
-				<td>{{ $contacto->email }}</td>
+			<tr class="hoverable" v-repeat="row:rows">
+				<td><a href="#!" v-on="click: setEdit(row)">@{{ row.name }}</a></td>
+				<td>@{{ row.type }}</td>
+				<td>@{{ row.cargo }}</td>
+				<td>@{{ row.notes }}</td>
+				<td>@{{ row.phone }}</td>
+				<td>@{{ row.movil }}</td>
+				<td>@{{ row.email }}</td>
+				<td><a href="#!" v-on="click: setDestroy(row)" class="red-text"><i class="material-icons">delete</i></a></td>
 			</tr>
-		@endforeach
+		<tbody>
+
 		</tbody>
 	</table>
+	@include('contactos._pagination')
+
+	<pre>@{{ $data | json }}</pre>
+@stop
+@section('post-script')
+	<script src="{{ URL::asset("js/vue-contactos.js") }}"></script>
+@stop
+
+@section('modal')
+	@include('contactos._delete-modal')
+	@include('contactos._edit-modal')
+	@include('contactos._create-modal')
 @stop
