@@ -10376,14 +10376,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }
 /******/ ]);
-$(document).ready(function(){
-    $('#create').on('click', function(){
-        $('#modal1').openModal({
-            dismissible: false
-        });
-    });
-});
-
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
 
 var v = new Vue({

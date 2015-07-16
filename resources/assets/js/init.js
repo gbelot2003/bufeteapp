@@ -9,5 +9,14 @@ $(function() {
             }, 1000);
             return false;
         });
+
+        $(document).ready(function(){
+            $('#create').on('click', function(){
+                $('#modal1').openModal({
+                    dismissible: false
+                });
+            });
+        });
+
     });
 });
