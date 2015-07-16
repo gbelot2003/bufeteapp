@@ -26,6 +26,8 @@ Route::resource('clientes', 'ClientesController');
 
 Route::resource('contactos', 'ContactosController');
 
+Route::resource('casos', 'CasosController');
+
 Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',
