@@ -36,8 +36,6 @@
 		</tbody>
 	</table>
 	@include('contactos._pagination')
-
-	<pre>@{{ $data | json }}</pre>
 @stop
 @section('post-script')
 	<script src="{{ URL::asset("js/vue-contactos.js") }}"></script>
