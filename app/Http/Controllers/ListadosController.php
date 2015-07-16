@@ -218,9 +218,9 @@ class ListadosController extends Controller
 			$contactos = Contacto::where(function ($query) use ($search) {
 				$query->where('type', 'LIKE', '%'.$search.'%')
 				->where('name', 'LIKE', '%'.$search.'%')
-				->where('phone', 'LIKE', '%'.$search.'%')
-				->where('movil', 'LIKE', '%'.$search.'%')
-				->where('email', 'LIKE', '%'.$search.'%');
+				->orWhere('phone', 'LIKE', '%'.$search.'%')
+				->orWhere('movil', 'LIKE', '%'.$search.'%')
+				->orWhere('email', 'LIKE', '%'.$search.'%');
 			})
 				->orderBy('id')
 				->limit($counter)
@@ -229,10 +229,10 @@ class ListadosController extends Controller
 
 			$total = Contacto::where(function ($query) use ($search) {
 				$query->where('type', 'LIKE', '%'.$search.'%')
-					->where('name', 'LIKE', '%'.$search.'%')
-					->where('phone', 'LIKE', '%'.$search.'%')
-					->where('movil', 'LIKE', '%'.$search.'%')
-					->where('email', 'LIKE', '%'.$search.'%');
+					->orWhere('name', 'LIKE', '%'.$search.'%')
+					->orWhere('phone', 'LIKE', '%'.$search.'%')
+					->orWhere('movil', 'LIKE', '%'.$search.'%')
+					->orWhere('email', 'LIKE', '%'.$search.'%');
 			})->count();
 
 			return $contactos = [
