@@ -55,7 +55,7 @@
 	<ul class="right hide-on-med-and-down">
 
 		@if (Auth::guest())
-			<li><a href="auth/login"><i class="material-icons right">lock</i>Login</a></li>
+			<li><a href="/auth/login"><i class="material-icons right">lock</i>Login</a></li>
 
 		@else
 			<li><a href="/casos">Registros de casos</a></li>
