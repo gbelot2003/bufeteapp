@@ -39,7 +39,24 @@ v = new Vue({
             } else {
                 this.getCasos(1, search);
             }
+        },
 
-        }
+        /** querys de paginación **/
+
+        setPage: function(pageNumber) {
+            this.currentPage = pageNumber;
+            var spage = (pageNumber + 1)
+            if(this.searchKey != null){
+                this.getClientes(spage, this.searchKey);
+            } else {
+                this.getClientes(spage);
+            }
+
+        },
+
+        setTotalPage: function(){
+            this.totalPage = Math.ceil(this.resultCount / this.itemsPerPage);
+        },
+
     }
 });
