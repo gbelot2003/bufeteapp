@@ -10,10 +10,6 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<pre>@{{ $data | json }}</pre>
-	</div>
-
 @stop
 @section('post-script')
 	<script src="{{ URL::asset("js/vue-casos-create.js") }}"></script>
