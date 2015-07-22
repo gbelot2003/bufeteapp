@@ -32,9 +32,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-
+	/**
+	 * Userstatus
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function userstatus()
 	{
 		return $this->belongsTo('App\Userstatus');
 	}
+
+	/**
+	 * Un usuario se relaciona a un caso
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function casos()
+	{
+		return $this->hasOne('App\Caso');
+	}
+
+
 }

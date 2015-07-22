@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Caso;
 use App\Cliente;
 use App\Contacto;
 use App\Permission;
@@ -20,10 +21,11 @@ class ListadosController extends Controller
 		$this->middleware('auth');
 	}
 
-    /**
-     *
-     * @return Response
-     */
+	/**
+	 * @param null $page
+	 * @param null $search
+	 * @return array
+	 */
     public function getPermisos($page = null, $search = null)
     {
 		$counter = 10;
@@ -63,18 +65,29 @@ class ListadosController extends Controller
 		}
     }
 
+	/**
+	 * @return mixed
+	 */
 	public function getPermissionList()
 	{
 		$permisos = Permission::select('id', 'display_name')->get();
 		return $permisos;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getRolesList()
 	{
 		$roles = Role::select('id', 'display_name')->get();
 		return $roles;
 	}
 
+	/**
+	 * @param null $page
+	 * @param null $search
+	 * @return array
+	 */
 	public function getRoles($page = null, $search = null)
 	{
 		$counter = 10;
@@ -119,6 +132,11 @@ class ListadosController extends Controller
 		}
 	}
 
+	/**
+	 * @param null $page
+	 * @param null $search
+	 * @return array
+	 */
 	public function getUser($page = null, $search = null)
 	{
 		$counter = 10;
@@ -163,6 +181,11 @@ class ListadosController extends Controller
 		}
 	}
 
+	/**
+	 * @param null $page
+	 * @param null $search
+	 * @return array
+	 */
 	public function getClientes($page = null, $search = null)
 	{
 		$counter = 9;
@@ -208,7 +231,11 @@ class ListadosController extends Controller
 		}
 	}
 
-
+	/**
+	 * @param null $page
+	 * @param null $search
+	 * @return array
+	 */
 	public function getContactos($page = null, $search = null)
 	{
 		$counter = 10;
@@ -217,7 +244,8 @@ class ListadosController extends Controller
 
 			$contactos = Contacto::where(function ($query) use ($search) {
 				$query->where('type', 'LIKE', '%'.$search.'%')
-				->where('name', 'LIKE', '%'.$search.'%')
+				->orWhere('name', 'LIKE', '%'.$search.'%')
+				->orWhere('cargo', 'LIKE', '%'.$search.'%')
 				->orWhere('phone', 'LIKE', '%'.$search.'%')
 				->orWhere('movil', 'LIKE', '%'.$search.'%')
 				->orWhere('email', 'LIKE', '%'.$search.'%');
@@ -230,6 +258,7 @@ class ListadosController extends Controller
 			$total = Contacto::where(function ($query) use ($search) {
 				$query->where('type', 'LIKE', '%'.$search.'%')
 					->orWhere('name', 'LIKE', '%'.$search.'%')
+					->orWhere('cargo', 'LIKE', '%'.$search.'%')
 					->orWhere('phone', 'LIKE', '%'.$search.'%')
 					->orWhere('movil', 'LIKE', '%'.$search.'%')
 					->orWhere('email', 'LIKE', '%'.$search.'%');
@@ -255,5 +284,115 @@ class ListadosController extends Controller
 				'items' => $contactos
 			];
 		}
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getClienteName($id){
+		$cliente = Cliente::findOrFail($id)->select('name');
+		return $cliente;
+	}
+
+	/** Queryes de Casos */
+	/**	******************/
+
+	public function getCasos($page = null, $search = null)
+	{
+		$counter = 10;
+		$start = ($page > 1) ? ($page * $counter) - $counter : 0;
+		if($search != null){
+
+			$casos = Caso::select([
+				'casos.caso',
+				'clientes.name as clientename',
+				'casos.tribunal',
+				'jueces.name as juezname',
+				'casos.tipojuicio as tipojuicio',
+				'casos.created_at as created_at',
+				'casos.estado as estado'
+			])
+				->join('users', 'user_id', '=', 'users.id')
+				->join('contactos as jueces', 'juez_id', '=', 'jueces.id')
+				->join('clientes', 'cliente_id', '=', 'clientes.id')
+			->where(function ($query) use ($search) {
+				$query->where('clientename', 'LIKE', '%'.$search.'%')
+					->orWhere('tribunal', 'LIKE', '%'.$search.'%')
+					->orWhere('estado', 'LIKE', '%'.$search.'%')
+					->orWhere('name', 'LIKE', '%'.$search.'%');
+			})
+				->with('users', 'clientes', 'jueces')
+				->orderBy('id')
+				->limit($counter)
+				->offset($start)
+				->get();
+
+			$total = Caso::select([
+				'casos.caso',
+				'clientes.name as clientename',
+				'casos.tribunal',
+				'jueces.name as juezname',
+				'casos.tipojuicio as tipojuicio',
+				'casos.created_at as created_at',
+				'casos.estado as estado'
+			])
+				->join('users', 'user_id', '=', 'users.id')
+				->join('contactos as jueces', 'juez_id', '=', 'jueces.id')
+				->join('clientes', 'cliente_id', '=', 'clientes.id')
+				->where(function ($query) use ($search) {
+					$query->where('clientename', 'LIKE', '%'.$search.'%')
+						->orWhere('tribunal', 'LIKE', '%'.$search.'%')
+						->orWhere('estado', 'LIKE', '%'.$search.'%')
+						->orWhere('name', 'LIKE', '%'.$search.'%');
+			})->count();
+
+			return $casos = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $casos
+			];
+
+
+		} else {
+
+			$casos = Caso::select([
+				'casos.caso',
+				'clientes.name as clientename',
+				'casos.tribunal',
+				'jueces.name as juezname',
+				'casos.tipojuicio as tipojuicio',
+				'casos.created_at as created_at',
+				'casos.estado as estado'
+				])
+				->join('users', 'user_id', '=', 'users.id')
+				->join('contactos as jueces', 'juez_id', '=', 'jueces.id')
+				->join('clientes', 'cliente_id', '=', 'clientes.id')
+				->orderBy('casos.id')
+				->limit($counter)
+				->offset($start)
+				->get();
+			$total = Caso::all()->count();
+			return $casos = [
+				'itemsPerPage' => $counter,
+				'total' => $total,
+				'items' => $casos
+			];
+		}
+	}
+
+	/**
+	 * Conseguir listado de jueces
+	 * @return mixed
+	 */
+	public function getJueces()
+	{
+		$jueces = Contacto::where('type', '=', 'Juez')->select('id', 'name')->get();
+		return $jueces;
+	}
+
+	public function getContactosCaso(){
+		$contactos = Contacto::where('type', '=', 'Relacionado a Caso')->select('id', 'name')->get();
+		return $contactos;
 	}
 }

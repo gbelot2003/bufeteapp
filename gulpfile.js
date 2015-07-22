@@ -18,6 +18,7 @@ elixir(function(mix) {
     mix.copy('vendor/bower_components/datatables/media/js/jquery.dataTables.js', 'resources/assets/js/dataTable.js');
     mix.copy('vendor/bower_components/moment/min/moment.min.js', 'resources/assets/js/moment.js');
     mix.copy('vendor/bower_components/fullcalendar/dist/fullcalendar.js', 'resources/assets/js/fullcalendar.js');
+    mix.copy('vendor/bower_components/select2/dist/js/select2.full.js', 'resources/assets/js/select2.js');
 
     /** vue dependensies **/
     mix.copy('vendor/bower_components/vue/dist/vue.js', 'resources/assets/js/vue.js');
@@ -33,10 +34,10 @@ elixir(function(mix) {
     /** jquery and libraries **/
     mix.scripts([
         'jquery.js',
-        'materialize.js',
         'moment.js',
         'fullcalendar.js',
         'dataTable.js',
+        'materialize.js',
         'init.js'
         ], 'public/js/app.js');
 
@@ -48,6 +49,7 @@ elixir(function(mix) {
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-contactos-clientes.js'], 'public/js/vue-contactos-clientes.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-contactos.js'], 'public/js/vue-contactos.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-casos.js'], 'public/js/vue-casos.js');
+    mix.scripts(['select2.js', 'casos-script.js', 'vue.js', 'vue-resource.js', 'vue-casos-create.js'], 'public/js/vue-casos-create.js');
 
 });
 

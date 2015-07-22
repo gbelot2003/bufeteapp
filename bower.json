@@ -23,6 +23,7 @@
     "ng-animate-css": "~0.0.4",
     "vue": "~0.12.6",
     "vue-resource": "~0.1.5",
-    "datatables": "~1.10.7"
+    "datatables": "~1.10.7",
+    "select2": "~4.0.0"
   }
 }

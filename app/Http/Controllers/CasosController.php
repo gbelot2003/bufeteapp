@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Caso;
+use App\Cliente;
+use App\Contacto;
+use App\Departamento;
+use App\Tipocaso;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class CasosController extends Controller
 {
@@ -16,7 +23,7 @@ class CasosController extends Controller
      */
     public function index()
     {
-        //
+        return View('casos.index');
     }
 
     /**
@@ -26,7 +33,11 @@ class CasosController extends Controller
      */
     public function create()
     {
-        //
+		$clientes = Cliente::Lists('name', 'id');
+		$departamento = Departamento::Lists('departamento', 'id');
+		$tipocaso = Tipocaso::Lists('name', 'id');
+
+        return View('casos.create', compact('clientes', 'tipocaso'));
     }
 
     /**
@@ -34,9 +45,11 @@ class CasosController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+		$caso = new Caso($request->all());
+		Auth::user()->casos()->save($caso);
+		return 'done';
     }
 
     /**
