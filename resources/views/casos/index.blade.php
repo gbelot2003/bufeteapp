@@ -34,6 +34,7 @@
 			</tr>
 		</tbody>
 	</table>
+	@include('casos._pagination')
 	<pre>@{{ $data | json }}</pre>
 @stop
 
