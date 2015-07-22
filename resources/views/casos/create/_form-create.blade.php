@@ -23,7 +23,7 @@
 		<!-- Descripcion Form Input -->
 		<div class="input-field">
 			{!! Form::label('descripcion', "Descripción:") !!}
-			{!! Form::textarea("descripcion", null, ['class' => 'materialize-textarea', 'v-model' => 'caso.description']) !!}
+			{!! Form::textarea("descripcion", null, ['class' => 'materialize-textarea', 'v-model' => 'caso.descripcion']) !!}
 			{!! Form::hidden('estado', 'Abierto') !!}
 		</div>
 	</div>

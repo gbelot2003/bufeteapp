@@ -115,7 +115,7 @@ v = new Vue({
             juez_id: 0,
             csj: '', /** corte suprema de justicia **/
             ca: '', /** corte de apelaciones **/
-            description: ''
+            descripcion: ''
         }
     },
 
@@ -250,7 +250,7 @@ v = new Vue({
             this.caso.demandado = '';
             this.caso.demandante = '';
             this.caso.juez_id = 0;
-            this.caso.description = '';
+            this.caso.descripcion = '';
             this.caso.estado = '';
         }
 
