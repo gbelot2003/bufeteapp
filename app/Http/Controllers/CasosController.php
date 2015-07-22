@@ -40,6 +40,7 @@ class CasosController extends Controller
         return View('casos.create', compact('clientes', 'tipocaso'));
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -58,9 +59,10 @@ class CasosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+		$caso = Caso::findBySlug($slug);
+		return View('casos.show', compact('caso'));
     }
 
     /**
