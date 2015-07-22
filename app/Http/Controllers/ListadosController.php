@@ -305,9 +305,9 @@ class ListadosController extends Controller
 		if($search != null){
 
 			$casos = Caso::select([
-				'casos.caso',
+				'casos.caso as caso',
 				'clientes.name as clientename',
-				'casos.tribunal',
+				'casos.tribunal as tribunal',
 				'jueces.name as juezname',
 				'casos.tipojuicio as tipojuicio',
 				'casos.created_at as created_at',
@@ -318,20 +318,20 @@ class ListadosController extends Controller
 				->join('clientes', 'cliente_id', '=', 'clientes.id')
 			->where(function ($query) use ($search) {
 				$query->where('clientename', 'LIKE', '%'.$search.'%')
-					->orWhere('tribunal', 'LIKE', '%'.$search.'%')
-					->orWhere('estado', 'LIKE', '%'.$search.'%')
-					->orWhere('name', 'LIKE', '%'.$search.'%');
+					->orWhere('casos.caso', 'LIKE', '%'.$search.'%')
+					->orWhere('casos.tribunal', 'LIKE', '%'.$search.'%')
+					->orWhere('casos.estado', 'LIKE', '%'.$search.'%')
+					->orWhere('juezname', 'LIKE', '%'.$search.'%');
 			})
-				->with('users', 'clientes', 'jueces')
-				->orderBy('id')
+				->orderBy('casos.id')
 				->limit($counter)
 				->offset($start)
 				->get();
 
 			$total = Caso::select([
-				'casos.caso',
+				'casos.caso as caso',
 				'clientes.name as clientename',
-				'casos.tribunal',
+				'casos.tribunal as tribunal',
 				'jueces.name as juezname',
 				'casos.tipojuicio as tipojuicio',
 				'casos.created_at as created_at',
@@ -342,9 +342,10 @@ class ListadosController extends Controller
 				->join('clientes', 'cliente_id', '=', 'clientes.id')
 				->where(function ($query) use ($search) {
 					$query->where('clientename', 'LIKE', '%'.$search.'%')
-						->orWhere('tribunal', 'LIKE', '%'.$search.'%')
-						->orWhere('estado', 'LIKE', '%'.$search.'%')
-						->orWhere('name', 'LIKE', '%'.$search.'%');
+						->orWhere('casos.caso', 'LIKE', '%'.$search.'%')
+						->orWhere('casos.tribunal', 'LIKE', '%'.$search.'%')
+						->orWhere('casos.estado', 'LIKE', '%'.$search.'%')
+						->orWhere('juezname', 'LIKE', '%'.$search.'%');
 			})->count();
 
 			return $casos = [
@@ -357,13 +358,14 @@ class ListadosController extends Controller
 		} else {
 
 			$casos = Caso::select([
-				'casos.caso',
+				'casos.caso as caso',
 				'clientes.name as clientename',
-				'casos.tribunal',
+				'casos.tribunal as tribunal',
 				'jueces.name as juezname',
 				'casos.tipojuicio as tipojuicio',
 				'casos.created_at as created_at',
-				'casos.estado as estado'
+				'casos.estado as estado',
+				'casos.descripcion as descripcion'
 				])
 				->join('users', 'user_id', '=', 'users.id')
 				->join('contactos as jueces', 'juez_id', '=', 'jueces.id')
