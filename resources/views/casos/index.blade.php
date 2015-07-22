@@ -23,7 +23,7 @@
 		</thead>
 		<tbody>
 			<tr v-repeat="row:rows">
-				<td><a href="/casos/show/@{{ row.caso }}">@{{ row.caso }}</a></td>
+				<td><a href="/casos/@{{ row.caso }}">@{{ row.caso }}</a></td>
 				<td>@{{ row.clientename }}</td>
 				<td>@{{ row.tribunal }}</td>
 				<td>@{{ row.juezname }}</td>
