@@ -35,9 +35,9 @@ v = new Vue({
 
         getSearch: function(search){
             if(search === null || search === 0){
-                this.getRoles(1);
+                this.getCasos(1);
             } else {
-                this.getRoles(1, search);
+                this.getCasos(1, search);
             }
 
         }
