@@ -40,14 +40,31 @@ class Caso extends Model implements SluggableInterface
 		return $this->belongsTo('App\User', 'user_id', 'id');
 	}
 
+	/**
+	 * relacion con clientes
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function clientes()
 	{
 		return $this->belongsTo('App\Cliente', 'cliente_id', 'id');
 	}
 
+	/**
+	 * Relacion con jueces
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function jueces()
 	{
 		return $this->belongsTo('App\Contacto', 'juez_id', 'id');
+	}
+
+	/**
+	 * Relacion con tipocaso
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function tipocasos()
+	{
+		return $this->belongsTo('App\Tipocaso', 'tipocaso_id', 'id');
 	}
 
 }
