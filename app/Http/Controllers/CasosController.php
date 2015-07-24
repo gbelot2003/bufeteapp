@@ -73,7 +73,7 @@ class CasosController extends Controller
      */
     public function edit($id)
     {
-        //
+        return View('casos.edit');
     }
 
     /**
