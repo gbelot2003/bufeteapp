@@ -34,9 +34,6 @@ elixir(function(mix) {
     /** jquery and libraries **/
     mix.scripts([
         'jquery.js',
-        'moment.js',
-        'fullcalendar.js',
-        'dataTable.js',
         'materialize.js',
         'init.js'
         ], 'public/js/app.js');
