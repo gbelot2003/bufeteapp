@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ActualizacionCasos;
 use App\Caso;
 use App\Cliente;
 use App\Contacto;
@@ -393,8 +394,19 @@ class ListadosController extends Controller
 		return $jueces;
 	}
 
-	public function getContactosCaso(){
+	/**
+	 * Consigue contactos de caso
+	 * @return mixed
+	 */
+	public function getContactosCaso()
+	{
 		$contactos = Contacto::where('type', '=', 'Relacionado a Caso')->select('id', 'name')->get();
 		return $contactos;
+	}
+
+	public function getRelacionados($id)
+	{
+		$relaciones = ActualizacionCasos::where('caso_id', '=', $id)->with('users')->get();
+		return $relaciones;
 	}
 }

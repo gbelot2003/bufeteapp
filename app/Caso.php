@@ -67,7 +67,7 @@ class Caso extends Model implements SluggableInterface
 		return $this->belongsTo('App\Tipocaso', 'tipocaso_id', 'id');
 	}
 
-	public function Actualizaciones()
+	public function actualizaciones()
 	{
 		return $this->hasMany('App\ActualizacionCasos');
 	}

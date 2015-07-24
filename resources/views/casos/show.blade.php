@@ -1,20 +1,18 @@
 @extends('app')
 @section('title', 'Casos - ' . $caso->caso)
-@section('link-button')
-	<!--<a id="linking" href="{{ action('CasosController@edit', $caso->slug) }}" class=" btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">edit</i></a>-->
-@stop
+
 @section('v-control', "id='show-casos'")
 
 @section('content')
 
 	@include('casos.show._info')
+	<div class="row">
+		@include('casos.show._actualizaciones')
+	</div>
 
 	<div class="row">
 		{!! Form::hidden('caso_id', $caso->id, ['id' => 'caso_id', 'v-model' => 'caso_id']) !!}
-		<pre>@{{ $data | json }}</pre>
 	</div>
-
-	@include('casos.show._actualizaciones')
 
 @stop
 
@@ -24,5 +22,7 @@
 
 
 @section('modal')
-
+	@include('casos.show.actualizaciones._create-modal')
+	@include('casos.show.actualizaciones._edit-modal')
+	@include('casos.show.actualizaciones._delete-modal')
 @stop
