@@ -50,5 +50,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasOne('App\Caso');
 	}
 
+	/**
+	 * Un usuario puede tener varias actualizaciones en casos
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function actualizaciones()
+	{
+		return $this->hasMany('App\ActualizacionCasos');
+	}
+
 
 }

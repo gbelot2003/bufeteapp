@@ -20,12 +20,7 @@
 		</div>
 	</div>
 
-	<div class="col m3 s12">
-		<div class="row">
-			<div class="col m11 fheader">Tribunal :</div>
-			<div class="col m11 purple lighten-5"><strong>{{ $caso->tribunal }}</strong></div>
-		</div>
-	</div>
+
 
 </div>
 
