@@ -77,7 +77,7 @@
 		</div>
 		<div class="modal-footer">
 			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" v-on="click: modalDestroy">Cancelar</a>
-			<button class="waves-effect waves-green btn btn-primary" v-attr="disabled: editError">Guardar cambios</button>
+			<button class="waves-effect waves-green btn btn-primary" v-attr="disabled: createError">Guardar cambios</button>
 		</div>
 	</form>
 </div>

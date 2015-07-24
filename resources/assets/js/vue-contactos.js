@@ -184,8 +184,13 @@ v = new Vue({
     },
 
     computed: {
-        editError: function(){
+        createError: function(){
             if( ! this.newContacto.name || ! this.newContacto.type) { return true }
+            return false;
+        },
+
+        editError: function(){
+            if( ! this.contactos.name || ! this.contactos.type) { return true }
             return false;
         }
     }
