@@ -39,8 +39,8 @@
 		</div>
 
 	</div>
-</div>
 
-<div class="col s12">
-	<p>{!! $caso->descripcion !!}</p>
+	<div class="col s12">
+		<p>{!! $caso->descripcion !!}</p>
+	</div>
 </div>

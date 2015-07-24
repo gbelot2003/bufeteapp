@@ -8,6 +8,12 @@
 @section('content')
 
 	@include('casos.show._info')
+
+	<div class="row">
+		{!! Form::hidden('caso_id', $caso->id, ['id' => 'caso_id', 'v-model' => 'caso_id']) !!}
+		<pre>@{{ $data | json }}</pre>
+	</div>
+
 	@include('casos.show._actualizaciones')
 
 @stop
