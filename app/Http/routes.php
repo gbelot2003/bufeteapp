@@ -15,6 +15,10 @@ Route::get('/', 'PagesController@index');
 
 Route::get('home', 'DashController@home');
 
+Route::get('dash/dates', 'DashController@dates');
+
+Route::post('dash/create', 'DashController@create');
+
 Route::resource('permisos', 'PermsController');
 
 Route::resource('usuarios', 'UserController');

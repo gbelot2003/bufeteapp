@@ -15,10 +15,13 @@ class CreateEventCalendarTable extends Migration
         Schema::create('event_models', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('title');
-			$table->boolean('all_day');
+			$table->boolean('allday');
 			$table->datetime('start');
+			$table->string('start_hour');
 			$table->datetime('end');
+			$table->string('end_hour');
 			$table->timestamps();
+
         });
     }
 

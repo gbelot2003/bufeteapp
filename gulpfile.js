@@ -19,6 +19,8 @@ elixir(function(mix) {
     mix.copy('vendor/bower_components/moment/min/moment.min.js', 'resources/assets/js/moment.js');
     mix.copy('vendor/bower_components/fullcalendar/dist/fullcalendar.js', 'resources/assets/js/fullcalendar.js');
     mix.copy('vendor/bower_components/select2/dist/js/select2.full.js', 'resources/assets/js/select2.js');
+    mix.copy('vendor/bower_components/underscore/underscore.js', 'resources/assets/js/underscore.js');
+    mix.copy('vendor/bower_components/backbone/backbone-min.js', 'resources/assets/js/backbone-min.js');
 
     /** vue dependensies **/
     mix.copy('vendor/bower_components/vue/dist/vue.js', 'resources/assets/js/vue.js');
@@ -38,6 +40,17 @@ elixir(function(mix) {
         'init.js'
         ], 'public/js/app.js');
 
+    mix.scripts([
+        'jquery.js',
+        'moment.js',
+        'fullcalendar.js',
+        'materialize.js',
+        'underscore.js',
+        'backbone-min.js',
+        'init.js',
+        'bb-calendar.js'
+    ], 'public/js/calendar.js');
+
     /** vue scripts **/
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-permisos.js'], 'public/js/vue-permisos.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-roles.js'], 'public/js/vue-roles.js');
@@ -47,6 +60,7 @@ elixir(function(mix) {
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-contactos.js'], 'public/js/vue-contactos.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-casos.js'], 'public/js/vue-casos.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-casos-show.js'], 'public/js/vue-casos-show.js');
+    mix.scripts(['vue.js', 'vue-resource.js', 'calendar/calendar-self.js'], 'public/js/vue-calendar.js');
     mix.scripts(['select2.js', 'casos-script.js', 'vue.js', 'vue-resource.js', 'vue-casos-create.js'], 'public/js/vue-casos-create.js');
 
 });

@@ -24,6 +24,7 @@
     "vue": "~0.12.6",
     "vue-resource": "~0.1.5",
     "datatables": "~1.10.7",
-    "select2": "~4.0.0"
+    "select2": "~4.0.0",
+    "underscore": "~1.8.3"
   }
 }

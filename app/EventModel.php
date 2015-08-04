@@ -6,60 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 use MaddHatter\LaravelFullcalendar\Event;
 
 
-class EventModel extends model implements \MaddHatter\LaravelFullcalendar\Event {
+class EventModel extends Model {
 
 	protected $table = 'event_models';
 
-	protected $dates = ['start', 'end'];
+	protected $fillable = ['title', 'allday', 'start', 'start_hour', 'end', 'end_hour'];
 
 	/**
-	 * Get the event's id number
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Get the event's title
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
-
-	/**
-	 * Is it an all day event?
-	 *
+	 * @param $all_day
 	 * @return bool
 	 */
-	public function isAllDay()
+	public function getAlldayAttribute($allday)
 	{
-		return (bool)$this->all_day;
+		return (bool) $allday;
 	}
 
 	/**
-	 * Get the start time
+	 * User relationship
 	 *
-	 * @return DateTime
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function getStart()
+	public function users()
 	{
-		return $this->start;
+		return $this->belongsTo('App\User', 'user_id', 'id');
 	}
-
-	/**
-	 * Get the end time
-	 *
-	 * @return DateTime
-	 */
-	public function getEnd()
-	{
-		return $this->end;
-	}
-
 
 }
