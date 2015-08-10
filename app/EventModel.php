@@ -10,7 +10,7 @@ class EventModel extends Model {
 
 	protected $table = 'event_models';
 
-	protected $fillable = ['title', 'allday', 'start', 'start_hour', 'end', 'end_hour'];
+	protected $fillable = ['title', 'allday', 'start', 'start_hour', 'start_date', 'end', 'end_date', 'end_hour'];
 
 	/**
 	 * @param $all_day
