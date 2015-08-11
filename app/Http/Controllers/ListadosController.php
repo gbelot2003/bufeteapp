@@ -6,6 +6,7 @@ use App\ActualizacionCasos;
 use App\Caso;
 use App\Cliente;
 use App\Contacto;
+use App\EventModel;
 use App\Permission;
 use App\Role;
 use App\User;
@@ -408,5 +409,27 @@ class ListadosController extends Controller
 	{
 		$relaciones = ActualizacionCasos::where('caso_id', '=', $id)->with('users')->get();
 		return $relaciones;
+	}
+
+	public function getDates()
+	{
+		$query = $_SERVER['QUERY_STRING'];
+		$vars = [];
+		$second = [];
+		foreach (explode('&', $query) as $pair) {
+			list($key, $value) = explode('=', $pair);
+			if('' == trim($value)){
+				continue;
+			}
+
+			$vars[$key] = urldecode($value);
+
+		}
+		$start = $vars['start'];
+		$end = $vars['end'];
+		$sdates = [$start, $end];
+		$dates = EventModel::whereBetween('start', $sdates)->get();
+		return $dates;
+
 	}
 }
