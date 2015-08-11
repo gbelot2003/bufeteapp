@@ -15,12 +15,6 @@ class DashController extends Controller
 		return View('dash.home');
 	}
 
-	public function dates()
-	{
-		$dates = EventModel::all();
-		return $dates;
-	}
-
 	public function create(Request $request)
 	{
 		EventModel::create($request->all());
