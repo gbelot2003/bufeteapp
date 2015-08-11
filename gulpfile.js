@@ -45,10 +45,7 @@ elixir(function(mix) {
         'moment.js',
         'fullcalendar.js',
         'materialize.js',
-        'underscore.js',
-        'backbone-min.js',
         'init.js',
-        'bb-calendar.js'
     ], 'public/js/calendar.js');
 
     /** vue scripts **/
