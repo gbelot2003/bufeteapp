@@ -10378,91 +10378,96 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ]);
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
 
-Vue.directive('calendar', {
-    bind: function(){
-        var vm = this.vm;
-        //var methods = vm.$options.methods;
-
-        console.log('init.....');
-
-        $.get('/dash/dates').success(function (data) {
-
-            $(this.el).fullCalendar({
-                events: data
-            });
-
-            console.log('getDate1.')
-
-        }.bind(this));
-
-        $(this.el).find("#myBoton").on('click', function(e){
-            $.get('/dash/dates').success(function (data) {
-
-                $(this.el).fullCalendar({
-                    events: data
-                });
-
-                console.log('getDate2.')
-
-            }.bind(this));
-        }.bind(this));
-
-        console.log('dibe')
-    },
-    update: function(data) {
-        console.log('UPDATE');
-        $(this.el).find("#myBoton").trigger('click');
-    }
+Vue.component('calendar', {
+    template: '<div id="calendar"></div>'
 });
-
 
 var vm = new Vue({
     el: '#dashboard',
-    /*ready: function(){
-        this.getDate();
-    },*/
+    ready: function(){
+        this.calendarInit();
+    },
     data:{
         rows: [],
-        newEvent: {
+        newEvent: {},
+        editEvent: {
+            id: 0,
             title: '',
-            allday: '',
-            start:'',
+            start_date: '',
             start_hour: '',
-            end:'',
-            end_hour:''
+            end_date: '',
+            end_hour:'',
+            details: '',
+            allday: false
         },
+        id: 0,
         title: '',
         start_date: '',
         start_hour: '',
         end_date: '',
         end_hour:'',
+        details: '',
         allday: false
     },
 
     methods: {
 
-        getDate: function(){
+        calendarInit: function(){
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'agendaWeek',
+                //editable: true,
+                eventSources: [
+                    {
+                        url: '/listados/dates/', // use the `url` property
+                        cache: true
+                    }
+                ],
 
-            this.$http.get('/dash/dates').success(function (data) {
+                eventClick: function(calEvent, jsEvent, view) {
 
-                /*$(this._directives[0].el).fullCalendar({
-                    events: data
-                });*/
+                   //var evento = calEvent.title;
+                   //Materialize.toast(evento, 3000); // 2000 is the duration of the toast
+                   vm.$set('editEvent', calEvent);
 
-                console.log(this)
-                this._directives[0].update();
-                console.log('getDate.3')
+                   $('#modal2').openModal({
+                       dismissible: false
+                   });
 
-            }.bind(this));
+                   // change the border color just for fun
+                   $(this).css('border-color', 'red');
+
+                }
+
+            });
+        },
+
+        calendarReload: function(){
+            $('#calendar').fullCalendar('refetchEvents');
+        },
+
+        setEditEvent: function(event){
+            this.editEvent = event;
         },
 
         setNewEvent: function(){
             this.newEvent.title = this.title;
             this.newEvent.allday = this.allday;
             this.newEvent.start = this.start_date + " " + this.start_hour;
+            this.newEvent.start_date = this.start_date;
             this.newEvent.start_hour = this.start_hour;
             this.newEvent.end = this.end_date + " " + this.end_hour;
+            this.newEvent.end_date = this.end_date;
             this.newEvent.end_hour = this.end_hour;
+            this.newEvent.details = this.details;
+        },
+
+        unsetNewEvent: function(){
+            this.newEvent = {}
         },
 
         submitEvent: function(e){
@@ -10475,16 +10480,16 @@ var vm = new Vue({
 
             this.$http.post('/dash/create', event).success(function(data, status, request) {
 
-                //this.getDate();
-                this._directives[0].update();
-
                 Materialize.toast('Evento enviado!', 2000); // 2000 is the duration of the toast
+                this.calendarReload();
+                this.unsetNewEvent();
+                $("#modal1").closeModal();
 
             }).error(function(data, status, request){
 
                 Materialize.toast('Algo salio mal!', 2000) // 2000 is the duration of the toast
-
             });
+
         }
     }
 })

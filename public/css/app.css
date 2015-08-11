@@ -9643,4 +9643,8 @@ be a descendant of the grid when it is being dragged.
   height: 0;
   opacity: 0; }
 
+/******/
+.text-info {
+  padding: 0.7rem 0.5rem; }
+
 /*# sourceMappingURL=app.css.map */
