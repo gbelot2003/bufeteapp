@@ -10382,6 +10382,71 @@ Vue.component('calendar', {
     template: '<div id="calendar"></div>'
 });
 
+Vue.directive('start',{
+    bind: function () {
+        var endDateTextBox = $('#end');
+        var startDateTextBox = $('#start');
+        var vm = this.vm;
+        this.el.options = vm.start;
+
+        $(this.el).datetimepicker({
+            timeFormat: 'HH:mm:00',
+            dateFormat: 'yy-m-d',
+            onClose: function(dateText, inst) {
+                if (endDateTextBox.val() != '') {
+                    var testStartDate = startDateTextBox.datetimepicker('getDate');
+                    var testEndDate = endDateTextBox.datetimepicker('getDate');
+                    if (testStartDate > testEndDate)
+                        endDateTextBox.datetimepicker('setDate', testStartDate);
+                }
+                else {
+                    endDateTextBox.val(dateText);
+                }
+            },
+            onSelect: function (selectedDateTime){
+                endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate') );
+            }
+        })
+        .change( function(){
+                vm.start = this.el.value;
+            }.bind(this)
+        );
+    }
+});
+
+Vue.directive('end',{
+    bind: function () {
+        var endDateTextBox = $('#end');
+        var startDateTextBox = $('#start');
+        var vm = this.vm;
+        this.el.options = vm.end;
+
+        $(this.el).datetimepicker({
+            timeFormat: 'HH:mm:00',
+            dateFormat: 'yy-m-d',
+            onClose: function(dateText, inst) {
+                if (startDateTextBox.val() != '') {
+                    var testStartDate = startDateTextBox.datetimepicker('getDate');
+                    var testEndDate = endDateTextBox.datetimepicker('getDate');
+                    if (testStartDate > testEndDate)
+                        startDateTextBox.datetimepicker('setDate', testEndDate);
+                }
+                else {
+                    startDateTextBox.val(dateText);
+                }
+            },
+            onSelect: function (selectedDateTime){
+                startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate') );
+            }
+        })
+            .change( function(){
+                vm.end = this.el.value;
+            }.bind(this)
+        );
+    }
+});
+
+
 var vm = new Vue({
     el: '#dashboard',
     ready: function(){
@@ -10390,22 +10455,19 @@ var vm = new Vue({
     data:{
         rows: [],
         newEvent: {},
+        showEvents: {},
         editEvent: {
             id: 0,
             title: '',
-            start_date: '',
-            start_hour: '',
-            end_date: '',
-            end_hour:'',
+            start: '',
+            end:'',
             details: '',
             allday: false
         },
         id: 0,
         title: '',
-        start_date: '',
-        start_hour: '',
-        end_date: '',
-        end_hour:'',
+        start: '',
+        end:'',
         details: '',
         allday: false
     },
@@ -10413,14 +10475,31 @@ var vm = new Vue({
     methods: {
 
         calendarInit: function(){
+
             $('#calendar').fullCalendar({
+                lang: 'es',
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                defaultView: 'agendaWeek',
-                //editable: true,
+
+                editable: true,
+
+                eventDrop: function(event, delta, revertFunc) {
+
+                    alert(event.title + " was dropped on " + event.start.format());
+
+                    if (!confirm("Are you sure about this change?")) {
+                        revertFunc();
+                    }
+
+                },
+
+                eventLimit: false, // allow "more" link when too many events
+
+                defaultView: 'month',
+
                 eventSources: [
                     {
                         url: '/listados/dates/', // use the `url` property
@@ -10429,18 +10508,14 @@ var vm = new Vue({
                 ],
 
                 eventClick: function(calEvent, jsEvent, view) {
-
-                   //var evento = calEvent.title;
-                   //Materialize.toast(evento, 3000); // 2000 is the duration of the toast
-                   vm.$set('editEvent', calEvent);
+                    
+                   vm.$set('showEvents', calEvent);
 
                    $('#modal2').openModal({
                        dismissible: false
                    });
 
-                   // change the border color just for fun
-                   $(this).css('border-color', 'red');
-
+                   // $(this).css('border-color', 'red');
                 }
 
             });
@@ -10450,19 +10525,21 @@ var vm = new Vue({
             $('#calendar').fullCalendar('refetchEvents');
         },
 
-        setEditEvent: function(event){
-            this.editEvent = event;
+        setShowEvent: function(event){
+            this.showEvents = event;
+        },
+
+        setEditModal: function(){
+            this.editEvent = this.showEvents;
+          $('#modal2').closeModal();
+          $('#modal3').openModal();
         },
 
         setNewEvent: function(){
             this.newEvent.title = this.title;
             this.newEvent.allday = this.allday;
-            this.newEvent.start = this.start_date + " " + this.start_hour;
-            this.newEvent.start_date = this.start_date;
-            this.newEvent.start_hour = this.start_hour;
-            this.newEvent.end = this.end_date + " " + this.end_hour;
-            this.newEvent.end_date = this.end_date;
-            this.newEvent.end_hour = this.end_hour;
+            this.newEvent.start = this.start;
+            this.newEvent.end = this.end;
             this.newEvent.details = this.details;
         },
 
@@ -10471,28 +10548,37 @@ var vm = new Vue({
         },
 
         submitEvent: function(e){
-
             e.preventDefault();
-
             this.setNewEvent();
-
             var event = this.newEvent;
-
             this.$http.post('/dash/create', event).success(function(data, status, request) {
-
                 Materialize.toast('Evento enviado!', 2000); // 2000 is the duration of the toast
                 this.calendarReload();
                 this.unsetNewEvent();
                 $("#modal1").closeModal();
-
             }).error(function(data, status, request){
-
                 Materialize.toast('Algo salio mal!', 2000) // 2000 is the duration of the toast
             });
+        },
 
+        submitEditEvent: function(e){
+            e.preventDefault();
+            this.setNewEvent();
+            var event = this.editEvent;
+            $("#modal3").closeModal();
+        }
+    },
+    computed: {
+        initTime: function () {
+            return moment(this.showEvents.start).format('dddd DD MMMM YYYY, HH:MM');
+        },
+
+        endTime: function(){
+            return moment(this.showEvents.end).format('dddd DD MMMM YYYY, HH:MM');
         }
     }
-})
+
+});
 
 
 //# sourceMappingURL=vue-calendar.js.map
