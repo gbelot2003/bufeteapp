@@ -17,11 +17,7 @@ class CreateEventCalendarTable extends Migration
 			$table->string('title');
 			$table->boolean('allday');
 			$table->datetime('start');
-			$table->datetime('start_date');
-			$table->string('start_hour');
 			$table->datetime('end');
-			$table->datetime('end_date');
-			$table->string('end_hour');
 			$table->text('details')->nullable();
 			$table->timestamps();
 
