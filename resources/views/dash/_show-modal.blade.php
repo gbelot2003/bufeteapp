@@ -2,7 +2,7 @@
 
 		<div class="modal-content">
 
-			<h5>@{{ editEvent.title }}</h5>
+			<h5>@{{ showEvents.title }}</h5>
 
 			<div class="col s12 diverblock text-info">
 
@@ -12,19 +12,19 @@
 						<div class="row">
 							<div class="s12 col amber lighten-5 diverblock">
 								<p><strong>Inicio</strong></p>
-								<span>@{{ editEvent.start_date }}</span> - <span>@{{ editEvent.start_hour }}</span>
+								<span>@{{ initTime }}</span>
 							</div>
 
 							<div class="s12 col amber lighten-5 diverblock">
 								<p><strong>hasta</strong></p>
-								<span>@{{ editEvent.end_date }}</span> - <span>@{{ editEvent.end_hour }}</span>
+								<span>@{{ endTime }}</span>
 							</div>
 						</div>
 					</div>
 
 					<div class="col m9 diverblock">
 						<div class="s12 col amber lighten-5 ">
-							<p class="text-info">@{{ editEvent.details }}</p>
+							<p class="text-info">@{{ showEvents.details }}</p>
 						</div>
 					</div>
 
@@ -33,8 +33,8 @@
 
 			<div class="col s12">
 				<div class="modal-footer">
-					<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
-					<button class="btn waves-effect waves-light" type="submit" name="action" id="myBoton">Editar
+					<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+					<button class="btn waves-effect waves-light" type="submit" name="action" id="myBoton" v-on="click: setEditModal">Editar
 						<i class="material-icons">edit</i>
 					</button>
 				</div>
