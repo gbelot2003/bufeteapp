@@ -10,6 +10,7 @@ use App\EventModel;
 use App\Permission;
 use App\Role;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -414,8 +415,10 @@ class ListadosController extends Controller
 	public function getDates()
 	{
 		$query = $_SERVER['QUERY_STRING'];
+
 		$vars = [];
-		$second = [];
+
+
 		foreach (explode('&', $query) as $pair) {
 			list($key, $value) = explode('=', $pair);
 			if('' == trim($value)){
@@ -425,10 +428,16 @@ class ListadosController extends Controller
 			$vars[$key] = urldecode($value);
 
 		}
-		$start = $vars['start'];
-		$end = $vars['end'];
-		$sdates = [$start, $end];
-		$dates = EventModel::whereBetween('start', $sdates)->get();
+
+		$start = $vars['start'] . ' 00:00:00';
+		$end = $vars['end'] . ' 11:59:59';
+
+		$bdate = Carbon::createFromFormat('Y-m-d H:m:s', $start)->startOfDay();
+		$sdate = Carbon::createFromFormat('Y-m-d H:m:s', $end)->endOfDay();
+
+		$ds = [$bdate, $sdate];
+
+		$dates = EventModel::whereBetween('start', $ds)->get();
 		return $dates;
 
 	}
