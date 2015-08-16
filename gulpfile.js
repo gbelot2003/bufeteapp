@@ -19,8 +19,8 @@ elixir(function(mix) {
     mix.copy('vendor/bower_components/moment/min/moment.min.js', 'resources/assets/js/moment.js');
     mix.copy('vendor/bower_components/fullcalendar/dist/fullcalendar.js', 'resources/assets/js/fullcalendar.js');
     mix.copy('vendor/bower_components/select2/dist/js/select2.full.js', 'resources/assets/js/select2.js');
-    mix.copy('vendor/bower_components/underscore/underscore.js', 'resources/assets/js/underscore.js');
-    mix.copy('vendor/bower_components/backbone/backbone-min.js', 'resources/assets/js/backbone-min.js');
+    mix.copy('vendor/bower_components/fullcalendar/dist/lang/es.js', 'resources/assets/js/fullcalendar-es.js');
+
 
     /** vue dependensies **/
     mix.copy('vendor/bower_components/vue/dist/vue.js', 'resources/assets/js/vue.js');
@@ -44,7 +44,11 @@ elixir(function(mix) {
         'jquery.js',
         'moment.js',
         'fullcalendar.js',
+        'fullcalendar-es.js',
         'materialize.js',
+        'jquery-ui.min.js',
+        'jquery-ui-timepicker-addon.js',
+        'jquery-ui-sliderAccess.js',
         'init.js',
     ], 'public/js/calendar.js');
 
