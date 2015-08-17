@@ -2,7 +2,7 @@
 	<div class="col m3 s12">
 		<div class="row">
 			<div class="col m11 fheader">Cliente :</div>
-			<div class="col m11 purple lighten-5"><strong>{{ $caso->clientes->name }}</strong></div>
+			<div class="col m11 purple lighten-5"><strong><a href="{{ url('/clientes', $caso->clientes->slug) }}">{{ $caso->clientes->name }}</a></strong></div>
 		</div>
 	</div>
 
