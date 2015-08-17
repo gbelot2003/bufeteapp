@@ -24,7 +24,6 @@ var v = new Vue({
             display_name:''
         },
         rolesName: [],
-        submitted: false,
         message: '',
         searchKey: '',
         currentPage: 0,
@@ -100,14 +99,13 @@ var v = new Vue({
             this.$http.put('/roles/' + roles.id, roles).success(function (data, status, request) {
                 this.message = 'El Role a sido registrado exitosamente';
                 this.getRoles(1);
-                this.submitted = true;
 
             }).error(function(data, status, response){
                 this.message = 'Hay un error en el envio de esta información!!!';
                 this.errors = response.display_name;
             });
             this.getCloseEdit();
-            this.submitted = true;
+            Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
         },
 
         onSubmitForm: function(e) {
@@ -120,7 +118,7 @@ var v = new Vue({
                 this.message = 'Hay un error en el envio de esta información!!!';
             });
 
-            this.submitted = true;
+            Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
 
             $('#modal1').closeModal();
 
@@ -148,7 +146,7 @@ var v = new Vue({
                     this.message = 'Hay un error en el envio de esta información!!!';
                     this.getRoles(1);
                 });
-            this.submitted = true;
+            Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             this.rolesName = [];
         },
 
@@ -168,7 +166,6 @@ var v = new Vue({
         },
 
         clearMessage: function(){
-          this.submitted = false;
           this.message = '';
         },
 

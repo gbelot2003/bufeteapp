@@ -9,8 +9,6 @@
 
 @section('content')
 
-	@include('roles._messages')
-
 	@include('roles._filter')
 
 	<table id="roles-table" class="striped bordered responsive-table">
