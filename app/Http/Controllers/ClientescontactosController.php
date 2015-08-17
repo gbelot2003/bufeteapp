@@ -11,6 +11,12 @@ use App\Http\Controllers\Controller;
 
 class ClientescontactosController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
 	public function getContactos($id)
 	{
 		$cliente = Cliente::whereId($id)->with('contactos')->get();

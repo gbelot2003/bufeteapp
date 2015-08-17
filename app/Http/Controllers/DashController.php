@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Event;
 
 class DashController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
     public function home()
 	{
 		return View('dash.home');
