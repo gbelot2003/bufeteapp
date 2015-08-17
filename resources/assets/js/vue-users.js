@@ -29,7 +29,6 @@ var v = new Vue({
             roles:[]
         },
         userstatus: '',
-        submitted: false,
         message: '',
         searchKey: '',
         currentPage: 0,
@@ -137,29 +136,28 @@ var v = new Vue({
             e.preventDefault();
             var usuarios = this.usuario;
             this.$http.put('/usuarios/' + usuarios.id, usuarios).success(function (data, status, request) {
-                this.message = 'El Role a sido registrado exitosamente';
+                this.message = 'El usuario a sido Editado exitosamente';
                 this.getUsuarios(1);
-                this.submitted = true;
+                Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
 
             }).error(function(data, status, response){
                 this.message = 'Hay un error en el envio de esta información!!!';
                 this.errors = response.display_name;
+                Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             });
             this.getCloseEdit();
-            this.submitted = true;
         },
 
         onSubmitForm: function(e) {
             e.preventDefault();
             var usuario = this.newUser;
             this.$http.post('/usuarios/', usuario).success(function (data, status, request) {
-                this.message = 'El Rol a sido registrado exitosamente';
+                this.message = 'El usuario a sido registrado exitosamente';
                 this.getUsuarios(1);
             }).error(function(data, status, request){
                 this.message = 'Hay un error en el envio de esta información!!!';
             });
-
-            this.submitted = true;
+            Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
 
             $('#modal1').closeModal();
 
@@ -195,7 +193,7 @@ var v = new Vue({
                     this.message = 'Hay un error en el envio de esta información!!!';
                     this.getUsuarios(1);
                 });
-            this.submitted = true;
+            Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             this.userName = [];
         }
     },

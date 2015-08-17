@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-	@include('users._messages')
 
 	@include('users._filter')
 
