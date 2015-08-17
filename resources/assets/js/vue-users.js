@@ -89,6 +89,8 @@ var v = new Vue({
             this.usuario.id = row.id;
             this.usuario.name = row.name;
             this.usuario.email = row.email;
+            this.usuario.userstatus_id = row.userstatus_id;
+
             for(var i = 0; i < row.roles.length; i++){
                 this.usuario.roles.push(row.roles[i].id);
             }
