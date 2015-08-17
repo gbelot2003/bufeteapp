@@ -7,16 +7,8 @@
 @stop
 @section('content')
 	<div class="row">
-
-		<div id="calendarWrapper" class="col s12 m8 diverblock">
+		<div id="calendarWrapper" class="col s12 m12 diverblock">
 			<calendar></calendar>
-		</div>
-
-		<div id="formWrapper" class="col s12 m4">
-
-			<div class="col s12">
-				<pre>@{{ $data | json }}</pre>
-			</div>
 		</div>
 	</div>
 @stop
