@@ -16,8 +16,8 @@ Route::get('/', 'PagesController@index');
 Route::get('home', 'DashController@home');
 
 Route::get('dash/dates', 'DashController@dates');
-
 Route::post('dash/create', 'DashController@create');
+Route::post('dash/edit/{id}', 'DashController@update');
 
 Route::resource('permisos', 'PermsController');
 

@@ -29,4 +29,5 @@
 	@include('dash._create-modal')
 	@include('dash._edit-modal')
 	@include('dash._show-modal')
+	@include('dash._alert1-modal')
 @stop

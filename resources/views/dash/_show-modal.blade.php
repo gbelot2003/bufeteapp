@@ -11,12 +11,12 @@
 					<div class="col m3">
 						<div class="row">
 							<div class="s12 col amber lighten-5 diverblock">
-								<p><strong>Inicio</strong></p>
+								<p><strong>De: </strong></p>
 								<span>@{{ initTime }}</span>
 							</div>
 
 							<div class="s12 col amber lighten-5 diverblock">
-								<p><strong>hasta</strong></p>
+								<p><strong>Hasta:</strong></p>
 								<span>@{{ endTime }}</span>
 							</div>
 						</div>

@@ -20,27 +20,14 @@
 
 					</div>
 
-					<div class="s12 m3 col">
-						<p>Incio</p>
+					<div class="s12 m4 col">
+						<p>De: </p>
 						<input class="datetimepiker" id="start" v-start>
 					</div>
 
-					<div class="s12 m3 col">
-						<p>Fin</p>
+					<div class="s12 m4 col">
+						<p>Hasta: </p>
 						<input class="datetimepiker" id="end" v-end>
-					</div>
-
-					<div class="s12 m2 col">
-						<label>¿Todo el día?</label>
-						<div class="switch">
-							<label>
-								Off
-								<input type="checkbox" v-model="allday">
-								<span class="lever"></span>
-								On
-							</label>
-						</div>
-
 					</div>
 
 				</div>
