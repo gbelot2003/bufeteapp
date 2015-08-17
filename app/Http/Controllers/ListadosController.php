@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ListadosController extends Controller
 {
@@ -437,7 +438,7 @@ class ListadosController extends Controller
 
 		$ds = [$bdate, $sdate];
 
-		$dates = EventModel::whereBetween('start', $ds)->get();
+		$dates = EventModel::whereBetween('start', $ds)->where('user_id', '=', Auth::Id())->get();
 		return $dates;
 
 	}

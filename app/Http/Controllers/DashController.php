@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\EventModel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 
 
@@ -25,6 +26,7 @@ class DashController extends Controller
 
 	public function create(Request $request)
 	{
+		$request['user_id'] = Auth::Id();
 		EventModel::create($request->all());
 		return 'done';
 	}

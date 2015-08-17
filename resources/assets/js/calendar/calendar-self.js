@@ -108,6 +108,14 @@ var vm = new Vue({
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
+                axisFormat: 'h:mm a',
+                timeFormat: {
+                    agenda: 'h:mm a',
+                    month: 'h:mm a',
+                    agendaWeek: 'h:mm a'
+                },
+
+                firstHour: 7,
 
                 editable: true,
 
@@ -118,7 +126,8 @@ var vm = new Vue({
                 eventSources: [
                     {
                         url: '/listados/dates/', // use the `url` property
-                        cache: true
+                        cache: true,
+                        dow: [ 1, 2, 3, 4, 5]
                     }
                 ],
 
