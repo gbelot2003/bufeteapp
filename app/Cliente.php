@@ -36,4 +36,12 @@ class Cliente extends Model implements SluggableInterface
 	{
 		return $this->belongsToMany('App\Contacto')->withTimestamps();
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function casos()
+	{
+		return $this->hasMany('App\Caso');
+	}
 }
