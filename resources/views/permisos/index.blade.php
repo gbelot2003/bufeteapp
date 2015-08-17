@@ -8,8 +8,6 @@
 
 @section('content')
 
-	@include('permisos._messages')
-
 	@include('permisos._filter')
 
 	<table id="permisos-table" class="striped bordered responsive-table">

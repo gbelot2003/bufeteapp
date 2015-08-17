@@ -1,11 +1,3 @@
-$(document).ready(function(){
-    $('#create').on('click', function(){
-        $('#modal1').openModal({
-            dismissible: false
-        });
-    });
-});
-
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
 
 var v = new Vue({
@@ -26,7 +18,6 @@ var v = new Vue({
             description: ''
         },
         permsName: [],
-        submitted: false,
         message: '',
         searchKey: '',
         currentPage: 0,
@@ -90,15 +81,15 @@ var v = new Vue({
             e.preventDefault();
             var permis = this.permission;
             this.$http.put('/permisos/' + permis.id, permis).success(function (data, status, request) {
-                this.message = 'El permiso a sido registrado exitosamente';
+                this.message = 'El permiso a sido editado exitosamente';
                 this.getPermisos(1);
-                this.submitted = true;
-
+                Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             }).error(function(data, status, response){
                 this.message = 'Hay un error en el envio de esta información!!!';
                 this.errors = response.display_name;
-                this.submitted = true;
+                Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             });
+
             this.getCloseEdit()
         },
 
@@ -108,14 +99,13 @@ var v = new Vue({
             this.$http.post('/permisos', perms).success(function (data, status, request) {
                 this.message = 'El permiso a sido registrado exitosamente';
                 this.getPermisos(1);
+                Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             }).error(function(data, status, request){
                 this.message = 'Hay un error en el envio de esta información!!!';
+                Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             });
 
-            this.submitted = true;
-
             $('#modal1').closeModal();
-
             this.clearForm();
         },
 
@@ -133,13 +123,14 @@ var v = new Vue({
         onDestroy:function(row){
             this.$http.delete('/permisos/' +  row.id)
             .success(function(data, status, request){
-                this.message = "El archivo a sido eliminado";
+                this.message = "El permiso a sido eliminado";
                 this.getPermisos(1);
+                Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             }).error(function(data, status, request){
                     this.message = 'Hay un error en el envio de esta información!!!';
                     this.getPermisos(1);
+                    Materialize.toast(this.message, 2000) // 2000 is the duration of the toast
             });
-
             this.permsName = [];
         },
 
