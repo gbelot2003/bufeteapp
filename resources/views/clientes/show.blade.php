@@ -32,9 +32,19 @@
 						<thead>
 						<th>Caso No</th>
 						<th>Tribunal</th>
-						<th>Descripción</th>
-						<th>Actualizacion</th>
+						<th>tipo</th>
+						<th>Estado</th>
 						</thead>
+						<tbody>
+						@foreach($cliente->casos as $casos)
+							<tr>
+								<td><a href="{{ url('/casos', $casos->caso) }}">{{ $casos->caso  }}</a></td>
+								<td>{{ $casos->tribunal  }}</td>
+								<td>{{ $casos->tipocasos->name  }}</td>
+								<td>{{ $casos->estado  }}</td>
+							</tr>
+						@endforeach
+						</tbody>
 					</table>
 				</div>
 
