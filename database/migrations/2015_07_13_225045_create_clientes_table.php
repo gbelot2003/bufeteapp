@@ -24,6 +24,18 @@ class CreateClientesTable extends Migration
 			$table->timestamps();
         });
 
+		Schema::create('contactos', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('type');
+			$table->string('name');
+			$table->string('cargo')->nullable();
+			$table->string('phone')->nullable();
+			$table->string('movil')->nullable();
+			$table->string('email')->nullable();
+			$table->string('notes')->nullable();
+			$table->timestamps();
+		});
+
 		Schema::create('cliente_contacto', function (Blueprint $table) {
 			$table->integer('cliente_id')->unsigned()->index();
 			$table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
@@ -42,8 +54,9 @@ class CreateClientesTable extends Migration
     public function down()
     {
         Schema::table('clientes', function (Blueprint $table) {
-			Schema::drop('clientes');
 			Schema::drop('cliente_contacto');
+			Schema::drop('clientes');
+			Schema::drop('contactos');
 		});
     }
 }
