@@ -9,7 +9,7 @@
 			<li class="no-padding">
 				<ul class="collapsible collapsible-accordion">
 					<li>
-						<a class="collapsible-header">Registro de Casos<i class="mdi-navigation-arrow-drop-down"></i></a>
+						<a class="collapsible-header">Contactos<i class="mdi-navigation-arrow-drop-down"></i></a>
 						<div class="collapsible-body">
 							<ul>
 								<li><a href="{{ url('clientes') }}">Clientes</a></li>
