@@ -29,7 +29,7 @@ class Caso extends Model implements SluggableInterface
 	 * @var array
 	 */
 	protected $fillable = ['caso', 'cliente_id', 'tipocaso_id', 'tipojuicio', 'tribunal', 'demandado', 'demandante'
-							, 'juez_id', 'csj', 'ca', 'descripcion', 'estado'];
+							, 'juez_id', 'csj', 'ca', 'descripcion', 'tribunales_id', 'estado'];
 
 	/**
 	 * Relacion con usuarios
@@ -70,6 +70,11 @@ class Caso extends Model implements SluggableInterface
 	public function actualizaciones()
 	{
 		return $this->hasMany('App\ActualizacionCasos');
+	}
+
+	public function tribunal()
+	{
+		return $this->belongsTo('App\Tribunale', 'tribunales_id', 'id');
 	}
 
 }

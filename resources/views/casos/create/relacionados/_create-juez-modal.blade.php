@@ -72,7 +72,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" v-on="click: modalDestroy">Cancelar</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" v-on="click: modalJuezDestroy">Cancelar</a>
 			<button class="waves-effect waves-green btn btn-primary" v-attr="disabled: JuezeditError">Crear</button>
 		</div>
 	</form>

@@ -9,6 +9,7 @@ use App\Contacto;
 use App\EventModel;
 use App\Permission;
 use App\Role;
+use App\Tribunale;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -411,6 +412,16 @@ class ListadosController extends Controller
 	{
 		$relaciones = ActualizacionCasos::where('caso_id', '=', $id)->with('users')->get();
 		return $relaciones;
+	}
+
+	/**
+	 * Conseguir listado de jueces
+	 * @return mixed
+	 */
+	public function getTribunales()
+	{
+		$tribunales = Tribunale::select('id', 'name')->get();
+		return $tribunales;
 	}
 
 	public function getDates()

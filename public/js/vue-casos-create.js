@@ -16518,7 +16518,6 @@ Vue.directive('clientes', {
     }
 });
 
-
 Vue.directive('jueces', {
     bind: function () {
         var vm = this.vm;
@@ -16553,6 +16552,23 @@ Vue.directive('demandado', {
     }
 });
 
+Vue.directive('tribunales', {
+    bind: function () {
+        var vm = this.vm;
+        var key = this.expression;
+        $(this.el).select2({
+            placeholder: 'Seleccionar el contacto',
+            allowClear: false,
+            width: '100%'
+        });
+        $(this.el).on('change', function(){
+            var text = $('#tribunal_id option:selected').val();
+            vm.$set('caso.tribunal_id', text);
+        });
+    }
+});
+
+
 Vue.directive('demandante', {
     bind: function () {
         var vm = this.vm;
@@ -16583,16 +16599,25 @@ v = new Vue({
     ready:function(){
         this.getJuecesList();
         this.getContactosList();
+        this.getTribunales();
     },
     data: {
-        contactos: {},
-        jueces: {},
-        show_details: false,
-        submitedForm: false,
-        unsetConfig: false,
-        demandado: false,
-        demandante:false,
-        cliente_nombre: "",
+        caso: {
+            caso: '',
+            cliente_id: 0,
+            tipocaso_id: 0,
+            tipojuicio: '',
+            instancia: '',
+            cliente_es: false,
+            tribunal_id: '',
+            salas_id: 0,
+            demandado: '',
+            demandante: '',
+            juez_id: 0,
+            csj: '', /** corte suprema de justicia **/
+            ca: '', /** corte de apelaciones **/
+            descripcion: ''
+        },
         newContacto:{
             id: '',
             type: '',
@@ -16603,20 +16628,21 @@ v = new Vue({
             email: '',
             notes: ''
         },
-        caso: {
-            caso: '',
-            cliente_id: 0,
-            tipocaso_id: 0,
-            tipojuicio: '',
-            cliente_es: false,
-            tribunal: '',
-            demandado: '',
-            demandante: '',
-            juez_id: 0,
-            csj: '', /** corte suprema de justicia **/
-            ca: '', /** corte de apelaciones **/
-            descripcion: ''
-        }
+        jueznombre: '',
+        show_details: false,
+        submitedForm: false,
+        unsetConfig: false,
+        demandado: false,
+        demandante:false,
+        cliente_nombre: "",
+        tribunales:{},
+        contactos: {},
+        jueces: {},
+        salas: [
+            {id:1, name: 'Sala Penal'},
+            {id:2, name: 'Sala Civil'}
+        ]
+
     },
 
     methods: {
@@ -16629,6 +16655,11 @@ v = new Vue({
             });
         },
 
+        getTribunales: function() {
+            this.$http.get('/listados/tribunales/').success(function (data) {
+                this.$set('tribunales', data);
+            });
+        },
 
         getContactosList: function() {
             this.$http.get('/listados/contactos-caso/').success(function (data) {
@@ -16664,12 +16695,13 @@ v = new Vue({
             $('#modal1').closeModal();
             var contactos = this.newContacto;
             this.$http.post('/contactos/', contactos).success(function (data, status, request) {
+                this.getJuecesList();
                 Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
             }).error(function(data, status, response){
                 Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
-                this.modalDestroy();
+                //this.modalDestroy();
             });
-            this.getJuecesList();
+
             this.modalJuzDestroy();
         },
 
@@ -16691,7 +16723,7 @@ v = new Vue({
                 Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
             }).error(function(data, status, response){
                 Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
-                this.modalDestroy();
+                //this.modalDestroy();
             });
             this.getContactosList();
             this.modalJuzDestroy();
@@ -16752,8 +16784,15 @@ v = new Vue({
             this.caso.juez_id = 0;
             this.caso.descripcion = '';
             this.caso.estado = '';
-        }
+        },
 
+        modalContactDestroy: function(){
+
+        },
+
+        modalJuezDestroy: function(){
+
+        }
     },
     computed: {
         JuezeditError: function(){
