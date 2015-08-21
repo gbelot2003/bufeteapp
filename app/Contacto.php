@@ -28,4 +28,8 @@ class Contacto extends Model
 		return $this->belongsToMany('App\Cliente')->withTimestamps();
 	}
 
+	public function casos()
+	{
+		return $this->belongsToMany('App\Caso')->withTimestamps();
+	}
 }

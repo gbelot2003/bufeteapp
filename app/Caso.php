@@ -63,6 +63,12 @@ class Caso extends Model implements SluggableInterface
 	}
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function contactos(){
+		return $this->belongsToMany('App\Contacto')->withTimestamps();
+	}
+	/**
 	 * Relacion con tipocaso
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
