@@ -62,8 +62,10 @@ Vue.directive('tribunales', {
             width: '100%'
         });
         $(this.el).on('change', function(){
-            var text = $('#tribunal_id option:selected').val();
+            var text = $('#tribunal_id option:selected').text();
+            var mid = $('#tribunal_id option:selected').val();
             vm.$set('caso.tribunal_id', text);
+            vm.$set(key, mid);
         });
     }
 });
@@ -199,7 +201,6 @@ v = new Vue({
                 Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
             }).error(function(data, status, response){
                 Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
-                //this.modalDestroy();
             });
 
             this.modalJuzDestroy();
@@ -223,7 +224,6 @@ v = new Vue({
                 Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
             }).error(function(data, status, response){
                 Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
-                //this.modalDestroy();
             });
             this.getContactosList();
             this.modalJuzDestroy();
