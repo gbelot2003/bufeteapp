@@ -38,7 +38,7 @@
 					<div class="">
 						{!! Form::label('Tribunal') !!}
 						<select name="tribunal_id" id="tribunal_id" class="select form-control" v-tribunales="caso.tribunal_id"  v-model='caso.tribunal_id' v-attr="disabled: ! caso.instancia">
-							<option value="null" disabled selected>-- Tribunal ---</option>
+							<option value="" disabled selected>-- Tribunal ---</option>
 							<template v-repeat="row: tribunales">
 								<my-component msg="@{{ row.name }}" value="@{{ row.id }}"></my-component>
 							</template>
@@ -60,7 +60,7 @@
 			<div class="">
 				{!! Form::label('Salas') !!}
 				<select name="salas_id" id="salas_id" class="browser-default"  v-model="caso.salas_id" v-attr="disabled: ! caso.tribunal_id">
-					<option value="null" disabled selected>-- Sala ---</option>
+					<option value="" disabled selected>-- Sala ---</option>
 					<template v-repeat="row: salas">
 						<my-component msg="@{{ row.name }}" value="@{{ row.id }}"></my-component>
 					</template>
@@ -75,7 +75,7 @@
 		<div class="col s11">
 			<div class="">
 				{!! Form::label('juez_id', "Juez") !!}
-				<select name="juez_id" id="juez_id" class="select form-control" v-jueces="caso.juez_id"  v-model='caso.juez_id'>
+				<select name="juez_id" id="juez_id" class="select form-control" v-jueces="caso.juez_id"  v-model='caso.juez_id' v-attr="disabled: ! caso.salas_id">
 					<option value="null" disabled selected>--Seleccione---</option>
 					<template v-repeat="row: jueces">
 						<my-component msg="@{{ row.name }}" value="@{{ row.id }}"></my-component>
