@@ -22,15 +22,15 @@
 			<th>Acciones</th>
 		</thead>
 		<tbody>
-			<tr v-repeat="row:rows">
+			<tr v-repeat="row:rows | filterBy userStatusPreset in 'estado'">
 				<td><a href="/casos/@{{ row.caso }}">@{{ row.caso }}</a></td>
 				<td>@{{ row.clientename }}</td>
-				<td>@{{ row.tribunal }}</td>
+				<td>@{{ row.tribunalname }}</td>
 				<td>@{{ row.juezname }}</td>
-				<td>@{{ row.tipojuicio }}</td>
+				<td>@{{ row.tipocaso }} - @{{ row.tipojuicio }}</td>
 				<td>@{{ row.created_at }}</td>
-				<td>@{{ row.estado }}</td>
-				<td>delete</td>
+				<td style="border-right: 1px solid lightslategray">@{{ estadoCaso(row.estado) }}</td>
+				<td><a href="#!" class="red-text"><i class="material-icons">delete</i></a></td>
 			</tr>
 		</tbody>
 	</table>
