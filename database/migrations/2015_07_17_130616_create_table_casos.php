@@ -27,7 +27,7 @@ class CreateTableCasos extends Migration
 			$table->string('csj')->nullable();
 			$table->string('ca')->nullable();
 			$table->text('descripcion')->nullable();
-			$table->string('estado');
+			$table->boolean('estado');
 			$table->integer('user_id');
 			$table->string('slug', 255);
 			$table->timestamps();
