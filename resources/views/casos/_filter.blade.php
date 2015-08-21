@@ -13,7 +13,7 @@
 			<div class="switch">
 				<label>
 					Off
-					<input type="checkbox">
+					<input type="checkbox" v-model="showNoActives">
 					<span class="lever"></span>
 					On
 				</label>
