@@ -13,7 +13,7 @@
 
 	<div class="row">
 		<div class="col s12">
-			<button class="waves-effect waves-green btn btn-primary" v-attr="disabled: errors">Crear</button>
+			<button class="waves-effect waves-green btn btn-primary" v-attr="disabled: ! caso.juez_id">Crear</button>
 			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" v-on="click: clearForm">Cancelar</a>
 		</div>
 	</div>
