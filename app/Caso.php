@@ -28,9 +28,13 @@ class Caso extends Model implements SluggableInterface
 	 * portected fillable
 	 * @var array
 	 */
-	protected $fillable = ['caso', 'cliente_id', 'tipocaso_id', 'tipojuicio', 'tribunal', 'demandado', 'demandante'
-							, 'juez_id', 'csj', 'ca', 'descripcion', 'tribunales_id', 'estado'];
+	protected $fillable = ['caso', 'cliente_id', 'tipocaso_id', 'tipojuicio', 'tribunal_id', 'instancia'
+							,'demandado', 'demandante', 'juez_id', 'csj', 'ca', 'descripcion', 'estado', 'user_id'];
 
+
+	public function getEstadoAttribute($estado){
+		return (bool) $estado;
+	}
 	/**
 	 * Relacion con usuarios
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -72,7 +76,7 @@ class Caso extends Model implements SluggableInterface
 		return $this->hasMany('App\ActualizacionCasos');
 	}
 
-	public function tribunal()
+	public function tribunales()
 	{
 		return $this->belongsTo('App\Tribunale', 'tribunales_id', 'id');
 	}
