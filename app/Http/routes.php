@@ -21,6 +21,8 @@ Route::post('dash/edit/{id}', 'DashController@update');
 
 Route::resource('permisos', 'PermsController');
 
+Route::resource('tribunal', 'TribunalesController');
+
 Route::resource('usuarios', 'UserController');
 Route::get('usuarios/setstatus/{id}', 'UserController@setStatus');
 
