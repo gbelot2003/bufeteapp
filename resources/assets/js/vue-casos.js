@@ -7,6 +7,8 @@ v = new Vue({
     },
     data: {
         rows:[],
+        showNoActives: false,
+        cerrados: '',
         searchKey: '',
         currentPage: 0,
         itemsPerPage: 0,
@@ -24,7 +26,7 @@ v = new Vue({
                     this.setTotalPage();
                 });
             } else {
-                this.$http.get('/listados/casos/' + page + "/"  + search).success(function(data){
+                this.$http.get('/listados/casos/' + page + "/"  + search ).success(function(data){
                     this.$set('rows', data.items);
                     this.$set('resultCount', data.total);
                     this.$set('itemsPerPage', data.itemsPerPage);
@@ -58,5 +60,20 @@ v = new Vue({
             this.totalPage = Math.ceil(this.resultCount / this.itemsPerPage);
         },
 
+        estadoCaso: function(row){
+            if(row == false){
+                return 'Cerrado'
+            }
+            return 'Abierto'
+        }
+    },
+    computed:{
+        userStatusPreset: function(){
+            if(this.showNoActives == false) {
+                return 'true';
+            }
+            return null;
+        }
     }
+
 });
