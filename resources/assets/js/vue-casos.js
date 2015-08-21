@@ -1,4 +1,6 @@
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
+moment.locale('es');
+moment.locale();
 
 v = new Vue({
     el: '#casos',
@@ -65,6 +67,11 @@ v = new Vue({
                 return 'Cerrado'
             }
             return 'Abierto'
+        },
+
+        setReadTime: function(row){
+            //
+            return moment(row).format('dddd DD MMMM YYYY');
         }
     },
     computed:{
