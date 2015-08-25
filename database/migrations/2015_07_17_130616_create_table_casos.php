@@ -16,17 +16,10 @@ class CreateTableCasos extends Migration
 			$table->increments('id');
 			$table->string('caso');
 			$table->string('cliente_id');
-			$table->integer('tipocaso_id');
-			$table->string('tipojuicio');
-			$table->integer('tribunal_id');
-			$table->string('instancia');
-			$table->string('salas_id');
 			$table->string('demandado')->nullable();
 			$table->string('demandante')->nullable();
-			$table->string('juez_id');
 			$table->string('csj')->nullable();
 			$table->string('ca')->nullable();
-			$table->text('descripcion')->nullable();
 			$table->boolean('estado');
 			$table->integer('user_id');
 			$table->string('slug', 255);

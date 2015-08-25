@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActualizacionCasos extends Migration
+class CreateActualizacioncasos extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,18 @@ class CreateActualizacionCasos extends Migration
      */
     public function up()
     {
-        Schema::create('actualizacion_casos', function (Blueprint $table) {
+        Schema::create('actualizacioncasos', function (Blueprint $table) {
 			$table->increments('id');
 			$table->integer('caso_id');
 			$table->integer('user_id');
 			$table->string('title');
-			$table->text('body');
+			$table->integer('tipocaso_id');
+			$table->string('tipojuicio');
+			$table->integer('tribunal_id');
+			$table->string('instancia');
+			$table->string('salas_id');
+			$table->string('juez_id');
+			$table->text('descripcion')->nullable();
 			$table->timestamp('date');
 			$table->timestamps();
 		});
