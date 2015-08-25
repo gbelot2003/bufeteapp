@@ -31,10 +31,14 @@ class Caso extends Model implements SluggableInterface
 	protected $fillable = ['caso', 'cliente_id', 'tipocaso_id', 'tipojuicio', 'tribunal_id', 'instancia'
 							,'demandado', 'demandante', 'juez_id', 'csj', 'ca', 'descripcion', 'estado', 'user_id'];
 
-
+	/**
+	 * @param $estado
+	 * @return bool
+	 */
 	public function getEstadoAttribute($estado){
 		return (bool) $estado;
 	}
+
 	/**
 	 * Relacion con usuarios
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -53,14 +57,6 @@ class Caso extends Model implements SluggableInterface
 		return $this->belongsTo('App\Cliente', 'cliente_id', 'id');
 	}
 
-	/**
-	 * Relacion con jueces
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function jueces()
-	{
-		return $this->belongsTo('App\Contacto', 'juez_id', 'id');
-	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -68,23 +64,15 @@ class Caso extends Model implements SluggableInterface
 	public function contactos(){
 		return $this->belongsToMany('App\Contacto')->withTimestamps();
 	}
-	/**
-	 * Relacion con tipocaso
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function tipocasos()
-	{
-		return $this->belongsTo('App\Tipocaso', 'tipocaso_id', 'id');
-	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function actualizaciones()
 	{
 		return $this->hasMany('App\ActualizacionCasos');
 	}
 
-	public function tribunales()
-	{
-		return $this->belongsTo('App\Tribunale', 'tribunales_id', 'id');
-	}
+
 
 }
