@@ -30,7 +30,7 @@ Vue.directive('jueces', {
         $(this.el).on('change', function(){
             var mid = $('#juez_id option:selected').val();
             var text = $('#juez_id option:selected').text();
-            vm.$set('jueznombre', text);
+            vm.$set('caso.juez_id', mid);
             vm.$set(key, mid);
         });
     }
@@ -87,7 +87,6 @@ Vue.directive('demandante', {
     }
 });
 
-
 var div = Vue.extend({
     template: '<option value="{{ value }}">{{ msg }}</option>',
     props: ['msg', 'value']
@@ -104,13 +103,15 @@ v = new Vue({
         this.getTribunales();
     },
     data: {
+        newTribunal: {
+            name:''
+        },
         caso: {
             caso: '',
             cliente_id: 0,
             tipocaso_id: 0,
             tipojuicio: '',
             instancia: '',
-            cliente_es: false,
             tribunal_id: '',
             salas_id: 0,
             demandado: '',
@@ -118,7 +119,8 @@ v = new Vue({
             juez_id: 0,
             csj: '', /** corte suprema de justicia **/
             ca: '', /** corte de apelaciones **/
-            descripcion: ''
+            descripcion: '',
+            estado: true
         },
         newContacto:{
             id: '',
@@ -168,8 +170,8 @@ v = new Vue({
                 this.$set('contactos', data);
             });
         },
-        /** Modal Jueces **/
 
+        /** Modal Jueces **/
         getNewJuez: function(){
             /** warning message **/
             $('#modal1').openModal({
@@ -177,8 +179,24 @@ v = new Vue({
             });
         },
 
-        /** Cancel detroy or edit **/
-        modalJuzDestroy: function(){
+        /** Create contactos modal **/
+        getNewContacto: function(){
+            /** warning message **/
+            $('#modal2').openModal({
+                dismisable: false
+            });
+            this.newContacto.type = 'Relacionado a Caso'
+        },
+
+        /** Modal Tribunal **/
+        getNewTribunal: function(){
+            $('#modal3').openModal({
+                dismisable: false
+            });
+        },
+
+        /** cancelar contacto o juez **/
+        modalJuezDestroy: function(){
             /** clear info **/
             this.newContacto.id = 0;
             this.newContacto.type = '';
@@ -189,6 +207,12 @@ v = new Vue({
             this.newContacto.email = '';
             this.newContacto.notes = '';
         },
+
+        /** Cancel create or edit **/
+        modalTribunalDestroy: function(){
+            this.newTribunal.name = '';
+        },
+
 
         /** enviar juez **/
         submitJuezCreate: function(e){
@@ -203,30 +227,35 @@ v = new Vue({
                 Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
             });
 
-            this.modalJuzDestroy();
+            this.modalJuezDestroy();
         },
 
-        /** Create contactos modal **/
-        getNewContacto: function(){
-            /** warning message **/
-            $('#modal2').openModal({
-                dismisable: false
-            });
-            this.newContacto.type = 'Relacionado a Caso'
-        },
-
-        /** enviar juez **/
+        /** enviar Contacto **/
         submitContactosCreate: function(e){
             e.preventDefault();
             $('#modal2').closeModal();
             var contactos = this.newContacto;
             this.$http.post('/contactos/', contactos).success(function (data, status, request) {
                 Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
+                this.getContactosList();
             }).error(function(data, status, response){
                 Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
             });
-            this.getContactosList();
-            this.modalJuzDestroy();
+            this.modalJuezDestroy();
+        },
+
+        /** enviar Tribunal **/
+        submitTribunalCreate: function(e){
+            e.preventDefault();
+            var tribunal = this.newTribunal;
+            this.$http.post('/tribunal', tribunal).success(function (data, status, request) {
+                this.getTribunales();
+                Materialize.toast('El Tribunal a sido agregado exitosamente!!!', 3000);
+            }).error(function(data, status, response){
+                Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
+            });
+            $('#modal3').closeModal();
+            this.modalTribunalDestroy();
         },
 
         /** configurando campos **/
@@ -251,6 +280,7 @@ v = new Vue({
             }
         },
 
+        /** Limpiar variables de caso **/
         unSetCasosConfig: function(){
             this.caso.demandado = "";
             this.demandado = false;
@@ -260,9 +290,10 @@ v = new Vue({
             this.unsetConfig = false;
         },
 
+        /** Enviar formulario **/
         getSubmitForm: function(e){
             e.preventDefault();
-            this.caso.estado = 'Abierto';
+            this.caso.estado = true;
             var caso = this.caso;
             this.$http.post('/casos/', caso).success(function (data, status, request) {
                 this.message = 'El caso a sido registrado exitosamente';
@@ -277,8 +308,9 @@ v = new Vue({
             this.caso.cliente_id = 0;
             this.caso.tipocaso_id = 0;
             this.caso.tipojuicio = '';
-            this.caso.cliente_es = false;
-            this.caso.trinunal= '';
+            this.caso.instancia = '';
+            this.caso.salas_id = '';
+            this.caso.tribunal_id= '';
             this.caso.demandado = '';
             this.caso.demandante = '';
             this.caso.juez_id = 0;
@@ -287,11 +319,7 @@ v = new Vue({
         },
 
         modalContactDestroy: function(){
-
-        },
-
-        modalJuezDestroy: function(){
-
+            this.newContacto = {};
         }
     },
     computed: {

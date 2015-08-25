@@ -19,6 +19,7 @@
 
 
 @section('modal')
-	@include('casos.create.relacionados._create-contacto-modal')
-	@include('casos.create.relacionados._create-juez-modal')
+	@include('casos.create2.relacionados._create-contacto-modal')
+	@include('casos.create2.relacionados._create-juez-modal')
+	@include('casos.create2.relacionados._create-tribunal-modal')
 @stop
