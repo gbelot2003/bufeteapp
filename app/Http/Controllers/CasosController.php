@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actualizacioncaso;
 use App\Caso;
 use App\Cliente;
 use App\Contacto;
@@ -54,8 +55,36 @@ class CasosController extends Controller
      */
     public function store(Request $request)
     {
-		$caso = new Caso($request->all());
+		/**
+		 * Se divide en dos el esenario de salvar
+		 * $casos y $Actualizacioncasos
+		 */
+		$caso = new Caso([
+			'caso' => $request->input('caso'),
+			'cliente_id' => $request->input('cliente_id'),
+			'demandado'	=> $request->input('demandado'),
+			'demandante'	=> $request->input('demandante'),
+			'csj'	=> $request->input('csj'),
+			'ca'	=> $request->input('ca'),
+			'estado'	=> $request->input('estado'),
+		]);
+
 		Auth::user()->casos()->save($caso);
+
+		$actualizacion = new Actualizacioncaso([
+			'caso_id' 	=> $caso->id,
+			'title'	=>	$request->input('title'),
+			'tipocaso_id'	=>	$request->input('tipocaso_id'),
+			'tipojuicio'	=>	$request->input('tipojuicio'),
+			'tribunal_id'	=>	$request->input('tribunal_id'),
+			'instancia'	=>	$request->input('instancia'),
+			'sala_id'	=>	$request->input('sala_id'),
+			'juez_id'	=>	$request->input('juez_id'),
+			'descripcion'	=>	$request->input('descripcion'),
+			'date'	=> $request->input('date')
+		]);
+
+		Auth::user()->Actualizacioncaso()->save($actualizacion);
 		return 'done';
     }
 
