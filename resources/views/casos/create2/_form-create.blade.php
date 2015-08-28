@@ -11,6 +11,10 @@
 		@include('casos.create2._c_involucrados')
 	</div>
 
+	<div class="row light-blue lighten-5">
+		@include('casos.create2._d_anotaciones')
+	</div>
+
 	<div class="row">
 		<div class="col s12">
 			<button class="waves-effect waves-green btn btn-primary" v-attr="disabled: ! caso.juez_id">Crear</button>
