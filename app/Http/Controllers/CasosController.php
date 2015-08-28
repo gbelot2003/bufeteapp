@@ -68,7 +68,7 @@ class CasosController extends Controller
 			'tipojuicio'	=>	$request->input('tipojuicio'),
 			'tribunal_id'	=>	$request->input('tribunal_id'),
 			'instancia'	=>	$request->input('instancia'),
-			'sala_id'	=>	$request->input('sala_id'),
+			'salas_id'	=>	$request->input('salas_id'),
 			'juez_id'	=>	$request->input('juez_id'),
 			'csj'	=> $request->input('csj'),
 			'ca'	=> $request->input('ca'),
