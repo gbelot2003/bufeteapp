@@ -64,6 +64,12 @@ class CasosController extends Controller
 			'cliente_id' => $request->input('cliente_id'),
 			'demandado'	=> $request->input('demandado'),
 			'demandante'	=> $request->input('demandante'),
+			'tipocaso_id'	=>	$request->input('tipocaso_id'),
+			'tipojuicio'	=>	$request->input('tipojuicio'),
+			'tribunal_id'	=>	$request->input('tribunal_id'),
+			'instancia'	=>	$request->input('instancia'),
+			'sala_id'	=>	$request->input('sala_id'),
+			'juez_id'	=>	$request->input('juez_id'),
 			'csj'	=> $request->input('csj'),
 			'ca'	=> $request->input('ca'),
 			'estado'	=> $request->input('estado'),
@@ -73,18 +79,11 @@ class CasosController extends Controller
 
 		$actualizacion = new Actualizacioncaso([
 			'caso_id' 	=> $caso->id,
-			'title'	=>	$request->input('title'),
-			'tipocaso_id'	=>	$request->input('tipocaso_id'),
-			'tipojuicio'	=>	$request->input('tipojuicio'),
-			'tribunal_id'	=>	$request->input('tribunal_id'),
-			'instancia'	=>	$request->input('instancia'),
-			'sala_id'	=>	$request->input('sala_id'),
-			'juez_id'	=>	$request->input('juez_id'),
 			'descripcion'	=>	$request->input('descripcion'),
 			'date'	=> $request->input('date')
 		]);
 
-		Auth::user()->Actualizacioncaso()->save($actualizacion);
+		Auth::user()->actualizaciones()->save($actualizacion);
 		return 'done';
     }
 
