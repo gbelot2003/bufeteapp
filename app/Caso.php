@@ -28,7 +28,7 @@ class Caso extends Model implements SluggableInterface
 	 * portected fillable
 	 * @var array
 	 */
-	protected $fillable = ['caso', 'cliente_id', 'demandado', 'demandante', 'tipocaso_id', 'tipojuicio', 'tribunal_id', 'instancia', 'sala_id',
+	protected $fillable = ['caso', 'cliente_id', 'demandado', 'demandante', 'tipocaso_id', 'tipojuicio', 'tribunal_id', 'instancia', 'salas_id',
 							 'juez_id', 'csj', 'ca', 'estado', 'user_id'];
 
 	/**
