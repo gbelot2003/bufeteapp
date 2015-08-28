@@ -29,8 +29,8 @@ class CreateActualizacioncasos extends Migration
      */
     public function down()
     {
-        Schema::table('actualizacion_casos', function (Blueprint $table) {
-			Schema::drop('actualizacion_casos');
+        Schema::table('actualizacioncasos', function (Blueprint $table) {
+			Schema::drop('actualizacioncasos');
         });
     }
 }
