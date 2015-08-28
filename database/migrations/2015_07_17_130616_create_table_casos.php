@@ -18,6 +18,12 @@ class CreateTableCasos extends Migration
 			$table->string('cliente_id');
 			$table->string('demandado')->nullable();
 			$table->string('demandante')->nullable();
+			$table->integer('tipocaso_id');
+			$table->string('tipojuicio');
+			$table->integer('tribunal_id');
+			$table->string('instancia');
+			$table->string('salas_id');
+			$table->string('juez_id');
 			$table->string('csj')->nullable();
 			$table->string('ca')->nullable();
 			$table->boolean('estado');

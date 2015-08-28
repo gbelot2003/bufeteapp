@@ -70,9 +70,33 @@ class Caso extends Model implements SluggableInterface
 	 */
 	public function actualizaciones()
 	{
-		return $this->hasMany('App\ActualizacionCasos');
+		return $this->hasMany('App\Actualizacioncaso');
+	}
+	/**
+	 * Relacion con tipocaso
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function tipocasos()
+	{
+		return $this->belongsTo('App\Tipocaso', 'tipocaso_id', 'id');
 	}
 
+	/**
+	 * Relacion con jueces
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function jueces()
+	{
+		return $this->belongsTo('App\Contacto', 'juez_id', 'id');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function tribunales()
+	{
+		return $this->belongsTo('App\Tribunale', 'tribunales_id', 'id');
+	}
 
 
 }

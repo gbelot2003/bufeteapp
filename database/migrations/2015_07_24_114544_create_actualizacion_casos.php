@@ -16,13 +16,6 @@ class CreateActualizacioncasos extends Migration
 			$table->increments('id');
 			$table->integer('caso_id');
 			$table->integer('user_id');
-			$table->string('title');
-			$table->integer('tipocaso_id');
-			$table->string('tipojuicio');
-			$table->integer('tribunal_id');
-			$table->string('instancia');
-			$table->string('salas_id');
-			$table->string('juez_id');
 			$table->text('descripcion')->nullable();
 			$table->timestamp('date');
 			$table->timestamps();

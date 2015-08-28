@@ -15,9 +15,7 @@ class Actualizacioncaso extends Model
 	 * portected fillable
 	 * @var array
 	 */
-	protected $fillable = ['caso_id', 'title', 'tipocaso_id', 'tipojuicio',
-							'tribunal_id', 'instancia', 'salas_id', 'juez_id',
-							'descripcion', 'date'];
+	protected $fillable = ['caso_id', 'descripcion', 'date'];
 
 	/**
 	 * Describe relación con casos
@@ -37,29 +35,4 @@ class Actualizacioncaso extends Model
 		return $this->belongsTo('App\User', 'user_id', 'id');
 	}
 
-	/**
-	 * Relacion con tipocaso
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function tipocasos()
-	{
-		return $this->belongsTo('App\Tipocaso', 'tipocaso_id', 'id');
-	}
-
-	/**
-	 * Relacion con jueces
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function jueces()
-	{
-		return $this->belongsTo('App\Contacto', 'juez_id', 'id');
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function tribunales()
-	{
-		return $this->belongsTo('App\Tribunale', 'tribunales_id', 'id');
-	}
 }
