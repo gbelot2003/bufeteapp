@@ -315,16 +315,14 @@ class ListadosController extends Controller
 				'tribunales.name as tribunalname',
 				'jueces.name as juezname',
 				'tipo_casos.name as tipocaso',
-				'actualizacioncasos.tipojuicio as tipojuicio',
-				'actualizacioncasos.created_at as created_at',
+				'casos.tipojuicio as tipojuicio',
+				'casos.created_at as created_at',
 				'casos.estado as estado',
-				'actualizacioncasos.descripcion as descripcion'
 			])
-				->join('actualizacioncasos', 'casos.id', '=', 'actualizacioncasos.caso_id')
 				->join('clientes', 'casos.cliente_id', '=', 'clientes.id')
-				->leftJoin('contactos as jueces', 'actualizacioncasos.juez_id', '=', 'jueces.id')
-				->leftJoin('tipo_casos', 'actualizacioncasos.tipocaso_id', '=', 'tipo_casos.id')
-				->leftJoin('tribunales', 'actualizacioncasos.tribunal_id', '=', 'tribunales.id')
+				->leftJoin('contactos as jueces', 'casos.juez_id', '=', 'jueces.id')
+				->leftJoin('tipo_casos', 'casos.tipocaso_id', '=', 'tipo_casos.id')
+				->leftJoin('tribunales', 'casos.tribunal_id', '=', 'tribunales.id')
 				->where(function ($query) use ($search) {
 				$query->where('clientes.name', 'LIKE', '%'.$search.'%')
 					->orWhere('casos.caso', 'LIKE', '%'.$search.'%')
@@ -343,16 +341,14 @@ class ListadosController extends Controller
 				'tribunales.name as tribunalname',
 				'jueces.name as juezname',
 				'tipo_casos.name as tipocaso',
-				'actualizacioncasos.tipojuicio as tipojuicio',
-				'actualizacioncasos.created_at as created_at',
+				'casos.tipojuicio as tipojuicio',
+				'casos.created_at as created_at',
 				'casos.estado as estado',
-				'actualizacioncasos.descripcion as descripcion'
 			])
-				->join('actualizacioncasos', 'caso.id', '=', 'actualizacioncasos.caso_id')
 				->join('clientes', 'casos.cliente_id', '=', 'clientes.id')
-				->leftJoin('contactos as jueces', 'actualizacioncasos.juez_id', '=', 'jueces.id')
-				->leftJoin('tipo_casos', 'actualizacioncasos.tipocaso_id', '=', 'tipo_casos.id')
-				->leftJoin('tribunales', 'actualizacioncasos.tribunal_id', '=', 'tribunales.id')
+				->leftJoin('contactos as jueces', 'casos.juez_id', '=', 'jueces.id')
+				->leftJoin('tipo_casos', 'casos.tipocaso_id', '=', 'tipo_casos.id')
+				->leftJoin('tribunales', 'casos.tribunal_id', '=', 'tribunales.id')
 				->where(function ($query) use ($search) {
 					$query->where('clientes.name', 'LIKE', '%'.$search.'%')
 						->orWhere('casos.caso', 'LIKE', '%'.$search.'%')
@@ -376,16 +372,14 @@ class ListadosController extends Controller
 				'tribunales.name as tribunalname',
 				'jueces.name as juezname',
 				'tipo_casos.name as tipocaso',
-				'actualizacioncasos.tipojuicio as tipojuicio',
-				'actualizacioncasos.created_at as created_at',
+				'casos.tipojuicio as tipojuicio',
+				'casos.created_at as created_at',
 				'casos.estado as estado',
-				'actualizacioncasos.descripcion as descripcion'
 				])
-				->join('actualizacioncasos', 'casos.id', '=', 'actualizacioncasos.caso_id')
 				->join('clientes', 'casos.cliente_id', '=', 'clientes.id')
-				->leftJoin('contactos as jueces', 'actualizacioncasos.juez_id', '=', 'jueces.id')
-				->leftJoin('tipo_casos', 'actualizacioncasos.tipocaso_id', '=', 'tipo_casos.id')
-				->leftJoin('tribunales', 'actualizacioncasos.tribunal_id', '=', 'tribunales.id')
+				->leftJoin('contactos as jueces', 'casos.juez_id', '=', 'jueces.id')
+				->leftJoin('tipo_casos', 'casos.tipocaso_id', '=', 'tipo_casos.id')
+				->leftJoin('tribunales', 'casos.tribunal_id', '=', 'tribunales.id')
 				->orderBy('created_at', 'Desc')
 				->limit($counter)
 				->offset($start)
