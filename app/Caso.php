@@ -40,6 +40,17 @@ class Caso extends Model implements SluggableInterface
 	}
 
 	/**
+	 * @param $estado
+	 * @return string
+	 */
+	public function estadoTrans($estado){
+		if($estado == 1){
+			return 'Abierto';
+		}
+		return 'cerrado';
+	}
+
+	/**
 	 * Relacion con usuarios
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
@@ -56,7 +67,6 @@ class Caso extends Model implements SluggableInterface
 	{
 		return $this->belongsTo('App\Cliente', 'cliente_id', 'id');
 	}
-
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -95,7 +105,7 @@ class Caso extends Model implements SluggableInterface
 	 */
 	public function tribunales()
 	{
-		return $this->belongsTo('App\Tribunale', 'tribunales_id', 'id');
+		return $this->belongsTo('App\Tribunale', 'tribunal_id', 'id');
 	}
 
 
