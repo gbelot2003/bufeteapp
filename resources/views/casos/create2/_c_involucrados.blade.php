@@ -13,8 +13,8 @@
 		<!-- Demandante Form Input -->
 		<div class="field">
 			{!! Form::label('demandante', "Demandante") !!}
-			<select name="demandante" id="demandante" class="select form-control" v-demandante="caso.demandante"  v-model='caso.demandante'>
-				<option value="null" disabled selected>--Seleccione---</option>
+			<select name="demandante[]" id="demandante" class="select form-control" v-demandante="caso.demandante"  v-model='caso.demandante' multiple>
+
 				<template v-repeat="row: contactos">
 					<my-component msg="@{{ row.name }}" value="@{{ row.name }}"></my-component>
 				</template>
@@ -34,8 +34,7 @@
 		<!-- Demandado Form Input -->
 		<div class="field">
 			{!! Form::label('demandado', "Demandado") !!}
-			<select name="demandado" id="demandado" class="select form-control" v-demandado="caso.demandado"  v-model='caso.demandado'>
-				<option value="null" disabled selected>--Seleccione---</option>
+			<select name="demandado[]" id="demandado" class="select form-control" v-demandado="caso.demandado"  v-model='caso.demandado'>
 				<template v-repeat="row: contactos">
 					<my-component msg="@{{ row.name }}" value="@{{ row.name }}"></my-component>
 				</template>
