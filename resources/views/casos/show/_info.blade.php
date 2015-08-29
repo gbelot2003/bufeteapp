@@ -1,51 +1,48 @@
-<div class="row">
-	<div class="col m3 s12">
-		<div class="row">
-			<div class="col m11 fheader">Cliente :</div>
-			<div class="col m11 blue lighten-5 showInfo"><strong><a href="{{ url('/clientes', $caso->clientes->slug) }}">{{ $caso->clientes->name }}</a></strong></div>
-		</div>
-	</div>
+<table class="table bordered responsive-table">
+	<caption>Datos del caso</caption>
+	<thead>
+		<th>Cliente</th>
 
-	<div class="col m3 s12">
-		<div class="row">
-			<div class="col m11 fheader">Tribunal :</div>
-			<div class="col m11 blue lighten-5 showInfo"><strong>{{ $caso->tribunal }}</strong></div>
-		</div>
-	</div>
+		<th>Tipo</th>
 
-	<div class="col m3 s12">
-		<div class="row">
-			<div class="col m11 fheader">Tipo :</div>
-			<div class="col m11 blue lighten-5 showInfo"><strong>{{ $caso->tipocasos->name }} : {{ $caso->tipojuicio }}</strong></div>
-		</div>
-	</div>
+		@if($caso->tipocaso_id == 1)
+		<th>Demandado</th>
+		@endif
 
-	<div class="col m3 s12">
-		<div class="row">
-			<div class="col m11 fheader">Juez :</div>
-			<div class="col m11 blue lighten-5 showInfo"><strong>{{ $caso->jueces->name }}</strong></div>
-		</div>
-	</div>
+		@if($caso->tipocaso_id == 2)
+			<th>Demandante</th>
+		@endif
 
-</div>
+		<th>Tribunal</th>
 
-<div class="row">
-	<div class="col m6 s12">
-		<div class="row">
-			<div class="col m11 fheader">Demandante :</div>
-			<div class="col m11 blue lighten-5 showInfo"><strong>{{ $caso->demandante }}</strong></div>
-		</div>
-	</div>
+		<th>Instancia</th>
 
-	<div class="col m6 s12">
-		<div class="row">
-			<div class="col m11 fheader">Demandado :</div>
-			<div class="col m11 blue lighten-5 showInfo"><strong>{{ $caso->demandado }}</strong></div>
-		</div>
+		<th>Juez</th>
 
-	</div>
+		<th class="red-text">Estado</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="{{ url('/clientes', $caso->clientes->slug) }}">{{ $caso->clientes->name }}</a></td>
 
-	<div class="col s12">
-		<p>{!! $caso->descripcion !!}</p>
-	</div>
-</div>
+			<td><strong>{{ $caso->tipocasos->name }} : {{ $caso->tipojuicio }}</strong></td>
+
+			@if($caso->tipocaso_id == 1)
+				<td>{{ $caso->demandado }}</td>
+			@endif
+
+			@if($caso->tipocaso_id == 2)
+				<td>{{ $caso->demandante }}</td>
+			@endif
+
+			<td><strong>{{ $caso->tribunales->name }}</strong></td>
+
+			<td><strong>{{ $caso->instancia }}</strong></td>
+
+			<td><strong>{{ $caso->jueces->name }}</strong></td>
+
+			<td><strong>{{ $caso->estadoTrans($caso->estado) }}</strong></td>
+		</tr>
+	</tbody>
+</table>
+
