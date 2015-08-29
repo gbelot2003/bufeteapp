@@ -87,6 +87,19 @@ Vue.directive('demandante', {
     }
 });
 
+
+Vue.directive('description', {
+    bind: function(){
+        var vm = this.vm;
+        var key = this.expression;
+        $(this.el).cleditor();
+        $(this.el).on('keyup', function(){
+           var text = $('#description').text();
+           vm.$set('caso.descripcion', text);
+        });
+    }
+});
+
 var div = Vue.extend({
     template: '<option value="{{ value }}">{{ msg }}</option>',
     props: ['msg', 'value']
