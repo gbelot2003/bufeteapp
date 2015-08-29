@@ -4,15 +4,15 @@
 		@include('casos.create2._a_clienteCaso')
 	</div>
 
-	<div class="row divierblock light-blue lighten-5">
+	<div class="row divierblock grey lighten-4">
 		@include('casos.create2._b_tipojuicios')
 	</div>
 
-	<div class="row light-blue lighten-5">
+	<div class="row grey lighten-4">
 		@include('casos.create2._c_involucrados')
 	</div>
 
-	<div class="row light-blue lighten-5">
+	<div class="row grey lighten-4">
 		@include('casos.create2._d_anotaciones')
 	</div>
 
