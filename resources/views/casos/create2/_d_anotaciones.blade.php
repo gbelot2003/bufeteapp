@@ -1,6 +1,8 @@
 <div class="row" xmlns="http://www.w3.org/1999/html">
-	<div class="input-field col s12">
-		<textarea id="casos.descripcion" type="text" class="materialize-textarea" v-model="caso.descripcion"/></textarea>
+	<div class="input col s12">
+
 		<label for="casos.descripcion">Descripción</label>
+		<textarea id="descripcion" name="description" v-description v-model="caso.descripcion" v-attr="disabled: ! caso.juez_id"/></textarea>
+
 	</div>
 </div>
