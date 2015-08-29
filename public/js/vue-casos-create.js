@@ -16543,6 +16543,7 @@ Vue.directive('demandado', {
         $(this.el).select2({
             placeholder: 'Seleccionar el contacto',
             allowClear: false,
+            multiple: true,
             width: '100%'
         });
         $(this.el).on('change', function(){
@@ -16577,6 +16578,7 @@ Vue.directive('demandante', {
         var key = this.expression;
         $(this.el).select2({
             placeholder: 'Seleccionar el contacto',
+            multiple: true,
             allowClear: false,
             width: '100%'
         });
@@ -16586,7 +16588,6 @@ Vue.directive('demandante', {
         });
     }
 });
-
 
 Vue.directive('description', {
     bind: function(){
