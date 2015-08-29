@@ -1,4 +1,5 @@
-<form action="post" v-on="submit: getSubmitForm">
+<form method="post" action="/casos/">
+	{!! csrf_field() !!}
 	<div class="row diverblock grey lighten-4">
 		@include('casos.create2._a_clienteCaso')
 	</div>
