@@ -9,7 +9,6 @@ use App\Contacto;
 use App\Departamento;
 use App\Tipocaso;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -72,7 +71,7 @@ class CasosController extends Controller
 			'juez_id'	=>	$request->input('juez_id'),
 			'csj'	=> $request->input('csj'),
 			'ca'	=> $request->input('ca'),
-			'estado'	=> $request->input('estado'),
+			'estado'	=> 1,
 		]);
 
 		Auth::user()->casos()->save($caso);
@@ -84,7 +83,7 @@ class CasosController extends Controller
 		]);
 
 		Auth::user()->actualizaciones()->save($actualizacion);
-		return 'done';
+		return redirect('/casos/');
     }
 
     /**
