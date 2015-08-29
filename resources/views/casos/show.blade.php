@@ -5,7 +5,10 @@
 
 @section('content')
 
-	@include('casos.show._info')
+	<div class="row">
+		@include('casos.show._info')
+	</div>
+
 	<div class="row">
 		@include('casos.show._actualizaciones')
 	</div>

@@ -21,7 +21,7 @@
 					<th colspan="4">Descripción</th>
 				</tr>
 				<tr>
-					<td colspan="4">@{{ row.body }}</td>
+					<td colspan="4">@{{ row.description }}</td>
 				</tr>
 			</tbody>
 		</table>
