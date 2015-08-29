@@ -14,6 +14,7 @@
 	</div>
 @stop
 @section('post-script')
+	<script src="{{ URL::asset("js/jquery.cleditor.min.js") }}"></script>
 	<script src="{{ URL::asset("js/vue-casos-create.js") }}"></script>
 @stop
 
