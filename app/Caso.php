@@ -97,7 +97,32 @@ class Caso extends Model implements SluggableInterface
 	 */
 	public function jueces()
 	{
+		/**
+		 * Relacion directa con tabla contactos
+		 */
 		return $this->belongsTo('App\Contacto', 'juez_id', 'id');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function demandados()
+	{
+		/**
+		 * Relacion atraves de casos_demandados
+		 */
+		return $this->hasMany('App\CasosDemandados', 'casos_id', 'id');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function demandantes()
+	{
+		/**
+		 * Relacion atraves de casos_demandantes
+		 */
+		return $this->hasMany('App\CasosDemandantes', 'casos_id', 'id');
 	}
 
 	/**

@@ -28,8 +28,41 @@ class Contacto extends Model
 		return $this->belongsToMany('App\Cliente')->withTimestamps();
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function casos()
 	{
 		return $this->belongsToMany('App\Caso')->withTimestamps();
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function demandados()
+	{
+		/**
+		 * Relacion atraves de casos_demandados
+		 */
+		return $this->hasMany('App\CasosDemandados', 'contacto_id', 'id');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function demandantes()
+	{
+		/**
+		 * Relacion atraves de casos_demandantes
+		 */
+		return $this->hasMany('App\CasosDemandantes', 'contacto_id', 'id');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function tercerias()
+	{
+		return $this->hasMany('App\CasoTerceria', 'contacto_id', 'id');
 	}
 }
