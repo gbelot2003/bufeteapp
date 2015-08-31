@@ -24,6 +24,8 @@ class CreateTableCasos extends Migration
 			$table->string('instancia');
 			$table->string('salas');
 			$table->string('juez_id');
+
+			$table->string('honorarios')->nullable();
 			$table->string('csj')->nullable();
 			$table->string('ca')->nullable();
 
