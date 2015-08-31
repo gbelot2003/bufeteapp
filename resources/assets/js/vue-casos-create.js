@@ -294,6 +294,15 @@ $(document).ready(function() {
         $('#juez_id').prop('disabled', false);
     });
 
+    /**
+     * habiliar juez_id
+     */
+    $('#submitCaso').prop('disabled', true);
+    $('#honorarios').keyup(function () {
+        $('#submitCaso').prop('disabled', this.value == "" ? true : false);
+    });
+
+
 });
 
 /** Vue **/
