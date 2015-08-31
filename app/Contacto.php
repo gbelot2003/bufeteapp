@@ -39,30 +39,12 @@ class Contacto extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function demandados()
+	public function contrapartes()
 	{
 		/**
-		 * Relacion atraves de casos_demandados
+		 * Relacion atraves de casos_contrapartes
 		 */
-		return $this->hasMany('App\CasosDemandados', 'contacto_id', 'id');
+		return $this->hasMany('App\CasosContraparte', 'contacto_id', 'id');
 	}
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function demandantes()
-	{
-		/**
-		 * Relacion atraves de casos_demandantes
-		 */
-		return $this->hasMany('App\CasosDemandantes', 'contacto_id', 'id');
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function tercerias()
-	{
-		return $this->hasMany('App\CasoTerceria', 'contacto_id', 'id');
-	}
 }

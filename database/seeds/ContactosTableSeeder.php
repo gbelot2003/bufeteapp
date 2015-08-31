@@ -118,6 +118,32 @@ class ContactosTableSeeder extends Seeder {
 				'created_at' => '2015-08-31 14:56:39',
 				'updated_at' => '2015-08-31 14:56:39',
 			),
+			8 => 
+			array (
+				'id' => 9,
+				'type' => 'Juez',
+				'name' => 'Johani Fonzeca',
+				'cargo' => 'Juez',
+				'phone' => '',
+				'movil' => '',
+				'email' => '',
+				'notes' => '',
+				'created_at' => '2015-08-31 18:42:41',
+				'updated_at' => '2015-08-31 18:42:41',
+			),
+			9 => 
+			array (
+				'id' => 10,
+				'type' => 'Juez',
+				'name' => 'Mariano Tejada',
+				'cargo' => 'Juez',
+				'phone' => '',
+				'movil' => '',
+				'email' => '',
+				'notes' => '',
+				'created_at' => '2015-08-31 18:43:00',
+				'updated_at' => '2015-08-31 18:43:00',
+			),
 		));
 	}
 

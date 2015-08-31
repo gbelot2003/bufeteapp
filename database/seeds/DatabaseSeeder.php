@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
 		$this->call('TribunalesTableSeeder');
 		$this->call('TipoContraparteTableSeeder');
 		$this->call('ContactosTableSeeder');
+		$this->call('CasosTableSeeder');
 	}
 
 }

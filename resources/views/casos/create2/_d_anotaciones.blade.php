@@ -21,6 +21,6 @@
 <div class="row">
 	<div class="input col s12">
 		<label for="casos.descripcion">Descripción</label>
-		<textarea id="descripcion" name="description" v-description v-model="caso.descripcion" /></textarea>
+		<textarea id="descripcion" name="descripcion" /></textarea>
 	</div>
 </div>

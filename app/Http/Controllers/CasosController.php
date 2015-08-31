@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actualizacioncaso;
 use App\Caso;
+use App\CasosContraparte;
 use App\Cliente;
 use App\Contacto;
 use App\Departamento;
@@ -53,30 +54,24 @@ class CasosController extends Controller
 	 * @param CasosCreateRequest $request
 	 * @return Response
 	 */
-    public function store(CasosCreateRequest $request)
+    public function store(Request $request)
     {
 
-		dd($request->all());
 		/**
 		 * Se divide en dos el esenario de salvar
 		 * $casos y $Actualizacioncasos
 		 */
 
-
-
 		$caso = new Caso([
 			'caso' => $request->input('caso'),
 			'cliente_id' => $request->input('cliente_id'),
-
-			'demandado'	=> $request->input('demandado'),
-			'demandante'	=> $request->input('demandante'),
-
 			'tipocaso_id'	=>	$request->input('tipocaso_id'),
 			'tipojuicio'	=>	$request->input('tipojuicio'),
 			'tribunal_id'	=>	$request->input('tribunal_id'),
 			'instancia'	=>	$request->input('instancia'),
-			'salas_id'	=>	$request->input('salas_id'),
+			'salas'	=>	$request->input('salas_id'),
 			'juez_id'	=>	$request->input('juez_id'),
+			'honorarios' => $request->input('honorarios'),
 			'csj'	=> $request->input('csj'),
 			'ca'	=> $request->input('ca'),
 			'estado'	=> 1,
@@ -85,15 +80,53 @@ class CasosController extends Controller
 
 		Auth::user()->casos()->save($caso);
 
+		if($request->input('demandantes') != null){
+			$demandantes = $request->input('demandante');
+			for ($i = 0; $i < count($demandantes); $i++) {
+				$contraparte = new CasosContraparte([
+					'caso_id' => $caso->id,
+					'contacto_id' => $demandantes[$i],
+					'tipo_contraparte' => 1
+				]);
+				$contraparte->save();
+			}
+		}
 
+
+		if($request->input('demandados') != null){
+			$demandados = $request->input('demandados');
+			for ($i = 0; $i < count($demandados); $i++) {
+				$contraparte = new CasosContraparte([
+					'caso_id' => $caso->id,
+					'contacto_id' => $demandados[$i],
+					'tipo_contraparte' => 2
+				]);
+				$contraparte->save();
+			}
+		}
+
+		if($request->input('tercerias') != null){
+			$tercerias = $request->input('tercerias');
+			for ($i = 0; $i < count($tercerias); $i++) {
+				$contraparte = new CasosContraparte([
+					'caso_id' => $caso->id,
+					'contacto_id' => $tercerias[$i],
+					'tipo_contraparte' => 3
+				]);
+				$contraparte->save();
+			}
+		}
+		$contraparte->save();
 
 		$actualizacion = new Actualizacioncaso([
 			'caso_id' 	=> $caso->id,
-			'descripcion'	=>	$request->input('descripcion'),
-			'date'	=> $request->input('date')
+			'date'	=> $request->input('date'),
+			'importancia'	=> 1,
+			'descripcion'	=>	$request->input('descripcion')
 		]);
 
 		Auth::user()->actualizaciones()->save($actualizacion);
+
 		return redirect('/casos/');
     }
 

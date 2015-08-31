@@ -16713,21 +16713,183 @@ function FormatContraparteNoResults(item){
 
 /**
  * validacion
+ * Tipo_casos -> Contraparte
+ *
 **/
 
-$('#tipocaso_id').on('change', function(e){
-    var num = $('#tipocaso_id option:selected').val();
-    console.log(num)
-    if(num == 1){
-        $('#lcontraparte').text('Demandado(s)');
-        $('#contraparte').prop("disabled", false);
-    }
-    else if(num == 2){
-        $('#lcontraparte').html('Demanadante(s)');
-        $('#contraparte').prop("disabled", false);
-    } else {
-        $('#lcontraparte').html('N/A');
-        $('#contraparte').prop("disabled", true);
+$(document).ready(function() {
+
+    $('#tipocaso_id').on('change', function(e){
+        var num = $('#tipocaso_id option:selected').val();
+        console.log(num)
+        if(num == 1){
+            $('#lcontraparte').text('Demandado(s)');
+            $('#contraparte').prop("disabled", false);
+            $('#contraparte').attr("name", 'demandados[]');
+
+        }
+        else if(num == 2){
+            $('#lcontraparte').html('Demanadante(s)');
+            $('#contraparte').prop("disabled", false);
+            $('#contraparte').attr("name", 'demandantes[]');
+        } else {
+            $('#lcontraparte').html('N/A');
+            $('#contraparte').prop("disabled", true);
+        }
+    });
+
+    /**
+     * habilitar cliente_id
+     */
+    $('#cliente_id').prop('disabled', true);
+    $('#caso-number').keyup(function () {
+        $('#cliente_id').prop('disabled', this.value == "" ? true : false);
+    });
+
+    /**
+     * habilitar tipocaso_id
+     */
+    $('#tipocaso_id').prop('disabled', true);
+    $('#cliente_id').change(function () {
+        $('#tipocaso_id').prop('disabled', false);
+    });
+
+    /**
+     * habiliar tipojuicio
+     */
+    $('#tipojuicio').prop('disabled', true);
+    $('#tipocaso_id').on('change', function () {
+        $('#tipojuicio').prop('disabled', false);
+    });
+
+    /**
+     * habiliar instancia
+     */
+    $('#instancia').prop('disabled', true);
+    $('#tipojuicio').on('change', function () {
+        $('#instancia').prop('disabled', false);
+    });
+
+    /**
+     * habilitar tribunal_id
+     */
+    $('#tribunal_id').prop('disabled', true);
+    $('#instancia').keyup(function () {
+        $('#tribunal_id').prop('disabled', this.value == "" ? true : false);
+    });
+
+    /**
+     * habiliar salas_id
+     */
+    $('#salas_id').prop('disabled', true);
+    $('#tribunal_id').on('change', function () {
+        $('#salas_id').prop('disabled', false);
+    });
+
+    /**
+     * habiliar juez_id
+     */
+    $('#juez_id').prop('disabled', true);
+    $('#salas_id').on('change', function () {
+        $('#juez_id').prop('disabled', false);
+    });
+
+});
+
+/** Vue **/
+
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
+
+v = new Vue({
+    el: '#create-casos',
+    data:{
+        newContacto:{
+            id: '',
+            type: '',
+            name: '',
+            cargo: '',
+            phone: '',
+            movil: '',
+            email: '',
+            notes: ''
+        },
+        newTribunal: {
+            name:''
+        }
+    },
+
+    methods:{
+        /** cancelar contacto o juez **/
+        modalJuezDestroy: function(){
+            /** clear info **/
+            this.newContacto.id = 0;
+            this.newContacto.type = '';
+            this.newContacto.name = '';
+            this.newContacto.cargo = '';
+            this.newContacto.phone = '';
+            this.newContacto.movil = '';
+            this.newContacto.email = '';
+            this.newContacto.notes = '';
+        },
+
+        /** enviar juez **/
+        submitJuezCreate: function(e){
+            e.preventDefault();
+            this.newContacto.type = 'Juez';
+            $('#modal1').closeModal();
+            var contactos = this.newContacto;
+            this.$http.post('/contactos/', contactos).success(function (data, status, request) {
+                Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
+            }).error(function(data, status, response){
+                Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
+            });
+
+            this.modalJuezDestroy();
+        },
+
+        /** destruir contacto **/
+        modalContactDestroy: function(){
+            this.newContacto = {};
+        },
+
+        /** enviar Contacto **/
+        submitContactosCreate: function(e){
+            e.preventDefault();
+            $('#modal2').closeModal();
+            var contactos = this.newContacto;
+            this.$http.post('/contactos/', contactos).success(function (data, status, request) {
+                Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
+            }).error(function(data, status, response){
+                Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
+            });
+            this.modalContactDestroy();
+        },
+
+        /** Cancel create or edit **/
+        modalTribunalDestroy: function(){
+            this.newTribunal.name = '';
+        },
+
+        /** enviar Tribunal **/
+        submitTribunalCreate: function(e){
+            e.preventDefault();
+            var tribunal = this.newTribunal;
+            this.$http.post('/tribunal', tribunal).success(function (data, status, request) {
+                Materialize.toast('El Tribunal a sido agregado exitosamente!!!', 3000);
+            }).error(function(data, status, response){
+                Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
+            });
+            $('#modal3').closeModal();
+            this.modalTribunalDestroy();
+        }
+
+    },
+
+    computed: {
+        JuezeditError: function(){
+            if( ! this.newContacto.name) { return true }
+            return false;
+        }
     }
 });
 //# sourceMappingURL=vue-casos-create.js.map

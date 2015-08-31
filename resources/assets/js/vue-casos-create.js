@@ -294,5 +294,101 @@ $(document).ready(function() {
         $('#juez_id').prop('disabled', false);
     });
 
+});
 
+/** Vue **/
+
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
+
+v = new Vue({
+    el: '#create-casos',
+    data:{
+        newContacto:{
+            id: '',
+            type: '',
+            name: '',
+            cargo: '',
+            phone: '',
+            movil: '',
+            email: '',
+            notes: ''
+        },
+        newTribunal: {
+            name:''
+        }
+    },
+
+    methods:{
+        /** cancelar contacto o juez **/
+        modalJuezDestroy: function(){
+            /** clear info **/
+            this.newContacto.id = 0;
+            this.newContacto.type = '';
+            this.newContacto.name = '';
+            this.newContacto.cargo = '';
+            this.newContacto.phone = '';
+            this.newContacto.movil = '';
+            this.newContacto.email = '';
+            this.newContacto.notes = '';
+        },
+
+        /** enviar juez **/
+        submitJuezCreate: function(e){
+            e.preventDefault();
+            this.newContacto.type = 'Juez';
+            $('#modal1').closeModal();
+            var contactos = this.newContacto;
+            this.$http.post('/contactos/', contactos).success(function (data, status, request) {
+                Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
+            }).error(function(data, status, response){
+                Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
+            });
+
+            this.modalJuezDestroy();
+        },
+
+        /** destruir contacto **/
+        modalContactDestroy: function(){
+            this.newContacto = {};
+        },
+
+        /** enviar Contacto **/
+        submitContactosCreate: function(e){
+            e.preventDefault();
+            $('#modal2').closeModal();
+            var contactos = this.newContacto;
+            this.$http.post('/contactos/', contactos).success(function (data, status, request) {
+                Materialize.toast('El conctacto a sido creado exitosamente!!!', 3000);
+            }).error(function(data, status, response){
+                Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
+            });
+            this.modalContactDestroy();
+        },
+
+        /** Cancel create or edit **/
+        modalTribunalDestroy: function(){
+            this.newTribunal.name = '';
+        },
+
+        /** enviar Tribunal **/
+        submitTribunalCreate: function(e){
+            e.preventDefault();
+            var tribunal = this.newTribunal;
+            this.$http.post('/tribunal', tribunal).success(function (data, status, request) {
+                Materialize.toast('El Tribunal a sido agregado exitosamente!!!', 3000);
+            }).error(function(data, status, response){
+                Materialize.toast('Hay un error en el envio de esta información!!!', 3000);
+            });
+            $('#modal3').closeModal();
+            this.modalTribunalDestroy();
+        }
+
+    },
+
+    computed: {
+        JuezeditError: function(){
+            if( ! this.newContacto.name) { return true }
+            return false;
+        }
+    }
 });

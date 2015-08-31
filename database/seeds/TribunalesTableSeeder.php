@@ -35,6 +35,20 @@ class TribunalesTableSeeder extends Seeder {
 				'created_at' => '0000-00-00 00:00:00',
 				'updated_at' => '0000-00-00 00:00:00',
 			),
+			3 => 
+			array (
+				'id' => 4,
+				'name' => 'Juzgado de Paz, San Pedro Sula',
+				'created_at' => '2015-08-31 18:40:35',
+				'updated_at' => '2015-08-31 18:40:35',
+			),
+			4 => 
+			array (
+				'id' => 5,
+				'name' => 'Juzgado de Paz, Comayagua',
+				'created_at' => '2015-08-31 18:40:47',
+				'updated_at' => '2015-08-31 18:40:47',
+			),
 		));
 	}
 

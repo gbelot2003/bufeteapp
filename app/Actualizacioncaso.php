@@ -15,7 +15,7 @@ class Actualizacioncaso extends Model
 	 * portected fillable
 	 * @var array
 	 */
-	protected $fillable = ['caso_id', 'descripcion', 'date'];
+	protected $fillable = ['caso_id', 'descripcion', 'importancia', 'date'];
 
 	/**
 	 * Describe relación con casos

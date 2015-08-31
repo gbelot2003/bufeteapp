@@ -28,8 +28,8 @@ class Caso extends Model implements SluggableInterface
 	 * portected fillable
 	 * @var array
 	 */
-	protected $fillable = ['caso', 'cliente_id', 'demandado', 'demandante', 'tipocaso_id', 'tipojuicio', 'tribunal_id', 'instancia', 'salas_id',
-							 'juez_id', 'csj', 'ca', 'estado', 'user_id'];
+	protected $fillable = ['caso', 'cliente_id', 'tipocaso_id', 'tipojuicio', 'tribunal_id', 'instancia', 'salas_id',
+							 'juez_id', 'csj', 'ca', 'estado', 'honorarios', 'user_id'];
 
 	/**
 	 * @param $estado
@@ -106,23 +106,12 @@ class Caso extends Model implements SluggableInterface
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function demandados()
+	public function contrapartes()
 	{
 		/**
-		 * Relacion atraves de casos_demandados
+		 * Relacion atraves de casos_contrapartes
 		 */
-		return $this->hasMany('App\CasosDemandados', 'casos_id', 'id');
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function demandantes()
-	{
-		/**
-		 * Relacion atraves de casos_demandantes
-		 */
-		return $this->hasMany('App\CasosDemandantes', 'casos_id', 'id');
+		return $this->hasMany('App\CasosContraparte', 'casos_id', 'id');
 	}
 
 	/**

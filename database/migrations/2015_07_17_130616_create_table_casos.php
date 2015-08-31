@@ -39,8 +39,8 @@ class CreateTableCasos extends Migration
 
 
 		Schema::create('casos_contrapartes', function(Blueprint $table){
-			$table->integer('casos_id')->unsigned()->index();
-			$table->foreign('casos_id')->references('id')->on('casos')->onDelete('cascade');
+			$table->integer('caso_id')->unsigned()->index();
+			$table->foreign('caso_id')->references('id')->on('casos')->onDelete('cascade');
 
 			$table->integer('contacto_id')->unsigned()->index();
 			$table->foreign('contacto_id')->references('id')->on('contactos');
