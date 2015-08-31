@@ -7,6 +7,7 @@ use App\Caso;
 use App\Cliente;
 use App\Contacto;
 use App\Departamento;
+use App\Http\Requests\CasosCreateRequest;
 use App\Tipocaso;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -46,12 +47,13 @@ class CasosController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store(Request $request)
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param CasosCreateRequest $request
+	 * @return Response
+	 */
+    public function store(CasosCreateRequest $request)
     {
 
 		dd($request->all());
