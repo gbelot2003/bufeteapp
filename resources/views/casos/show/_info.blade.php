@@ -28,7 +28,9 @@
 			<td><strong>{{ $caso->tipocasos->name }} : {{ $caso->tipojuicio }}</strong></td>
 
 			@if($caso->tipocaso_id == 1)
+
 				<td>{{ $caso->demandado }}</td>
+
 			@endif
 
 			@if($caso->tipocaso_id == 2)

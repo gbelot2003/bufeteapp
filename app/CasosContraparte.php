@@ -31,4 +31,6 @@ class CasosContraparte extends Model
 	public function contactos(){
 		return $this->belongsTo('App\Contacto', 'contacto_id', 'id');
 	}
+
+
 }
