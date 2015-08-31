@@ -39,10 +39,9 @@ class CasosController extends Controller
      */
     public function create()
     {
-		$clientes = Cliente::Lists('name', 'id');
+		$clientes = Cliente::select('name', 'id')->get();
 		$departamento = Departamento::Lists('departamento', 'id');
 		$tipocaso = Tipocaso::Lists('name', 'id');
-
         return View('casos.create', compact('clientes', 'tipocaso'));
     }
 
@@ -54,15 +53,22 @@ class CasosController extends Controller
      */
     public function store(Request $request)
     {
+
+		dd($request->all());
 		/**
 		 * Se divide en dos el esenario de salvar
 		 * $casos y $Actualizacioncasos
 		 */
+
+
+
 		$caso = new Caso([
 			'caso' => $request->input('caso'),
 			'cliente_id' => $request->input('cliente_id'),
+
 			'demandado'	=> $request->input('demandado'),
 			'demandante'	=> $request->input('demandante'),
+
 			'tipocaso_id'	=>	$request->input('tipocaso_id'),
 			'tipojuicio'	=>	$request->input('tipojuicio'),
 			'tribunal_id'	=>	$request->input('tribunal_id'),
@@ -72,9 +78,12 @@ class CasosController extends Controller
 			'csj'	=> $request->input('csj'),
 			'ca'	=> $request->input('ca'),
 			'estado'	=> 1,
+
 		]);
 
 		Auth::user()->casos()->save($caso);
+
+
 
 		$actualizacion = new Actualizacioncaso([
 			'caso_id' 	=> $caso->id,

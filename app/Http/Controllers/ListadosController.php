@@ -399,8 +399,22 @@ class ListadosController extends Controller
 	 */
 	public function getJueces()
 	{
-		$jueces = Contacto::where('type', '=', 'Juez')->select('id', 'name')->get();
-		return $jueces;
+		$query = $_SERVER['QUERY_STRING'];
+		$vars = [];
+		foreach (explode('&', $query) as $pair) {
+			list($key, $value) = explode('=', $pair);
+			if('' == trim($value)){
+				continue;
+			}
+			$vars[$key] = urldecode($value);
+		}
+
+		$name = $vars['q'];
+
+		$jueces = Contacto::select('id', 'name as text')->where('name', 'LIKE', '%'. $name .'%')->get();
+		return array(
+			'results' => $jueces
+		);
 	}
 
 	/**
@@ -409,8 +423,23 @@ class ListadosController extends Controller
 	 */
 	public function getContactosCaso()
 	{
-		$contactos = Contacto::where('type', '=', 'Relacionado a Caso')->select('id', 'name')->get();
-		return $contactos;
+		$query = $_SERVER['QUERY_STRING'];
+		$vars = [];
+		foreach (explode('&', $query) as $pair) {
+			list($key, $value) = explode('=', $pair);
+			if('' == trim($value)){
+				continue;
+			}
+			$vars[$key] = urldecode($value);
+		}
+
+		$name = $vars['q'];
+
+		$contactos = Contacto::select('id', 'name as text')->where('name', 'LIKE', '%'. $name .'%')->get();
+
+		return array(
+			'results' => $contactos
+		);
 	}
 
 	public function getRelacionados($id)
@@ -425,8 +454,23 @@ class ListadosController extends Controller
 	 */
 	public function getTribunales()
 	{
-		$tribunales = Tribunale::select('id', 'name')->get();
-		return $tribunales;
+		$query = $_SERVER['QUERY_STRING'];
+		$vars = [];
+		foreach (explode('&', $query) as $pair) {
+			list($key, $value) = explode('=', $pair);
+			if('' == trim($value)){
+				continue;
+			}
+			$vars[$key] = urldecode($value);
+		}
+
+		$name = $vars['q'];
+
+
+		$tribunales = Tribunale::select('id', 'name as text')->where('name', 'LIKE', '%'. $name .'%')->get();
+		return array(
+			'results' => $tribunales
+		);
 	}
 
 	public function getDates()

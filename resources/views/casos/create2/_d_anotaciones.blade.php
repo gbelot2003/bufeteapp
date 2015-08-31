@@ -2,7 +2,7 @@
 	<div class="input col s12">
 
 		<label for="casos.descripcion">Descripción</label>
-		<textarea id="descripcion" name="description" v-description v-model="caso.descripcion" v-attr="disabled: ! caso.juez_id"/></textarea>
+		<textarea id="descripcion" name="description" v-description v-model="caso.descripcion" /></textarea>
 
 	</div>
 </div>
