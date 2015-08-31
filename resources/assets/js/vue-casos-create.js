@@ -213,20 +213,86 @@ function FormatContraparteNoResults(item){
 
 /**
  * validacion
+ * Tipo_casos -> Contraparte
+ *
 **/
 
-$('#tipocaso_id').on('change', function(e){
-    var num = $('#tipocaso_id option:selected').val();
-    console.log(num)
-    if(num == 1){
-        $('#lcontraparte').text('Demandado(s)');
-        $('#contraparte').prop("disabled", false);
-    }
-    else if(num == 2){
-        $('#lcontraparte').html('Demanadante(s)');
-        $('#contraparte').prop("disabled", false);
-    } else {
-        $('#lcontraparte').html('N/A');
-        $('#contraparte').prop("disabled", true);
-    }
+$(document).ready(function() {
+
+    $('#tipocaso_id').on('change', function(e){
+        var num = $('#tipocaso_id option:selected').val();
+        console.log(num)
+        if(num == 1){
+            $('#lcontraparte').text('Demandado(s)');
+            $('#contraparte').prop("disabled", false);
+            $('#contraparte').attr("name", 'demandados[]');
+
+        }
+        else if(num == 2){
+            $('#lcontraparte').html('Demanadante(s)');
+            $('#contraparte').prop("disabled", false);
+            $('#contraparte').attr("name", 'demandantes[]');
+        } else {
+            $('#lcontraparte').html('N/A');
+            $('#contraparte').prop("disabled", true);
+        }
+    });
+
+    /**
+     * habilitar cliente_id
+     */
+    $('#cliente_id').prop('disabled', true);
+    $('#caso-number').keyup(function () {
+        $('#cliente_id').prop('disabled', this.value == "" ? true : false);
+    });
+
+    /**
+     * habilitar tipocaso_id
+     */
+    $('#tipocaso_id').prop('disabled', true);
+    $('#cliente_id').change(function () {
+        $('#tipocaso_id').prop('disabled', false);
+    });
+
+    /**
+     * habiliar tipojuicio
+     */
+    $('#tipojuicio').prop('disabled', true);
+    $('#tipocaso_id').on('change', function () {
+        $('#tipojuicio').prop('disabled', false);
+    });
+
+    /**
+     * habiliar instancia
+     */
+    $('#instancia').prop('disabled', true);
+    $('#tipojuicio').on('change', function () {
+        $('#instancia').prop('disabled', false);
+    });
+
+    /**
+     * habilitar tribunal_id
+     */
+    $('#tribunal_id').prop('disabled', true);
+    $('#instancia').keyup(function () {
+        $('#tribunal_id').prop('disabled', this.value == "" ? true : false);
+    });
+
+    /**
+     * habiliar salas_id
+     */
+    $('#salas_id').prop('disabled', true);
+    $('#tribunal_id').on('change', function () {
+        $('#salas_id').prop('disabled', false);
+    });
+
+    /**
+     * habiliar juez_id
+     */
+    $('#juez_id').prop('disabled', true);
+    $('#salas_id').on('change', function () {
+        $('#juez_id').prop('disabled', false);
+    });
+
+
 });
