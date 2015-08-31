@@ -55,8 +55,8 @@
 				{!! Form::label('Salas') !!}
 				<select name="salas_id" id="salas_id" class="browser-default">
 					<option value="" disabled selected>-- Sala ---</option>
-					<option value="1">Sala Penal</option>
-					<option value="2">Sala Civil</option>
+					<option value="Sala Penal">Sala Penal</option>
+					<option value="Sala Civil">Sala Civil</option>
 				</select>
 			</div>
 		</div>
