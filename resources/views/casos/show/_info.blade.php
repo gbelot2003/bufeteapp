@@ -14,7 +14,6 @@
 		@endif
 
 		<th>Tribunal</th>
-
 		<th>Instancia</th>
 
 		<th>Juez</th>
