@@ -3,18 +3,23 @@
 	<thead>
 		<th>Cliente</th>
 
+		<th>Tribunal</th>
+
 		<th>Tipo</th>
 
-		@if($caso->tipocaso_id == 1)
-		<th>Demandado</th>
-		@endif
-
-		@if($caso->tipocaso_id == 2)
-			<th>Demandante</th>
-		@endif
-
-		<th>Tribunal</th>
 		<th>Instancia</th>
+
+		@if($caso->hasDemandados())
+			<th>Demandado(s)</th>
+		@endif
+
+		@if($caso->hasDemandantes())
+			<th>Demandante(s)</th>
+		@endif
+
+		@if($caso->hasTercerias())
+			<th>Tercerias</th>
+		@endif
 
 		<th>Juez</th>
 
@@ -24,21 +29,35 @@
 		<tr>
 			<td><a href="{{ url('/clientes', $caso->clientes->slug) }}">{{ $caso->clientes->name }}</a></td>
 
-			<td><strong>{{ $caso->tipocasos->name }} : {{ $caso->tipojuicio }}</strong></td>
-
-			@if($caso->tipocaso_id == 1)
-
-				<td>{{ $caso->demandado }}</td>
-
-			@endif
-
-			@if($caso->tipocaso_id == 2)
-				<td>{{ $caso->demandante }}</td>
-			@endif
-
 			<td><strong>{{ $caso->tribunales->name }}</strong></td>
 
+			<td><strong>{{ $caso->tipocasos->name }} : {{ $caso->tipojuicio }}</strong></td>
+
 			<td><strong>{{ $caso->instancia }}</strong></td>
+
+			@if($caso->hasDemandados())
+				<td>
+				<ul>
+					@foreach($caso->demandados as $contrapartes)
+						<li>{{ $contrapartes->contactos->name }}</li>
+					@endforeach
+				</ul>
+				</td>
+			@endif
+
+			@if($caso->hasDemandantes())
+				<td>
+					<ul>
+					@foreach($caso->demandantes as $contrapartes)
+						<li>{{ $contrapartes->tipo }} - {{ $contrapartes->contactos->name }}</li>
+					@endforeach
+					</ul>
+				</td>
+			@endif
+
+			@if($caso->hasTercerias())
+				<td>Tecerias</td>
+			@endif
 
 			<td><strong>{{ $caso->jueces->name }}</strong></td>
 

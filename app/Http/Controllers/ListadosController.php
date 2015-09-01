@@ -411,7 +411,9 @@ class ListadosController extends Controller
 
 		$name = $vars['q'];
 
-		$jueces = Contacto::select('id', 'name as text')->where('name', 'LIKE', '%'. $name .'%')->get();
+		$jueces = Contacto::select('id', 'name as text')
+			->where('name', 'LIKE', '%'. $name .'%')
+			->where('type', '=', 'juez')->get();
 		return array(
 			'results' => $jueces
 		);
@@ -435,7 +437,9 @@ class ListadosController extends Controller
 
 		$name = $vars['q'];
 
-		$contactos = Contacto::select('id', 'name as text')->where('name', 'LIKE', '%'. $name .'%')->get();
+		$contactos = Contacto::select('id', 'name as text')
+			->where('type', '!=', 'juez')
+			->where('name', 'LIKE', '%'. $name .'%')->get();
 
 		return array(
 			'results' => $contactos

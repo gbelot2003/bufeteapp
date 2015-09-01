@@ -69,13 +69,6 @@ class Caso extends Model implements SluggableInterface
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function contactos(){
-		return $this->belongsToMany('App\Contacto')->withTimestamps();
-	}
-
-	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function actualizaciones()
@@ -106,12 +99,64 @@ class Caso extends Model implements SluggableInterface
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function contrapartes()
+	public function demandados()
 	{
 		/**
 		 * Relacion atraves de casos_contrapartes
 		 */
-		return $this->hasMany('App\CasosContraparte', 'casos_id', 'id');
+		return $this->hasMany('App\CasosContraparte', 'caso_id', 'id')
+			->where('tipo_contraparte', '=', 2);
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function demandantes()
+	{
+		/**
+		 * Relacion atraves de casos_contrapartes
+		 */
+		return $this->hasMany('App\CasosContraparte', 'caso_id', 'id')
+			->where('tipo_contraparte', '=', 1);
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function tercerias()
+	{
+		/**
+		 * Relacion atraves de casos_contrapartes
+		 */
+		return $this->hasMany('App\CasosContraparte', 'caso_id', 'id')
+			->where('tipo_contraparte', '=', 3);
+	}
+
+	/**
+	 * Chequear si existen filas desde la relación
+	 * @return bool
+	 */
+	public function hasTercerias(){
+
+		return (bool) $this->tercerias()->first();
+	}
+
+	/**
+	 * Chequear si existen filas desde la relación
+	 * @return bool
+	 */
+	public function hasDemandados(){
+
+		return (bool) $this->demandados()->first();
+	}
+
+	/**
+	 * Chequear si existen filas desde la relación
+	 * @return bool
+	 */
+	public function hasDemandantes(){
+
+		return (bool) $this->demandantes()->first();
 	}
 
 	/**

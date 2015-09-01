@@ -57,6 +57,7 @@ class CasosController extends Controller
     public function store(Request $request)
     {
 
+		/** Mover a request */
 		/**
 		 * Se divide en dos el esenario de salvar
 		 * $casos y $Actualizacioncasos
@@ -92,7 +93,6 @@ class CasosController extends Controller
 			}
 		}
 
-
 		if($request->input('demandados') != null){
 			$demandados = $request->input('demandados');
 			for ($i = 0; $i < count($demandados); $i++) {
@@ -116,6 +116,7 @@ class CasosController extends Controller
 				$contraparte->save();
 			}
 		}
+
 		$contraparte->save();
 
 		$actualizacion = new Actualizacioncaso([
@@ -126,6 +127,8 @@ class CasosController extends Controller
 		]);
 
 		Auth::user()->actualizaciones()->save($actualizacion);
+
+	/** mover a request  **/
 
 		return redirect('/casos/');
     }
