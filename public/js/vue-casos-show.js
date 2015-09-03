@@ -10391,21 +10391,34 @@ v = new Vue({
         datos:{
             id: 0,
             caso_id: 0,
-            title: '',
             date: '',
-            body: ''
+            importancia: '',
+            descripcion: ''
+        },
+        show:{
+            id: 0,
+            caso_id: 0,
+            date: '',
+            importancia: '',
+            descripcion: '',
+            users: ''
         },
 
         newDatos:{
             caso_id: 0,
-            title: '',
             date: '',
-            body: ''
-        },
-        datosTitle: ''
+            importancia: '',
+            descripcion: ''
+        }
     },
+
+    beforeCompile:function(){
+        console.log('almost');
+    },
+
     ready:function(){
         this.getData(this.caso_id);
+        this.setShowFirstData(this.caso_id);
     },
     methods: {
         getData: function(id){
@@ -10423,8 +10436,26 @@ v = new Vue({
 
         newDatos: function(){
             $('#modal3').openModal();
-        }
+        },
 
+        setReadTime: function(row){
+            return moment(row).format('dddd DD MMMM YYYY');
+        },
+
+        setShowData: function(row){
+            this.show.id = row.id;
+            this.show.caso_id = row.caso_id;
+            this.show.date = row.date;
+            this.show.importancia = row.importancia;
+            this.show.descripcion = row.descripcion;
+            this.show.users = row.users;
+        },
+
+        setShowFirstData:function(id){
+            this.$http.get('/listados/relacionados-active/' + id).success(function(data){
+                this.$set('show', data);
+            });
+        }
 
     }
 });
