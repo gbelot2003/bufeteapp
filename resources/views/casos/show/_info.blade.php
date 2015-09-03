@@ -37,26 +37,28 @@
 
 			@if($caso->hasDemandados())
 				<td>
-				<ul>
+
 					@foreach($caso->demandados as $contrapartes)
-						<li>{{ $contrapartes->contactos->name }}</li>
+						{{ $contrapartes->contactos->name }}, </li>
 					@endforeach
-				</ul>
 				</td>
 			@endif
 
 			@if($caso->hasDemandantes())
 				<td>
-					<ul>
 					@foreach($caso->demandantes as $contrapartes)
-						<li>{{ $contrapartes->tipo }} - {{ $contrapartes->contactos->name }}</li>
+						{{ $contrapartes->tipo }} - {{ $contrapartes->contactos->name }},
 					@endforeach
-					</ul>
+
 				</td>
 			@endif
 
 			@if($caso->hasTercerias())
-				<td>Tecerias</td>
+				<td>
+					@foreach($caso->tercerias as $tercerias)
+						{{ $tercerias->contactos->name }},
+					@endforeach
+				</td>
 			@endif
 
 			<td><strong>{{ $caso->jueces->name }}</strong></td>
