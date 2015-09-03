@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ActualizacionCasos;
+use App\Actualizacioncaso;
 use App\Caso;
 use App\Cliente;
 use App\Contacto;
@@ -414,9 +414,9 @@ class ListadosController extends Controller
 		$jueces = Contacto::select('id', 'name as text')
 			->where('name', 'LIKE', '%'. $name .'%')
 			->where('type', '=', 'juez')->get();
-		return array(
+		return [
 			'results' => $jueces
-		);
+		];
 	}
 
 	/**
@@ -441,14 +441,30 @@ class ListadosController extends Controller
 			->where('type', '!=', 'juez')
 			->where('name', 'LIKE', '%'. $name .'%')->get();
 
-		return array(
+		return [
 			'results' => $contactos
-		);
+		];
 	}
 
+	/**
+	 * Lista de actualizaciones relacionadas
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getRelacionados($id)
 	{
-		$relaciones = ActualizacionCasos::where('caso_id', '=', $id)->with('users')->get();
+		$relaciones = Actualizacioncaso::where('caso_id', '=', $id)->with('users')->orderBy('date', 'DESK')->get();
+		return $relaciones;
+	}
+
+	/**
+	 * Retorna unico valor de actualización activa
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getRelacionadosActive($id)
+	{
+		$relaciones = Actualizacioncaso::where('caso_id', '=', $id)->where('importancia', '=', 1)->with('users')->orderBy('date', 'DESK')->first();
 		return $relaciones;
 	}
 
@@ -472,9 +488,9 @@ class ListadosController extends Controller
 
 
 		$tribunales = Tribunale::select('id', 'name as text')->where('name', 'LIKE', '%'. $name .'%')->get();
-		return array(
+		return [
 			'results' => $tribunales
-		);
+		];
 	}
 
 	public function getDates()
