@@ -14,7 +14,8 @@ class CreateActualizacioncasos extends Migration
     {
         Schema::create('actualizacioncasos', function (Blueprint $table) {
 			$table->increments('id');
-			$table->integer('caso_id');
+			$table->integer('caso_id')->index()->unsigned();
+			$table->foreign('caso_id')->references('id')->on('casos')->onDelete('cascade');
 			$table->integer('user_id');
 			$table->integer('importancia');
 			$table->text('descripcion')->nullable();
