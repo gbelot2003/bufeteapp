@@ -33,15 +33,17 @@
 						<th>Caso No</th>
 						<th>Tribunal</th>
 						<th>tipo</th>
+						<th>Juez</th>
 						<th>Estado</th>
 						</thead>
 						<tbody>
 						@foreach($cliente->casos as $casos)
 							<tr>
 								<td><a href="{{ url('/casos', $casos->caso) }}">{{ $casos->caso  }}</a></td>
-								<td>{{ $casos->tribunal  }}</td>
+								<td>{{ $casos->tribunales->name  }}</td>
 								<td>{{ $casos->tipocasos->name  }}</td>
-								<td>{{ $casos->estado  }}</td>
+								<td>{{ $casos->jueces->name  }}</td>
+								<td>{{ $casos->estadoTrans($casos->estado)  }}</td>
 							</tr>
 						@endforeach
 						</tbody>
