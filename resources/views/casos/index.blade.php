@@ -17,7 +17,7 @@
 			<th>Tribunal</th>
 			<th>Juez</th>
 			<th>Tipo</th>
-			<th>Fecha</th>
+			<th>Ultima actualización</th>
 			<th>Estado</th>
 			<th>Acciones</th>
 		</thead>
@@ -28,7 +28,7 @@
 				<td>@{{ row.tribunalname }}</td>
 				<td>@{{ row.juezname }}</td>
 				<td>@{{ row.tipocaso }} - @{{ row.tipojuicio }}</td>
-				<td>@{{ setReadTime(row.created_at) }}</td>
+				<td>@{{ setReadTime(row.update) }}</td>
 				<td style="border-right: 1px solid lightslategray">@{{ estadoCaso(row.estado) }}</td>
 				<td><a href="#!" class="red-text"><i class="material-icons">delete</i></a></td>
 			</tr>
