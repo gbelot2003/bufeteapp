@@ -34,7 +34,7 @@ class CasosCreateRequest extends Request
 			'juez_id' => 'integer|required',
 			'ca'	=> 'string',
 			'csj'	=> 'string',
-			'honorarios' => 'numbers',
+			'honorarios' => 'string',
 			'descripcion' => 'string|required' // parte de actualización
         ];
     }
