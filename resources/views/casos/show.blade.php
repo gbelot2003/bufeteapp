@@ -16,7 +16,6 @@
 	<div class="row">
 		{!! Form::hidden('caso_id', $caso->id, ['id' => 'caso_id', 'v-model' => 'caso_id']) !!}
 	</div>
-	<pre>@{{ $data | json }}</pre>
 	@include('casos.show.actualizaciones._edit-modal')
 	@include('casos.show.actualizaciones._delete-modal')
 @stop
