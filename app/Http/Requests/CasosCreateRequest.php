@@ -24,7 +24,7 @@ class CasosCreateRequest extends Request
     public function rules()
     {
         return [
-            'caso' => 'integer|required|unique:casos',
+            'caso' => 'string|required|unique:casos',
 			'cliente_id' => 'integer|required',
 			'tipocaso_id' => 'integer|required',  //contexto
 			'tipojuicio' => 'string|required',
