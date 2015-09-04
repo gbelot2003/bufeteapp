@@ -118,11 +118,11 @@ class CasosController extends Controller
 			}
 		}
 
-		$contraparte->save();
+		//$contraparte->save();
 
 		$actualizacion = new Actualizacioncaso([
 			'caso_id' 	=> $caso->id,
-			'date'	=> Carbon::now(),
+			'date'	=> date('Y-m-d'),
 			'importancia'	=> 1,
 			'descripcion'	=>	$request->input('descripcion')
 		]);
