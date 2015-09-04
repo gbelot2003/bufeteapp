@@ -1,9 +1,9 @@
 <div class="col s12">
-	<form method="post" action="/actualizaciones/store">
+	<form method="post" action="/actualizaciones/update/{{ $actualizacion->id }}">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<input type="hidden" name="caso_id" value="{{ $caso->id }}"/>
 		<div class="modal-content">
-			<h4>Nueva Actualización</h4>
+			<h4>Editar Actualización</h4>
 
 			<div class="row">
 
@@ -12,7 +12,7 @@
 						<label for="date">
 							Fecha
 						</label>
-						<input type="date" value="{{ $actualizacion->date }}" name="date" class="datepicker">
+						<input type="date" value="{{ $date }}" name="date" class="datepicker">
 					</div>
 				</div>
 
@@ -42,7 +42,7 @@
 		</div>
 		<div class="modal-footer">
 			<a href="{{ action('CasosController@show', $caso->slug) }}" class="waves-effect waves-green btn-flat">Cancelar</a>
-			<button class="waves-effect waves-green btn btn-primary">Crear</button>
+			<button class="waves-effect waves-green btn btn-primary">Salvar</button>
 		</div>
 	</form>
 </div>

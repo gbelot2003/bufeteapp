@@ -20,7 +20,7 @@ class ActualizacioncasosController extends Controller
 		$caso = Caso::findOrFail($id);
 
 		//Generamos actualizacion de info y vista de creación
-		return View('casos.actualizaciones.create-actualizacion', compact('caso'));
+		return View('casos.actualizaciones.edit-actualizacion', compact('caso'));
 	}
 
 	public function postStore(Request $request)
@@ -35,8 +35,17 @@ class ActualizacioncasosController extends Controller
 	public function getEdit($id)
 	{
 		$actualizacion = Actualizacioncaso::findOrfail($id);
+		$date = date('Y-m-d', strtotime(str_replace('-','/', $actualizacion->date)));
 		$caso = Caso::findOrFail($actualizacion->caso_id);
 
-		return View('casos.actualizaciones.edit-actualizacion', compact('caso', 'actualizacion'));
+		return View('casos.actualizaciones.edit-actualizacion', compact('caso', 'actualizacion', 'date'));
+	}
+
+	public function postUpdate(Request $request, $id)
+	{
+		$actualizacion = Actualizacioncaso::findOrFail($id);
+		$actualizacion->update($request->all());
+		$caso = Caso::findOrFail($request->input('caso_id'));
+		return redirect(action('CasosController@show', $caso->slug));
 	}
 }
