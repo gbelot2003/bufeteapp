@@ -21,8 +21,6 @@ Route::post('dash/edit/{id}', 'DashController@update');
 
 Route::resource('permisos', 'PermsController');
 
-Route::resource('actualizaciones', 'ActualizacioncasosController');
-
 Route::resource('tribunal', 'TribunalesController');
 
 Route::resource('usuarios', 'UserController');
@@ -40,5 +38,6 @@ Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',
 	'listados'	=> 'ListadosController',
-	'contactos-relacionados' => 'ClientescontactosController'
+	'contactos-relacionados' => 'ClientescontactosController',
+	'actualizaciones' => 'ActualizacioncasosController',
 ]);

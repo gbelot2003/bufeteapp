@@ -16,16 +16,12 @@
 	<div class="row">
 		{!! Form::hidden('caso_id', $caso->id, ['id' => 'caso_id', 'v-model' => 'caso_id']) !!}
 	</div>
-
+	<pre>@{{ $data | json }}</pre>
+	@include('casos.show.actualizaciones._edit-modal')
+	@include('casos.show.actualizaciones._delete-modal')
 @stop
 
 @section('post-script')
+	<script src="{{ URL::asset("js/jquery.cleditor.min.js") }}"></script>
 	<script src="{{ URL::asset("js/vue-casos-show.js") }}"></script>
-@stop
-
-
-@section('modal')
-	@include('casos.show.actualizaciones._create-modal')
-	@include('casos.show.actualizaciones._edit-modal')
-	@include('casos.show.actualizaciones._delete-modal')
 @stop

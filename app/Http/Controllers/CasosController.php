@@ -54,7 +54,7 @@ class CasosController extends Controller
 	 * @param CasosCreateRequest $request
 	 * @return Response
 	 */
-    public function store(Request $request)
+    public function store(CasosCreateRequest $request)
     {
 
 		/** Mover a request */

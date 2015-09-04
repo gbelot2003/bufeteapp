@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Actualizacioncaso extends Model
@@ -16,6 +17,14 @@ class Actualizacioncaso extends Model
 	 * @var array
 	 */
 	protected $fillable = ['caso_id', 'descripcion', 'importancia', 'date'];
+
+	/**
+	 * @param $estado
+	 * @return bool
+	 */
+	public function getImportanciaAttribute($importancia){
+		return (bool) $importancia;
+	}
 
 	/**
 	 * Describe relación con casos
@@ -33,6 +42,11 @@ class Actualizacioncaso extends Model
 	public function users()
 	{
 		return $this->belongsTo('App\User', 'user_id', 'id');
+	}
+
+	public function setDateAttribute($date)
+	{
+		$this->attributes['date'] = Carbon::createFromFormat('Y-m-d', $date);
 	}
 
 }

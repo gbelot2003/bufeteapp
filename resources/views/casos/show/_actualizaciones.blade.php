@@ -1,6 +1,7 @@
 <div class="col s12">
-	<a id="create" class="modal-trigger btn-floating btn-small waves-effect waves-light blue right" href="#modal1"><i class="material-icons">add</i></a>
+	<a id="" class="btn-floating btn-small waves-effect waves-light blue right" href="{{ url('actualizaciones/create', $caso->id) }}"><i class="material-icons">add</i></a>
 </div>
+
 <div class="col s12">
 	<div class="row">
 		<div class="col s12 m9">
@@ -26,8 +27,17 @@
 				</tbody>
 				<tfooter>
 					<tr class="yellow lighten-5">
-						<td><strong>Usuario :</strong> @{{ show.users.name }}</td>
-						<td>borrar | <a href="#!" v-on="click: editForm()">Editar</a></td>
+						<td>
+							<div class="row">
+								<div class="col s11">
+									<strong>Usuario :</strong> @{{ show.users.name }}
+								</div>
+								<div class="col s1">
+									<a class="btn-floating btn-small" href="/actualizaciones/edit/@{{ show.id }}"><i class="tiny material-icons">edit</i></a>
+								</div>
+							</div>
+
+						</td>
 					</tr>
 				</tfooter>
 			</table>

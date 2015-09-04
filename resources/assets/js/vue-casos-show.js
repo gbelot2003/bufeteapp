@@ -1,5 +1,14 @@
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('value');
 
+/**
+ * Cleditor
+ */
+
+$(document).ready(function() {
+    $("#descripcion").cleditor();
+    $('select').material_select();
+});
+
 $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
@@ -7,7 +16,15 @@ $('.datepicker').pickadate({
 
 v = new Vue({
     el: '#show-casos',
+
     data: {
+        formCreate: false,
+        newDatos:{
+            caso_id: 0,
+            date: '',
+            importancia: '',
+            descripcion: ''
+        },
         caso_id: 0,
         rows: [],
         datos:{
@@ -24,13 +41,6 @@ v = new Vue({
             importancia: '',
             descripcion: '',
             users: ''
-        },
-
-        newDatos:{
-            caso_id: 0,
-            date: '',
-            importancia: '',
-            descripcion: ''
         }
     },
 
@@ -77,7 +87,22 @@ v = new Vue({
             this.$http.get('/listados/relacionados-active/' + id).success(function(data){
                 this.$set('show', data);
             });
-        }
+        },
 
+        getCloseCreate: function(){
+            this.newDatos.caso_id = 0;
+            this.newDatos.date = '';
+            this.newDatos.importancia = 0;
+            this.newDatos.descripcion = '';
+            $('#modal1').closeModal();
+        },
+
+        openCreate: function() {
+          this.formCreate = true;
+        },
+
+        closeCreate: function (){
+            this.formCreate = false;
+        }
     }
 });
