@@ -221,7 +221,6 @@ $(document).ready(function() {
 
     $('#tipocaso_id').on('change', function(e){
         var num = $('#tipocaso_id option:selected').val();
-        console.log(num)
         if(num == 1){
             $('#lcontraparte').text('Demandado(s)');
             $('#contraparte').prop("disabled", false);
@@ -364,6 +363,7 @@ v = new Vue({
         /** enviar Contacto **/
         submitContactosCreate: function(e){
             e.preventDefault();
+            this.newContacto.type = 'Relacionado a Caso';
             $('#modal2').closeModal();
             var contactos = this.newContacto;
             this.$http.post('/contactos/', contactos).success(function (data, status, request) {

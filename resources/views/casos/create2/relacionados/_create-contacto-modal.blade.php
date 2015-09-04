@@ -3,7 +3,6 @@
 		<div class="modal-content">
 			<h4>Crear nuevo contacto</h4>
 
-
 			<div class="row">
 
 				<div class="col s12 m6">
