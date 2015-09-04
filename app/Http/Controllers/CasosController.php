@@ -10,6 +10,7 @@ use App\Contacto;
 use App\Departamento;
 use App\Http\Requests\CasosCreateRequest;
 use App\Tipocaso;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -121,7 +122,7 @@ class CasosController extends Controller
 
 		$actualizacion = new Actualizacioncaso([
 			'caso_id' 	=> $caso->id,
-			'date'	=> $request->input('date'),
+			'date'	=> Carbon::now(),
 			'importancia'	=> 1,
 			'descripcion'	=>	$request->input('descripcion')
 		]);
