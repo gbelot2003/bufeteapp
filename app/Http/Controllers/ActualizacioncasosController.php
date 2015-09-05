@@ -20,7 +20,7 @@ class ActualizacioncasosController extends Controller
 		$caso = Caso::findOrFail($id);
 
 		//Generamos actualizacion de info y vista de creación
-		return View('casos.actualizaciones.edit-actualizacion', compact('caso'));
+		return View('casos.actualizaciones.create-actualizacion', compact('caso'));
 	}
 
 	public function postStore(Request $request)
