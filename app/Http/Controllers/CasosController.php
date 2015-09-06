@@ -142,7 +142,7 @@ class CasosController extends Controller
      */
     public function show($slug)
     {
-		$caso = Caso::findBySlug($slug);
+		$caso = Caso::findBySlugOrFail($slug);
 		return View('casos.show', compact('caso'));
     }
 
@@ -152,9 +152,12 @@ class CasosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        return View('casos.edit');
+		$caso = Caso::findBySlugOrFail($slug);
+		$clientes = Cliente::select('name', 'id')->get();
+		$tipocaso = Tipocaso::Lists('name', 'id');
+        return View('casos.edit', compact('caso', 'clientes', 'tipocaso'));
     }
 
     /**

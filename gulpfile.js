@@ -65,6 +65,7 @@ elixir(function(mix) {
     mix.scripts(['vue.js', 'vue-resource.js', 'vue-casos-show.js'], 'public/js/vue-casos-show.js');
     mix.scripts(['vue.js', 'vue-resource.js', 'calendar/calendar-self.js'], 'public/js/vue-calendar.js');
     mix.scripts(['select2.js', 'casos-script.js', 'vue.js', 'vue-resource.js', 'vue-casos-create.js'], 'public/js/vue-casos-create.js');
+    mix.scripts(['select2.js', 'vue.js', 'vue-resource.js', 'vue-casos-edit.js'], 'public/js/vue-casos-edit.js');
     mix.scripts(['jquery.cleditor.min.js'], 'public/js/jquery.cleditor.min.js');
 
 });
