@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="col s11 m11">
 			<button id="submitCaso" type="submit" class="waves-effect waves-green btn btn-primary">Crear</button>
-			<a href="/casos/" class="waves-effect waves-green btn-flat">Cancelar</a>
+			<a href="/casos/{{ $caso->slug }}" class="waves-effect waves-green btn-flat">Cancelar</a>
 		</div>
 
 		<div class="col s1 m1">

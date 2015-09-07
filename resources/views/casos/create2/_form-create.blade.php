@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="col s12">
 			<button id="submitCaso" type="submit" class="waves-effect waves-green btn btn-primary">Crear</button>
-			<a href="#!" class="waves-effect waves-green btn-flat">Cancelar</a>
+			<a href="/casos" class="waves-effect waves-green btn-flat">Cancelar</a>
 		</div>
 	</div>
 </form>
