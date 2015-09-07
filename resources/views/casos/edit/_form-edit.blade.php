@@ -17,10 +17,20 @@
 		@include('casos.edit._d_anotaciones')
 	</div>
 
+	<div class="row grey lighten-4">
+		@include('casos.edit._e_estado')
+	</div>
+
+	<hr />
+
 	<div class="row">
-		<div class="col s12">
+		<div class="col s11 m11">
 			<button id="submitCaso" type="submit" class="waves-effect waves-green btn btn-primary">Crear</button>
 			<a href="/casos/" class="waves-effect waves-green btn-flat">Cancelar</a>
+		</div>
+
+		<div class="col s1 m1">
+			<a href="#!" class="red btn-floating btn-small waves-effect waves-light" title="Eliminar"><i class="material-icons">delete</i></a>
 		</div>
 	</div>
 </form>

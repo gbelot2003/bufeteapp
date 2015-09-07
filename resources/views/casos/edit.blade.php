@@ -3,7 +3,6 @@
 @section('v-control', "id='edit-casos'")
 
 @section('content')
-
 	<div class="row">
 		@include('casos.edit._form-edit')
 	</div>
@@ -11,7 +10,6 @@
 @stop
 @section('post-script')
 	<script src="{{ URL::asset("js/vue-casos-edit.js") }}"></script>
-	<script></script>
 @stop
 
 
