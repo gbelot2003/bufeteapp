@@ -173,12 +173,10 @@ class CasosController extends Controller
      */
     public function update(Request $request, $id)
     {
-		//dd($request->all());
+
 		$caso = Caso::findOrFail($id);
 		$contrapartes = CasosContraparte::where('caso_id', '=', $caso->id);
 		$contrapartes->delete();
-
-		//$caso->update($request->all());
 
 		/** Mover a request */
 		/**
@@ -198,14 +196,15 @@ class CasosController extends Controller
 			'honorarios' => $request->input('honorarios'),
 			'csj'	=> $request->input('csj'),
 			'ca'	=> $request->input('ca'),
-			'estado'	=> 1,
+			'estado'	=> $request->input('estado'),
 
 		]);
 
 		Auth::user()->casos()->save($caso);
 
+
 		if($request->input('demandantes') != null){
-			$demandantes = $request->input('demandante');
+			$demandantes = $request->input('demandantes');
 			for ($i = 0; $i < count($demandantes); $i++) {
 				$contraparte = new CasosContraparte([
 					'caso_id' => $caso->id,
