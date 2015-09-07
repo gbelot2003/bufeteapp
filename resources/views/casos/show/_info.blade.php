@@ -24,6 +24,7 @@
 		<th>Juez</th>
 
 		<th class="red-text">Estado</th>
+		<th class="blue-text">Editar</th>
 	</thead>
 	<tbody>
 		<tr>
@@ -64,6 +65,12 @@
 			<td><strong>{{ $caso->jueces->name }}</strong></td>
 
 			<td><strong>{{ $caso->estadoTrans($caso->estado) }}</strong></td>
+
+			<td>
+				<div class="col s12">
+					<a href="/casos/{{ $caso->slug }}/edit" class="btn-floating btn-small waves-effect waves-light"><i class="material-icons">edit</i></a>
+				</div>
+			</td>
 		</tr>
 	</tbody>
 </table>
