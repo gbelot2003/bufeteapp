@@ -19,7 +19,6 @@
 			<th>Tipo</th>
 			<th>Ultima actualización</th>
 			<th>Estado</th>
-			<th>Acciones</th>
 		</thead>
 		<tbody>
 			<tr v-repeat="row:rows | filterBy userStatusPreset in 'estado'">
@@ -30,11 +29,6 @@
 				<td>@{{ row.tipocaso }} - @{{ row.tipojuicio }}</td>
 				<td>@{{ setReadTime(row.update) }}</td>
 				<td style="border-right: 1px solid lightslategray">@{{ estadoCaso(row.estado) }}</td>
-				<td>
-					<a href="/casos/@{{ row.caso}}/edit" class="red-blue"><i class="material-icons">edit</i></a>
-					-
-					<a href="#!" class="red-text"><i class="material-icons">delete</i></a>
-				</td>
 			</tr>
 		</tbody>
 	</table>
