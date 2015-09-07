@@ -89,6 +89,15 @@ class Caso extends Model implements SluggableInterface {
 	}
 
 	/**
+	 * Relacion con salas
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function salas()
+	{
+		return $this->belongsTo('App\Sala', 'salas_id', 'id');
+	}
+
+	/**
 	 * Relacion con jueces
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */

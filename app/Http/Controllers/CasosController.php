@@ -157,7 +157,12 @@ class CasosController extends Controller
 		$caso = Caso::findBySlugOrFail($slug);
 		$clientes = Cliente::select('name', 'id')->get();
 		$tipocaso = Tipocaso::Lists('name', 'id');
-        return View('casos.edit', compact('caso', 'clientes', 'tipocaso'));
+		$contrapartes = CasosContraparte::where('caso_id', '=', $caso->id)
+										->where('tipo_contraparte', '!=', 3)->get();
+
+		$tercerias = CasosContraparte::where('caso_id', '=', $caso->id)
+										->where('tipo_contraparte', '=', 3)->get();
+        return View('casos.edit', compact('caso', 'clientes', 'tipocaso', 'contrapartes', 'tercerias'));
     }
 
     /**
@@ -166,9 +171,76 @@ class CasosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+		//dd($request->all());
+		$caso = Caso::findOrFail($id);
+		$contrapartes = CasosContraparte::where('caso_id', '=', $caso->id);
+		$contrapartes->delete();
+
+		//$caso->update($request->all());
+
+		/** Mover a request */
+		/**
+		 * Se divide en dos el esenario de salvar
+		 * $casos y $Actualizacioncasos
+		 */
+
+		$caso->update([
+			'caso' => $request->input('caso'),
+			'cliente_id' => $request->input('cliente_id'),
+			'tipocaso_id'	=>	$request->input('tipocaso_id'),
+			'tipojuicio'	=>	$request->input('tipojuicio'),
+			'tribunal_id'	=>	$request->input('tribunal_id'),
+			'instancia'	=>	$request->input('instancia'),
+			'salas_id'	=>	$request->input('salas_id'),
+			'juez_id'	=>	$request->input('juez_id'),
+			'honorarios' => $request->input('honorarios'),
+			'csj'	=> $request->input('csj'),
+			'ca'	=> $request->input('ca'),
+			'estado'	=> 1,
+
+		]);
+
+		Auth::user()->casos()->save($caso);
+
+		if($request->input('demandantes') != null){
+			$demandantes = $request->input('demandante');
+			for ($i = 0; $i < count($demandantes); $i++) {
+				$contraparte = new CasosContraparte([
+					'caso_id' => $caso->id,
+					'contacto_id' => $demandantes[$i],
+					'tipo_contraparte' => 1
+				]);
+				$contraparte->save();
+			}
+		}
+
+		if($request->input('demandados') != null){
+			$demandados = $request->input('demandados');
+			for ($i = 0; $i < count($demandados); $i++) {
+				$contraparte = new CasosContraparte([
+					'caso_id' => $caso->id,
+					'contacto_id' => $demandados[$i],
+					'tipo_contraparte' => 2
+				]);
+				$contraparte->save();
+			}
+		}
+
+		if($request->input('tercerias') != null){
+			$tercerias = $request->input('tercerias');
+			for ($i = 0; $i < count($tercerias); $i++) {
+				$contraparte = new CasosContraparte([
+					'caso_id' => $caso->id,
+					'contacto_id' => $tercerias[$i],
+					'tipo_contraparte' => 3
+				]);
+				$contraparte->save();
+			}
+		}
+
+		return redirect( url('/casos', $caso->slug));
     }
 
     /**

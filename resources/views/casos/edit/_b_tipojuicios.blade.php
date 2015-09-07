@@ -3,7 +3,7 @@
 
 		<div class="col s12 m6 input-field">
 			<select name="tipocaso_id" id="tipocaso_id"  class="browser-default">
-				<option value="{{ $caso->tipocasos->id }}" disabled selected>{{ $caso->tipocasos->name }}</option>
+				<option value="{{ $caso->tipocasos->id }}" selected>{{ $caso->tipocasos->name }}</option>
 				<option value="1">Demanda</option>
 				<option value="2">Defensa</option>
 				<option value="3">Procedimiento administrativo</option>
@@ -38,7 +38,7 @@
 					<div class="">
 						{!! Form::label('Tribunal') !!}
 						<select name="tribunal_id" id="tribunal_id" class="select form-control">
-							<option value="{{ $caso->tribunales->id }}" disabled selected>{{ $caso->tribunales->name }}</option>
+							<option value="{{ $caso->tribunales->id }}" selected>{{ $caso->tribunales->name }}</option>
 						</select>
 					</div>
 				</div>
@@ -53,8 +53,8 @@
 		<div class="col s12">
 			<div class="">
 				{!! Form::label('Salas') !!}
-				<select name="salas" id="salas_id" class="browser-default">
-					<option value="" disabled selected>-- Sala ---</option>
+				<select name="salas_id" id="salas_id" class="browser-default">
+					<option value="{{ $caso->salas_id }}" selected>{{ $caso->salas->name }}</option>
 					<option value="Sala Penal">Sala Penal</option>
 					<option value="Sala Civil">Sala Civil</option>
 				</select>
@@ -69,7 +69,7 @@
 			<div class="">
 				{!! Form::label('juez_id', "Juez") !!}
 				<select name="juez_id" id="juez_id" class="select form-control">
-					<option value="{{ $caso->jueces->id }}" disabled selected>{{ $caso->jueces->name }}</option>
+					<option value="{{ $caso->jueces->id }}" selected>{{ $caso->jueces->name }}</option>
 				</select>
 			</div>
 		</div>

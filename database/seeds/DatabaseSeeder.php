@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
     	$this->call('DepartamentoTableSeeder');
     	$this->call('MunicipioTableSeeder');
+		$this->call('SalasTableSeeder');
     	$this->call('UserstatusesTableSeeder');
 		$this->call('TipoCasosTableSeeder');
 		$this->call('PermissionsTableSeeder');

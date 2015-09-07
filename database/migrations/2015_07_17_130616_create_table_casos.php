@@ -22,7 +22,7 @@ class CreateTableCasos extends Migration
 			$table->string('tipojuicio');
 			$table->integer('tribunal_id');
 			$table->string('instancia');
-			$table->string('salas');
+			$table->string('salas_id');
 			$table->string('juez_id');
 
 			$table->string('honorarios')->nullable();

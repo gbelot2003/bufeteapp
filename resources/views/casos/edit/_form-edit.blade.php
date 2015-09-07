@@ -1,6 +1,6 @@
-<form method="POST" action="/casos/">
+<form method="POST" action="/casos/{{ $caso->id }}">
 	{!! csrf_field() !!}
-	<input name="_method" type="hidden" value="PUT">
+	<input name="_method" type="hidden" value="PATCH">
 	<div class="row diverblock grey lighten-4">
 		@include('casos.edit._a_clienteCaso')
 	</div>

@@ -10,7 +10,7 @@
 	<div class="">
 		{!! Form::label('cliente_id', "Cliente") !!}
 		<select name="cliente_id" id="cliente_id" class="select">
-			<option value="{{ $caso->clientes->id }}" selected disabled>{{ $caso->clientes->name }}</option>
+			<option value="{{ $caso->clientes->id }}" selected>{{ $caso->clientes->name }}</option>
 			@foreach($clientes as $cliente)
 				<option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
 			@endforeach
