@@ -6,8 +6,7 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Caso extends Model implements SluggableInterface
-{
+class Caso extends Model implements SluggableInterface {
 
 	/**
 	 * Slugable
@@ -21,7 +20,7 @@ class Caso extends Model implements SluggableInterface
 
 	protected $sluggable = [
 		'build_from' => 'caso',
-		'save_to'    => 'slug',
+		'save_to' => 'slug',
 	];
 
 	/**
@@ -29,24 +28,28 @@ class Caso extends Model implements SluggableInterface
 	 * @var array
 	 */
 	protected $fillable = ['caso', 'cliente_id', 'tipocaso_id', 'tipojuicio', 'tribunal_id', 'instancia', 'salas_id',
-							 'juez_id', 'csj', 'ca', 'estado', 'honorarios', 'user_id'];
+		'juez_id', 'csj', 'ca', 'estado', 'honorarios', 'user_id'];
 
 	/**
 	 * @param $estado
 	 * @return bool
 	 */
-	public function getEstadoAttribute($estado){
-		return (bool) $estado;
+	public function getEstadoAttribute($estado)
+	{
+		return (bool)$estado;
 	}
 
 	/**
 	 * @param $estado
 	 * @return string
 	 */
-	public function estadoTrans($estado){
-		if($estado == 1){
+	public function estadoTrans($estado)
+	{
+		if ($estado == 1)
+		{
 			return 'Abierto';
 		}
+
 		return 'cerrado';
 	}
 
@@ -75,6 +78,7 @@ class Caso extends Model implements SluggableInterface
 	{
 		return $this->hasMany('App\Actualizacioncaso');
 	}
+
 	/**
 	 * Relacion con tipocaso
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -94,6 +98,17 @@ class Caso extends Model implements SluggableInterface
 		 * Relacion directa con tabla contactos
 		 */
 		return $this->belongsTo('App\Contacto', 'juez_id', 'id');
+	}
+
+	/**
+	 * Relacion contrapartes
+	 * @return mixed
+	 */
+	public function contrapartes()
+	{
+		return $this->hasMany('App\CasosContraparte', 'caso_id', 'id')
+				->where('tipo_contraparte', '=', 1)
+				->orWhere('tipo_contraparte', '=', 2);
 	}
 
 	/**
