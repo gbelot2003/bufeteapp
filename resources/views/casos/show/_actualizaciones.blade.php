@@ -1,8 +1,4 @@
 <div class="col s12">
-	<a id="" class="btn-floating btn-small waves-effect waves-light blue right" href="{{ url('actualizaciones/create', $caso->id) }}"><i class="material-icons">add</i></a>
-</div>
-
-<div class="col s12">
 	<div class="row">
 		<div class="col s12 m9">
 			<table class="borders table-striped">
@@ -44,6 +40,11 @@
 		</div>
 		<div class="col s12 m3">
 			<h5>Listado de actualizaciones</h5>
+
+			<div class="col s12">
+				<a id="" class="btn-floating btn-small waves-effect waves-light blue right" href="{{ url('actualizaciones/create', $caso->id) }}"><i class="material-icons">add</i></a>
+			</div>
+
 			<ul>
 				<li v-repeat="row:rows">
 					<div class="row">

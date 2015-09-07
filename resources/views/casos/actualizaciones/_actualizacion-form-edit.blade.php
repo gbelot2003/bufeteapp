@@ -41,8 +41,8 @@
 
 		</div>
 		<div class="modal-footer">
-			<a href="{{ action('CasosController@show', $caso->slug) }}" class="waves-effect waves-green btn-flat">Cancelar</a>
 			<button class="waves-effect waves-green btn btn-primary">Salvar</button>
+			<a href="{{ action('CasosController@show', $caso->slug) }}" class="waves-effect waves-green btn-flat">Cancelar</a>
 		</div>
 	</form>
 </div>
