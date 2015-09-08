@@ -143,6 +143,7 @@ return [
 		Orangehill\Iseed\IseedServiceProvider::class,
 		Illuminate\Html\HtmlServiceProvider::class,
 		yajra\Datatables\DatatablesServiceProvider::class,
+		Barryvdh\DomPDF\ServiceProvider::class,
 		/*
          * Application Service Providers...
          */
@@ -202,7 +203,8 @@ return [
 		'PDF' 		=> Barryvdh\DomPDF\Facade::class,
 		'Form' 		=> Illuminate\Html\FormFacade::class,
 		'Html' 		=> Illuminate\Html\HtmlFacade::class,
-		'Datatables' => yajra\Datatables\Datatables::class
+		'Datatables' => yajra\Datatables\Datatables::class,
+		'PDF' 		 => Barryvdh\DomPDF\Facade::class
 
     ],
 

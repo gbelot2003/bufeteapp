@@ -25,9 +25,16 @@
 						</tbody>
 					</table>
 				</div>
-
+				<hr/>
 				<div class="col s12">
-					<h5>Historial de Casos</h5>
+					<div class="row">
+						<div class="col s12 m10">
+							<h5>Historial de Casos</h5>
+						</div>
+						<div class="col s12 m2">
+							<a href="/reportes/informe-principal/{{ $cliente->id }}" class="btn-floating btn-small waves-effect waves-light"><i class="material-icons right">list</i></a>
+						</div>
+					</div>
 					<table class="table table-bordered table-hoverable responsive-table">
 						<thead>
 						<th>Caso No</th>

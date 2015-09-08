@@ -80,6 +80,16 @@ class Caso extends Model implements SluggableInterface {
 	}
 
 	/**
+	 * @return mixed
+	 */
+	public  function  ultimactualizacion()
+	{
+		return $this->hasOne('App\Actualizacioncaso')
+				->where('importancia', '=', 1)->latest();
+	}
+
+
+	/**
 	 * Relacion con tipocaso
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */

@@ -40,5 +40,5 @@ Route::controllers([
 	'listados'	=> 'ListadosController',
 	'contactos-relacionados' => 'ClientescontactosController',
 	'actualizaciones' => 'ActualizacioncasosController',
-	'mails'	=> 'EmailsController'
+	'reportes'	=> 'ReportesController'
 ]);
