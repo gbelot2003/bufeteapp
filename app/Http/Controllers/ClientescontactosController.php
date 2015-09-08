@@ -19,8 +19,8 @@ class ClientescontactosController extends Controller
 	
 	public function getContactos($id)
 	{
-		$cliente = Cliente::whereId($id)->with('contactos')->get();
-		return $cliente;
+		$cliente = Cliente::findOrFail($id);
+		return $cliente->contactos()->take(10)->get();
 	}
 
 	public function postContactos(Request $request)

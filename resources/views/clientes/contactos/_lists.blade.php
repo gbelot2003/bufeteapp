@@ -1,4 +1,4 @@
-<div class="col s12" v-repeat="row:rows[0].contactos | filterBy searchText in row">
+<div class="col s12" v-repeat="row : rows | filterBy searchText in rows">
 
 	<div class="card blue-grey darken-1">
 		<div class="card-content white-text">

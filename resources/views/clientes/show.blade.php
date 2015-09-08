@@ -58,8 +58,8 @@
 			<h5>Contactos relacionados</h5>
 			@include('clientes.contactos._contactos')
 		</div>
-
 	</div>
+
 @stop
 
 
