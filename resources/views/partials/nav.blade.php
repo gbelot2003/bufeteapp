@@ -1,5 +1,6 @@
 <nav class="indigo darken-1">
-	<a class="" href="{{ url('/') }}"><strong>Sistema de Control de Casos</strong></a>
+	<a  class="brand-logo"></a>
+	<a href="{{ url('/') }}" class="brand-logo">Control de Casos</a>
 	<ul id="slide-out" class="side-nav">
 
 		@if (Auth::guest())
