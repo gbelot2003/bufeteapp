@@ -18,22 +18,22 @@ class TribunalesTableSeeder extends Seeder {
 			array (
 				'id' => 1,
 				'name' => 'Juzgado de Tegucigalpa',
-				'created_at' => '0000-00-00 00:00:00',
-				'updated_at' => '0000-00-00 00:00:00',
+				'created_at' => '2015-08-31 18:40:47',
+				'updated_at' => '2015-08-31 18:40:47',
 			),
 			1 => 
 			array (
 				'id' => 2,
 				'name' => 'Juzgado de Paz de Tegucigalpa',
-				'created_at' => '0000-00-00 00:00:00',
-				'updated_at' => '0000-00-00 00:00:00',
+				'created_at' => '2015-08-31 18:40:47',
+				'updated_at' => '2015-08-31 18:40:47',
 			),
 			2 => 
 			array (
 				'id' => 3,
 				'name' => 'Sala Constitucional',
-				'created_at' => '0000-00-00 00:00:00',
-				'updated_at' => '0000-00-00 00:00:00',
+				'created_at' => '2015-08-31 18:40:47',
+				'updated_at' => '2015-08-31 18:40:47',
 			),
 			3 => 
 			array (

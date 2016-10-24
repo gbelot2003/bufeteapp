@@ -34,7 +34,8 @@ class CreateTableCasos extends Migration
 			$table->integer('user_id');
 
 			$table->string('slug', 255);
-			$table->timestamps();
+			$table->timestamp('created_at')->nullable();
+			$table->timestamp('updated_at')->nullable();
         });
 
 
@@ -47,7 +48,8 @@ class CreateTableCasos extends Migration
 
 			$table->integer('tipo_contraparte')->unsigned();
 
-			$table->timestamps();
+			$table->timestamp('created_at')->nullable();
+			$table->timestamp('updated_at')->nullable();
 		});
 
 		Schema::create('tipo_contraparte', function(Blueprint $table){

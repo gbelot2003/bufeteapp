@@ -17,9 +17,10 @@ class CreateUsersTable extends Migration
 			$table->integer('userstatus_id')->unsigned();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password', 60);
+            $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

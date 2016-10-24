@@ -21,7 +21,8 @@ class CreateClientesTable extends Migration
 			$table->string('email');
 			$table->text('details');
 			$table->string('slug', 255);
-			$table->timestamps();
+			$table->timestamp('created_at')->nullable();
+			$table->timestamp('updated_at')->nullable();
         });
 
 		Schema::create('contactos', function (Blueprint $table) {
@@ -33,7 +34,8 @@ class CreateClientesTable extends Migration
 			$table->string('movil')->nullable();
 			$table->string('email')->nullable();
 			$table->string('notes')->nullable();
-			$table->timestamps();
+			$table->timestamp('created_at')->nullable();
+			$table->timestamp('updated_at')->nullable();
 		});
 
 		Schema::create('cliente_contacto', function (Blueprint $table) {
@@ -42,7 +44,8 @@ class CreateClientesTable extends Migration
 
 			$table->integer('contacto_id')->unsigned()->index();
 			$table->foreign('contacto_id')->references('id')->on('contactos')->onDelete('cascade');
-			$table->timestamps();
+			$table->timestamp('created_at')->nullable();
+			$table->timestamp('updated_at')->nullable();
 		});
     }
 

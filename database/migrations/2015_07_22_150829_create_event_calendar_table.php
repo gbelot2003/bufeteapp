@@ -20,7 +20,8 @@ class CreateEventCalendarTable extends Migration
 			$table->datetime('start');
 			$table->datetime('end');
 			$table->text('details')->nullable();
-			$table->timestamps();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
 
         });
     }
